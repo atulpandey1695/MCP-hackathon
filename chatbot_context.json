@@ -1,0 +1,110 @@
+[
+  {
+    "role": "user",
+    "content": "value of A=3125"
+  },
+  {
+    "role": "user",
+    "content": "value of A=3125"
+  },
+  {
+    "role": "assistant",
+    "content": "The value of A is already given as 3125."
+  },
+  {
+    "role": "user",
+    "content": "ok. Who is PM india now?"
+  },
+  {
+    "role": "user",
+    "content": "ok. Who is PM india now?"
+  },
+  {
+    "role": "assistant",
+    "content": "As of my last update, the Prime Minister of India is Narendra Modi."
+  },
+  {
+    "role": "user",
+    "content": "ok. Who is PM UK now?"
+  },
+  {
+    "role": "user",
+    "content": "ok. Who is PM UK now?"
+  },
+  {
+    "role": "assistant",
+    "content": "As of my last update, the Prime Minister of the United Kingdom is Boris Johnson."
+  },
+  {
+    "role": "user",
+    "content": "What is value of \"a\""
+  },
+  {
+    "role": "user",
+    "content": "What is value of \"a\""
+  },
+  {
+    "role": "assistant",
+    "content": "You haven't provided any context or equation to determine the value of \"a\". Could you please provide more information?"
+  },
+  {
+    "role": "user",
+    "content": "What is value of \"A\""
+  },
+  {
+    "role": "user",
+    "content": "What is value of \"A\""
+  },
+  {
+    "role": "assistant",
+    "content": "The value of \"A\" you provided earlier is 3125."
+  },
+  {
+    "role": "user",
+    "content": "a=41656"
+  },
+  {
+    "role": "user",
+    "content": "a=41656"
+  },
+  {
+    "role": "assistant",
+    "content": "The value of \"a\" is 41656."
+  },
+  {
+    "role": "user",
+    "content": "B=6237"
+  },
+  {
+    "role": "user",
+    "content": "B=6237"
+  },
+  {
+    "role": "assistant",
+    "content": "The value of \"B\" is 6237."
+  },
+  {
+    "role": "user",
+    "content": "Who is PM of UK?"
+  },
+  {
+    "role": "user",
+    "content": "Who is PM of UK?"
+  },
+  {
+    "role": "assistant",
+    "content": "As of my last update, the Prime Minister of the United Kingdom is Boris Johnson."
+  },
+  {
+    "role": "user",
+    "content": "value of B?"
+  },
+  {
+    "role": "user",
+    "content": "value of B?"
+  },
+  {
+    "role": "assistant",
+    "content": "The value of \"B\" is 6237."
+  }
+]

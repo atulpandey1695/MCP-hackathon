@@ -1,0 +1,28 @@
+[
+  {
+    "name": "question_answering",
+    "module": "chatbot",
+    "description": "Answer questions by performing internet research and logical reasoning. Remembers context for follow-up questions.",
+    "args_schema": {
+      "type": "object",
+      "properties": {
+        "query": { "type": "string", "description": "The natural language question to answer." }
+      },
+      "required": ["query"]
+    },
+    "output_format": "console"
+  },
+  {
+    "name": "custom_api",
+    "module": "tools.custom_api",
+    "description": "Execute an internal project function exposed over HTTP.",
+    "args_schema": {
+      "type": "object",
+      "properties": {
+        "query": { "type": "string", "description": "The natural language prompt or query for the tool." }
+      },
+      "required": ["query"]
+    },
+    "output_format": "console"
+  }
+]

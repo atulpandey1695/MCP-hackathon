@@ -1,0 +1,18 @@
+Use case examples for the AI Agent System:
+
+Use case 1: Web Search and Information Gathering
+- Use the google_search tool to find information on any topic
+- The agent can search for current news, research topics, or general information
+- Example: "Search for the latest AI developments in 2025"
+
+Use case 2: API Integration
+- Use the custom_api tool to interact with external services
+- The agent can call custom endpoints and process responses
+- Example: "Call the summarization API with this text data"
+
+Use case 3: Multi-step Workflows
+- Combine multiple tools in sequence to accomplish complex tasks
+- The agent can plan and execute multi-step workflows automatically
+- Example: "Search for information about X, then summarize the findings using the API"
+
+The agent system is designed to be flexible and extensible by adding more tools to the tools.json configuration file. 
