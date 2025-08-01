@@ -106,5 +106,29 @@
   {
     "role": "assistant",
     "content": "The value of \"B\" is 6237."
+  },
+  {
+    "role": "user",
+    "content": "C=5125"
+  },
+  {
+    "role": "user",
+    "content": "C=5125"
+  },
+  {
+    "role": "assistant",
+    "content": "The value of \"C\" is 5125."
+  },
+  {
+    "role": "user",
+    "content": "What data you have for me?"
+  },
+  {
+    "role": "user",
+    "content": "What data you have for me?"
+  },
+  {
+    "role": "assistant",
+    "content": "Based on our conversation, here are the data points I have:\n\n1. Value of A = 3125\n2. Value of a = 41656\n3. Value of B = 6237\n4. Value of C = 5125\n5. The Prime Minister of India is Narendra Modi.\n6. The Prime Minister of the United Kingdom is Boris Johnson."
   }
 ]
