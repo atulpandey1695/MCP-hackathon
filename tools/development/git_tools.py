@@ -3,9 +3,13 @@ Git analysis tools
 """
 import subprocess
 from enhanced_context_manager import get_context_manager
+from langchain.tools import tool
 
-def check_git_conventions(query):
+@tool
+def check_git_conventions(query: str) -> str:
     """Tool to check git commit conventions"""
+    if query == "demo":
+        return "Demo: Found 10 recent commits. Common prefixes: ['feat', 'fix', 'docs']. Suggests using conventional commit format."
     cm = get_context_manager()
     
     # Simple git log analysis
@@ -34,6 +38,8 @@ def check_git_conventions(query):
 
 def analyze_git_history(query):
     """Detailed git history analysis"""
+    if query == "demo":
+        return "Demo: Top contributors: [('alice', 5), ('bob', 3)]. Total commits analyzed: 8."
     try:
         # Get more detailed git stats
         result = subprocess.run(['git', 'log', '--pretty=format:%an|%s', '-20'], 

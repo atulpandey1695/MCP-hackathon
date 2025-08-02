@@ -1,0 +1,13 @@
+### List all tools
+GET http://localhost:8000/tools
+
+### Execute a tool (example: scan_codebase)
+POST http://localhost:8000/tools/execute
+Content-Type: application/json
+
+{
+  "tool_name": "scan_codebase",
+  "arguments": {
+    "query": "python patterns"
+  }
+}

@@ -1,7 +1,7 @@
 [
   {
     "name": "question_answering",
-    "module": "chatbot",
+    "module": "tools.question_answering_module",
     "description": "Answer questions by performing internet research and logical reasoning. Remembers context for follow-up questions.",
     "args_schema": {
       "type": "object",

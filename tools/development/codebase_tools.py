@@ -5,8 +5,10 @@ from enhanced_context_manager import DevelopmentContextManager, get_context_mana
 import os
 import ast
 from pathlib import Path
+from langchain.tools import tool
 
-def scan_codebase(query):
+@tool
+def scan_codebase(query: str) -> str:
     """Tool to scan and analyze codebase patterns"""
     cm = get_context_manager()
     
