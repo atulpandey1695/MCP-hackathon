@@ -63,5 +63,18 @@
       "required": ["query"]
     },
     "output_format": "console"
-  }
+  },
+   {
+  "name": "answer_codebase_question",
+  "module": "tools.development.codebase_tools",
+  "description": "Answer questions about the codebase using indexed information.",
+  "args_schema": {
+    "type": "object",
+    "properties": {
+      "query": { "type": "string", "description": "The question about the codebase." }
+    },
+    "required": ["query"]
+  },
+  "output_format": "console"
+}
 ]
