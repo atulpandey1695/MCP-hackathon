@@ -1,6 +1,7 @@
 # Ignore Python cache and bytecode
 __pycache__/
 *.py[cod]
+venv/
 
 # Ignore SQLite database files
 *.db

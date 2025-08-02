@@ -39,7 +39,7 @@
     "output_format": "console"
   },
   {
-    "name": "analyze_jira_history",
+    "name": "jira_ticket_summarizer",
     "module": "tools.development.jira_tools",
     "description": "Analyze JIRA ticket history for development patterns, requirements, and project insights.",
     "args_schema": {
@@ -49,7 +49,7 @@
       },
       "required": ["query"]
     },
-    "output_format": "console"
+    "output_format": "json"
   },
   {
     "name": "check_git_conventions",

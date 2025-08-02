@@ -1,0 +1,120 @@
+{
+  "title": "Product Requirements Document",
+  "tickets": [
+    {
+      "id": "TK-7980",
+      "summary": "Updated Date in Custom List",
+      "description": "Track and store the *last updated timestamp* of a Custom List and Display it in the UI."
+    },
+    {
+      "id": "TK-7979",
+      "summary": "Language Translation 1.1",
+      "description": null
+    },
+    {
+      "id": "TK-7978",
+      "summary": "Support triggers in edition api",
+      "description": null
+    },
+    {
+      "id": "TK-7977",
+      "summary": "Aug 2025 Enhancements & Bugs",
+      "description": null
+    },
+    {
+      "id": "TK-7976",
+      "summary": "QA: Fast Forward issue fix testing",
+      "description": null
+    },
+    {
+      "id": "TK-7975",
+      "summary": "Shopify Issues on productions",
+      "description": "Multiple Shopify stores are experiencing issues during the data sync process. These issues fall into two major categories:\n\n----\n\nh3. *Issue Group 1: Sync Failures Related to Customer Data*\n\nSome stores fail to sync due to errors encountered when processing customer-related information. These errors involve unexpected null or missing values that prevent the sync job from completing successfully.\n\n*Affected Stores:*\n\n* Blue Elan Records (ID 32)\n* KC and the Sunshine Band (ID 14)\n* Graham Nash Shopify Store (ID 55)\n* [Store Name Missing] (ID 6)\n\n----\n\nh3. *Issue Group 2: Sync Failures Due to Excessive Data Volume*\n\nCertain stores encounter system errors when restarting syncs after a long period of inactivity. The sync process attempts to load a large volume of historical data, which leads to system instability.\n\n*Affected Stores:*\n\n* Please and Thank You (ID 11)\n* For King & Country (ID 4)"
+    },
+    {
+      "id": "TK-7974",
+      "summary": "Palette icon disappears after page refresh on Template Library",
+      "description": "On the Template Library page, when a user saves a palette, the palette icon appears as expected. However, upon refreshing the page, the palette icon is no longer visible. This indicates that the palette selection or icon state is not being persisted correctly.\n\n*Steps to Reproduce*\n\n# Go to the Template Library page.\n# Save a palette.\n# Confirm the palette icon appears next to the template.\n# Refresh the page.\n# Observe that the palette icon disappears.\n\nEdition Link: [https://qa.tm00.com/app/Test/all/Surbhi12/a/feature/m/library-templates|https://qa.tm00.com/app/Test/all/Surbhi12/a/feature/m/library-templates|smart-link] "
+    },
+    {
+      "id": "TK-7973",
+      "summary": "(Technical) Simplify Template Editor modal and I/O interactions",
+      "description": "* Template editor modal interaction, after-closed and output-event subscriptions are poorly formed.\n* Template page callbacks need to be improved as a prerequisite to further band-palette fixes requested, e.g., set color on palette-icon if palette is set for the template."
+    },
+    {
+      "id": "TK-7972",
+      "summary": "QA: Testing \"+\" trimming in tracker URLs for [billingcode] merge field.",
+      "description": null
+    },
+    {
+      "id": "TK-7971",
+      "summary": "Show updated language list in translation wizard",
+      "description": "* Show the updated language list in the Translation wizard page\n* Store the selected languages per project group in the local storage so that if the author visits next time the languages are pre-selected\n* Add a spinner until the list loads"
+    },
+    {
+      "id": "TK-7970",
+      "summary": "Drip diagram UI improvements (based on call with Matt on 2025-07-18)",
+      "description": "\n\n# Day number should be in wait time section (instead of \u201cSEND MAIL\u201c node).\n!image-20250722-084949.png|width=327,height=264,alt=\"image-20250722-084949.png\"!\n# CONDITION should be renamed. (sync with Matt for this)\n# Wait time 0 should be supported only for first node. Rest nodes should have minimum of wait time = 1. If wait time = 0, it means those are welcome emails.\n# As we choose \u201cSEND MAIL\u201c, it should ask for title. When author provides title, an item with that title will be created and saved in that node.\n!image-20250722-085706.png|width=426,height=373,alt=\"image-20250722-085706.png\"!\n# Show items card vertically with a trigger icon for each item.\n!Screenshot (1954)-20250718-163715.png|width=1280,height=720,alt=\"Screenshot (1954)-20250718-163715.png\"!\n# On click of trigger icon, Open a dialog. This dialog will have old aspx page. Once author saves trigger, dialog closes and a horizontal card will appear horizontal to email node. It will trigger detals shown as:- If \u2026. Then \u2026.\n## Edit icon for existing triggers will be in horizontal card itself.\n# No \u201cConditional Mail\u201c nodes. Use old page in dialog (Point 6). In case of \u201cUpdate Sequence\u201c, drawing of line to specific \u201cSEND MAIL\u201c node.\n## We do *not* need dialog to choose either \u201cSEND MAIL\u201c or \u201cCONDITIONAL MAIL\u201c anymore. On click of \u201c+\u201d, we should simply add \u201cSEND MAIL\u201c node. (In fact, there will be only one type of node i.e \u201cSEND MAIL\u201c node).\n# Deleting of items from nodes.\n# Deleting of nodes."
+    },
+    {
+      "id": "TK-7969",
+      "summary": "SMS Settings Save Not Functioning as Expected",
+      "description": "The Save Changes option on the SMS Settings page is not functioning correctly if a setting is already applied. When attempting to update the configuration, the POST request fails, and changes are not saved correctly.\n\nThis is an existing issue and is reproducible both on QA and Production environments."
+    },
+    {
+      "id": "TK-7968",
+      "summary": "ASAP: Trim the erroneous \"+\" being adde to a tracker URL when using parameters",
+      "description": "*From:* Matt Highsmith <[matt@proze.io|mailto:matt@proze.io]> \n*Sent:* Sunday, July 20, 2025 12:42 AM\n*To:* Development <[development@tailoredmail.com|mailto:development@tailoredmail.com]>\n*Subject:* ASAP: Trim the erroneous \"+\" being adde to a tracker URL when using parameters\n\n\u00a0\n\nThat title is going to make no sense...and maybe this video won't either. But, I really only have a short window to try and test (with TSO) whether we are correctly coding Google Analytics (GA) URLs. I am available to get on a call my-Sunday-night if that helps get to the core of the issue faster.\n\n\u00a0\n\nI have GA set up to add utm params to urls with the domain [www.ticketmaster.com|http://www.ticketmaster.com]. I then also am inserting a system tag in the utm_campaign param....BUT....our system is adding a \"+\" at the end of that URL.\n\n\u00a0\n\n[https://m9.tm00.com/tmsubscribe.net/viewbcast.aspx?B=DVf0&N=Lao&T=1|https://m9.tm00.com/tmsubscribe.net/viewbcast.aspx?B=DVf0&N=Lao&T=1|smart-link] \n\n\u00a0\n\nI just removed the GA set-up utm_campaign to be a hard-coded \"TEST\", as opposed to the dynamic-tag of [billingcode]. I can confirm that when using \"TEST\" the link did NOT have the \"+\" added. So, I think the quick fix is to figure out why \"[billingcode]\" is not trimming itself (or is arbitrarily adding an apace or + to the end).\n\n!image-20250722-072604.png|width=1112,height=487,alt=\"image-20250722-072604.png\"!"
+    },
+    {
+      "id": "TK-7967",
+      "summary": "Newsletter Archive Not Working",
+      "description": "*From:* Matt Highsmith <[matt@tailoredmail.com|mailto:matt@tailoredmail.com]>\n*Sent:* July 18, 2025 2:40 AM\n*To:* Development <[development@tailoredmail.com|mailto:development@tailoredmail.com]>\n\n----\n\nDevs, \n\n  \nCan someone do a quick investigation and see if we've broken something? \n\n  \n\n  \n\n  \n \n \n*From:* Kelly Elders \n<kelly@tailoredmail.com>\n *Date:* Thursday, July 17, 2025 at 1:12\u202fPM\n *To:* Bugs <bugs@tailoredmail.com>\n *Subject:* FW: Newsletter Archive Not Working\n \n  \nM7 >JSU were using the old archive \u2013 but after the NEW archive was set up, I did test to make sure the link still worked and it did. \n  \nHowever, they just reported that its not working now. Do I need to provide them with a different URL? Or is something in fact broken here? \n[https://www.jsu.edu/news/red-white.html|https://www.jsu.edu/news/red-white.html]  \n\n [Faculty/Staff Archive|https://proze.jsu.edu/TMSubscribe.Net/ArchivePage.aspx?i=c-1x-QIOpsHBta3kW8x-Qs6c1MdZT-QkW8Fk&p=258741]  \n[Student Edition Archive|https://proze.jsu.edu/TMSubscribe.Net/ArchivePage.aspx?i=c-1x-QIOpsHBtcGKd59-Q1E6kCOHU-QkW8Fk&p=258770]  \n  \n  \n  \n  \n*Kelly Elders* \nClient Services \n[TailoredMail|http://www.tailoredmail.com/] \u00a0/ [VIZU.AL|http://vizu.al/w/Live/173/1135/2266/13002?tm_source=KellyEmailSig]  \n425-440-3403 \n  \n{color:#c00000}*Nashville Office:*{color} \nVIZU.AL / Kelly Elders \n818 18th Ave S \n10^th^\u00a0Floor \nNashville, TN 37203-6666 \n\n  "
+    },
+    {
+      "id": "TK-7966",
+      "summary": "Important BUG: Fast Forward Tool Error",
+      "description": "*From:* Matt Highsmith <[matt@tailoredmail.com|mailto:matt@tailoredmail.com]> \n*Sent:* Wednesday, July 16, 2025 12:06 AM\n*To:* Development <[development@tailoredmail.com|mailto:development@tailoredmail.com]>\n*Subject:* Important BUG: Fast Forward Tool Error\n\n\u00a0\n\nWe definitely need to fix this. Still used by clients and still of value. We may want to do one other sanity check here: are we always and correctly authenticating it with SPF and DKIM? \u00a0Can we also QA it so that if someone has added an initial \"message/comment\" that it is being accurately inserted at the top of the email? Is it all still sending/working appropriately with:\n\n* embedded video\n* background video\n* polls\n* proper unsub-link at the bottom (I believe it's supposed to send you to the \"do-not-email\" sign-up-option)\n\n\u00a0\n\n*From:* Kelly Elders <[kelly@proze.io|mailto:kelly@proze.io]>\n*Date:* Tuesday, July 15, 2025 at 10:15\u202fAM\n*To:* Bugs <[bugs@tailoredmail.com|mailto:bugs@tailoredmail.com]>\n*Subject:* FW: Fast Forward Tool Error\n\nAny chance we can take some time and fine tune this feature?\n\n\u00a0\n\nOr remove it from the application?\n\n\u00a0\n\nClient tried to use our FORWARD feature in a broadcast to 46k subscribers and its broken. (granted they should have tested it before using it)\n\n\u00a0\n\nTest email is attached (this email has been sent so please do not SAVE or EDIT this one \u2013 if you need to make a copy of it please do)\n\n[https://m9.tm00.com/app/PTY/all/PleaseThankYou/a/feature/m/email/edition/30920|https://m9.tm00.com/app/PTY/all/PleaseThankYou/a/feature/m/email/edition/30920|smart-link] \n\n\u00a0\n\nClicking on the icon at the bottom of the email does send you to this page successfully."
+    },
+    {
+      "id": "TK-7965",
+      "summary": "Upload file name has invalid windows character",
+      "description": "Investigate and resolve the issue caused by filenames containing characters invalid on Windows (e.g., {{<}}, {{>}}, {{:}}, etc.) that lead to mismatches between database entries and file upload failures. "
+    },
+    {
+      "id": "TK-7964",
+      "summary": "QA: Disable \"Next\" button if phone number missing in SMS Broadcast testing",
+      "description": null
+    },
+    {
+      "id": "TK-7963",
+      "summary": "Random preview page broke: M7 Autodesk ",
+      "description": "From Kelly:\n\nJane (AUTODESK) is on LIVE CHAT and says they are still having issues with the SPREADSHEET BROADCASTER. i suggested she try changing the file name, and trying again, and she said its still not working.\n\n+the error is in /tmadmin.net/PreviewReceipientsBlob.aspx+\n+the error message is : Conversion from string \"txn:osed\" to type 'Integer' is not valid.+"
+    },
+    {
+      "id": "TK-7962",
+      "summary": "Email archives menu not working for Admin Authors",
+      "description": "(Matt) just tested/tried the email-archives-admin view of the settings page (I created a non-proze-io-sso-account to view as an admin):\n\n* it was not even available to clients yet via the permissions-menu\n* I enabled the menu\n* there are not default settings in there? No \"Create\"?\n\n!image-20250717-122947.png|width=1865,height=511,alt=\"image-20250717-122947.png\"!"
+    },
+    {
+      "id": "TK-7961",
+      "summary": "Enable Canva button and hide Email Archives > Translation for all authors",
+      "description": null
+    },
+    {
+      "id": "TK-7960",
+      "summary": "QA: Spreadsheet broadcast M7 Yelp issue analysis",
+      "description": null
+    },
+    {
+      "id": "TK-7959",
+      "summary": "Store predicted time for each recipient in predictive send enabled broadcast",
+      "description": "This task logs predicted time for each recipient in predictive send enabled broadcast.\n\n*Technical details:*\n\n# Add new column in table {{tm_bcastlist}}. New column will be {{PredictedTime}}. \n# Insert values for {{#bclist}}. (Column is present and values are getting filled in #bclist already)."
+    },
+    {
+      "id": "TK-7958",
+      "summary": "RE: Koch major security flaw in dynamic list builder",
+      "description": "Fix SQL Injection Vulnerabilities in Dynamic Custom List\n\n----\n\nh3. *Description*\n\nA SQL injection vulnerability was identified in the Dynamic Custom List when using the \"Equals (Numeric)\" condition with a non-numeric input like {{'DeWit(043)'}}. This allowed malicious input such as {{'; GO; DELETE users; --/*}} to execute during actions like list count refresh.\n\nThe issue is not limited to numeric filters and may affect all condition types. This must be addressed across all data fields.\n\n----\n\nh3. *Action Items*\n\n# Audit query generation for all filter conditions.\n\n[^RE Koch major security flaw in dynamic list builder.msg]\n\n"
+    }
+  ]
+}

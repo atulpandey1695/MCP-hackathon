@@ -8,13 +8,14 @@ import pathlib
 import importlib
 import sys
 import os
+
+from langchain_openai import OpenAI
 sys.path.append(os.path.join(os.path.dirname(__file__), 'tools'))
 
 from llm_provider import LLMProvider
 from langchain.agents import Tool, AgentExecutor, create_openai_functions_agent
 from langchain.prompts import ChatPromptTemplate
 from langchain.memory import ConversationBufferMemory
-from langchain_openai import OpenAI
 
 sys.path.append(str(pathlib.Path(__file__).parent))
 TOOLS_PATH = pathlib.Path(__file__).parent / "tools.json"
@@ -50,25 +51,14 @@ for tool in tools_config:
     tool_map[func_name] = getattr(mod, func_name)
 
 # Initialize tools
-from tools.custom_api import custom_api
-from tools.google_search import google_search
-from tools.question_answering_module import question_answering_module
+from langchain.agents import Tool, AgentExecutor
+from tools.development.jira_tools import jira_ticket_summarizer
 
 tools = [
     Tool(
-        name="Custom API",
-        func=custom_api,
-        description="Custom API for specific tasks"
-    ),
-    Tool(
-        name="Google Search",
-        func=google_search,
-        description="Search Google for information"
-    ),
-    Tool(
-        name="Question Answering",
-        func=question_answering_module,
-        description="Answer questions based on context"
+        name="jira_ticket_summarizer",
+        func=jira_ticket_summarizer,
+        description="Fetch JIRA tickets, summarize them into a PRD, and save the context in JSON format."
     )
 ]
 
@@ -142,9 +132,12 @@ class MultiAgent:
     def run(self, user_prompt):
         print(f"[AGENT LOG] Received user prompt: {user_prompt}")
         try:
-            tool_func = tool_map["answer_codebase_question"]
-            result = tool_func(query=user_prompt)
-            print(f"[AGENT LOG] Tool result: {result}")
+            for tool in tools:
+                try:
+                    result = tool.func.invoke(user_prompt)
+                    print(f"[AGENT LOG] Tool '{tool.name}' result: {result}")
+                except Exception as tool_error:
+                    print(f"[AGENT LOG] Error executing '{tool.name}': {tool_error}")
         except Exception as e:
             print(f"[AGENT LOG] Error executing question_answering: {e}")
             # If tool fails, store as context
