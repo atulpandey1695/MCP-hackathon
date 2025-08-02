@@ -99,3 +99,39 @@ def codebase_json_to_faiss(json_file_path: str, faiss_index_path: str):
     faiss_index.save_local(faiss_index_path)
     print(f"FAISS index saved to {faiss_index_path}")
     return faiss_index
+
+# Function to convert remote_git_history.json to FAISS index
+def remote_git_history_to_faiss(json_file_path: str, faiss_index_path: str):
+    """
+    Convert remote_git_history.json git commit data into FAISS chunks for semantic search.
+    Args:
+        json_file_path (str): Path to the remote_git_history.json file.
+        faiss_index_path (str): Path to save the FAISS index.
+    Returns:
+        FAISS: The FAISS index object.
+    """
+    from langchain_core.documents import Document
+    # Load JSON data
+    with open(json_file_path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    # Extract commit data
+    commits = data.get("commits", [])
+    documents = []
+    for commit in commits:
+        chunk = f"SHA: {commit['sha']}\nMessage: {commit['message']}\nAuthor: {commit['author']['name']} <{commit['author']['email']}>\nAuthored: {commit['authored_date']}\nCommitted: {commit['committed_date']}\nChanged Files: {', '.join(commit.get('changed_files', []))}"
+        metadata = {
+            "sha": commit["sha"],
+            "short_sha": commit.get("short_sha"),
+            "author": commit["author"]["name"],
+            "authored_date": commit["authored_date"],
+            "committed_date": commit["committed_date"]
+        }
+        documents.append(Document(page_content=chunk, metadata=metadata))
+
+    # Generate embeddings and create FAISS index
+    embeddings = OpenAIEmbeddings(openai_api_key=openai_api_key)
+    faiss_index = FAISS.from_documents(documents, embeddings)
+    faiss_index.save_local(faiss_index_path)
+    print(f"FAISS index saved to {faiss_index_path}")
+    return faiss_index

@@ -13,17 +13,17 @@
     "output_format": "json"
   },
   {
-    "name": "check_git_conventions",
+    "name": "fetch_remote_git_history",
     "module": "tools.development.git_tools",
-    "description": "Check git commit history for naming conventions, code changes patterns, and development practices.",
+    "description": "Fetch git commit history from a remote repository.",
     "args_schema": {
       "type": "object",
       "properties": {
         "query": { "type": "string", "description": "Query about git conventions, commit patterns, or code change history." }
       },
-      "required": ["query"]
+      "required": ["repo_url"]
     },
-    "output_format": "console"
+    "output_format": "json"
   },
    {
   "name": "train_agent_on_github_repo",

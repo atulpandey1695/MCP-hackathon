@@ -131,14 +131,33 @@ class MultiAgent:
 
     def run(self, user_prompt):
         print(f"[AGENT LOG] Received user prompt: {user_prompt}")
+        print(f"[AGENT LOG] tool_map keys: {list(tool_map.keys())}")
         try:
-            tool_func = tool_map["jira_ticket_summarizer"]
-            result = tool_func.invoke({"query": "created >=-20d"})
-            print(f"[AGENT LOG] Tool result: {result}")
-            
-            tool_func = tool_map["train_agent_on_github_repo"]
-            result = tool_func(repo_url="https://github.com/atulpandey1695/MCP-hackathon.git")
-            print(f"[AGENT LOG] Tool result: {result}")
+            # Check for jira_ticket_summarizer
+            if "jira_ticket_summarizer" in tool_map:
+                tool_func = tool_map["jira_ticket_summarizer"]
+                result = tool_func.invoke({"query": "created >=-20d"})
+                print(f"[AGENT LOG] Tool result: {result}")
+            else:
+                print("[AGENT LOG] Tool 'jira_ticket_summarizer' not found in tool_map.")
+
+            # Check for fetch_remote_git_history
+            if "fetch_remote_git_history" in tool_map:
+                tool_func = tool_map["fetch_remote_git_history"]
+                # Call directly as a normal function
+                result = tool_func.invoke({"repo_url": "https://github.com/atulpandey1695/MCP-hackathon.git"})
+                print(f"[AGENT LOG] Tool result: {result}")
+            else:
+                print("[AGENT LOG] Tool 'fetch_remote_git_history' not found in tool_map.")
+
+            # Check for train_agent_on_github_repo
+            if "train_agent_on_github_repo" in tool_map:
+                tool_func = tool_map["train_agent_on_github_repo"]
+                result = tool_func(repo_url="https://github.com/atulpandey1695/MCP-hackathon.git")
+                print(f"[AGENT LOG] Tool result: {result}")
+            else:
+                print("[AGENT LOG] Tool 'train_agent_on_github_repo' not found in tool_map.")
+
             # for tool in tools:
             #     try:
             #         result = tool.func.invoke(user_prompt)

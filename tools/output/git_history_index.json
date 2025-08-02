@@ -1,0 +1,437 @@
+{
+  "repository": {
+    "url": "https://github.com/atulpandey1695/MCP-hackathon.git",
+    "cloned_branch": "main",
+    "requested_branch": "main",
+    "remote_url": "https://github.com/atulpandey1695/MCP-hackathon.git"
+  },
+  "metadata": {
+    "total_commits_fetched": 17,
+    "max_commits_requested": 50,
+    "fetch_timestamp": "2025-08-02T22:30:57.974281",
+    "clone_method": "temporary"
+  },
+  "commits": [
+    {
+      "sha": "db9a7063a94d151ff91f74493fb66117889b5d26",
+      "short_sha": "db9a706",
+      "message": "Merge pull request #1 from atulpandey1695/gitwebhook-anand\n\nFetch git history",
+      "author": {
+        "name": "Codebandits-tal",
+        "email": "140823987+Codebandits-tal@users.noreply.github.com"
+      },
+      "authored_date": "2025-08-02T21:21:00+05:30",
+      "committed_date": "2025-08-02T21:21:00+05:30",
+      "changed_files": [
+        "data/codebandits_private_history.json",
+        "data/hello_world_remote.json",
+        "git_history_api.py",
+        "requirements.txt"
+      ]
+    },
+    {
+      "sha": "579588ea447af0188c1e084a243393db1709e40c",
+      "short_sha": "579588e",
+      "message": "codebase analysis tool  half done",
+      "author": {
+        "name": "VishalRj-7",
+        "email": "Vishal.raj@talentica.com"
+      },
+      "authored_date": "2025-08-02T21:16:57+05:30",
+      "committed_date": "2025-08-02T21:16:57+05:30",
+      "changed_files": [
+        "bot.py",
+        "logs/mcp-server.log",
+        "multi-agent.py",
+        "output/workflow_context.json",
+        "tools.json",
+        "tools/development/codebase_tools.py",
+        "tools/development/jira_tools.py",
+        "tools/output/codebase_faiss_index/index.faiss",
+        "tools/output/codebase_faiss_index/index.pkl",
+        "tools/output/codebase_index.json",
+        "tools/output/faiss_index/index.faiss",
+        "tools/output/jira_faiss_index/index.faiss",
+        "tools/output/faiss_index/index.pkl",
+        "tools/utils/faiss_converter.py"
+      ]
+    },
+    {
+      "sha": "4598c1468516ba0bb49d475e0a95fb7d26250735",
+      "short_sha": "4598c14",
+      "message": "Added bot py file",
+      "author": {
+        "name": "patelashok93",
+        "email": "ashok.patel@talentica.com"
+      },
+      "authored_date": "2025-08-02T18:08:55+05:30",
+      "committed_date": "2025-08-02T18:10:01+05:30",
+      "changed_files": [
+        ".env",
+        ".gitignore",
+        "__pycache__/enhanced_context_manager.cpython-311.pyc",
+        "__pycache__/llm_provider.cpython-311.pyc",
+        "bot.py",
+        "multi-agent.py",
+        "requirements.txt",
+        "tools.json",
+        "tools/__pycache__/__init__.cpython-311.pyc",
+        "tools/__pycache__/custom_api.cpython-311.pyc",
+        "tools/__pycache__/google_search.cpython-311.pyc",
+        "tools/__pycache__/question_answering_module.cpython-311.pyc",
+        "tools/development/__pycache__/codebase_tools.cpython-311.pyc",
+        "tools/development/__pycache__/git_tools.cpython-311.pyc",
+        "tools/development/__pycache__/jira_tools.cpython-311.pyc",
+        "tools/development/jira_tools.py",
+        "tools/output/faiss_index/index.faiss",
+        "tools/output/faiss_index/index.pkl",
+        "tools/output/prd_context.json",
+        "tools/utils/faiss_converter.py"
+      ]
+    },
+    {
+      "sha": "590de4726c3e1862708382819723b1c96e622428",
+      "short_sha": "590de47",
+      "message": "updated terraform files",
+      "author": {
+        "name": "atul.pandey",
+        "email": "atul.pandey@digitalturbine.com"
+      },
+      "authored_date": "2025-08-02T18:06:18+05:30",
+      "committed_date": "2025-08-02T18:06:18+05:30",
+      "changed_files": [
+        "terraform/main.tf",
+        "terraform/setup_script.sh",
+        "terraform/user_data.sh"
+      ]
+    },
+    {
+      "sha": "3abe4151434db0b7210ff62dd7bf73219163556e",
+      "short_sha": "3abe415",
+      "message": "updated main.tf file",
+      "author": {
+        "name": "atul.pandey",
+        "email": "atul.pandey@digitalturbine.com"
+      },
+      "authored_date": "2025-08-02T18:00:34+05:30",
+      "committed_date": "2025-08-02T18:00:34+05:30",
+      "changed_files": [
+        "terraform/main.tf"
+      ]
+    },
+    {
+      "sha": "41cfa49fe4f1afb217821fa671d1aaa942fdae42",
+      "short_sha": "41cfa49",
+      "message": ":Merge branch 'main' of github.com:atulpandey1695/MCP-hackathon",
+      "author": {
+        "name": "atul.pandey",
+        "email": "atul.pandey@digitalturbine.com"
+      },
+      "authored_date": "2025-08-02T17:54:43+05:30",
+      "committed_date": "2025-08-02T17:54:43+05:30",
+      "changed_files": [
+        "multi-agent.py",
+        "tools.json",
+        "tools/development/codebase_tools.py"
+      ]
+    },
+    {
+      "sha": "81fbed0203736548665a9e05486f953356b0a26c",
+      "short_sha": "81fbed0",
+      "message": "feat: Add complete AWS infrastructure with Terraform\n\n- Add comprehensive Terraform configuration for MCP Server\n- Include EC2 instance with PostgreSQL and Redis\n- Add S3 bucket and ECR repository\n- Include enhanced user_data script with error handling\n- Add comprehensive documentation and deployment guides\n- Optimize for t2.micro instances with Amazon Linux 2\n- Include security groups and monitoring\n- Add troubleshooting and verification scripts",
+      "author": {
+        "name": "atul.pandey",
+        "email": "atul.pandey@digitalturbine.com"
+      },
+      "authored_date": "2025-08-02T17:36:38+05:30",
+      "committed_date": "2025-08-02T17:36:38+05:30",
+      "changed_files": [
+        "ARCHITECTURE_ANALYSIS.md",
+        "terraform/.gitignore",
+        "terraform/DEPLOYMENT_GUIDE.md",
+        "terraform/MANUAL_DEPLOYMENT.md",
+        "terraform/README.md",
+        "terraform/WORKFLOW_DIAGRAM.md",
+        "terraform/deploy.sh",
+        "terraform/main.tf",
+        "terraform/outputs.tf",
+        "terraform/user_data.sh",
+        "terraform/variables.tf",
+        "terraform/versions.tf",
+        "terraform/workflow.md"
+      ]
+    },
+    {
+      "sha": "825ea209fc8eb3257e30bb8d2bc83a78624783b4",
+      "short_sha": "825ea20",
+      "message": "Merge branch 'main' into gitwebhook-anand",
+      "author": {
+        "name": "Codebandits-tal",
+        "email": "140823987+Codebandits-tal@users.noreply.github.com"
+      },
+      "authored_date": "2025-08-02T15:31:57+05:30",
+      "committed_date": "2025-08-02T15:31:57+05:30",
+      "changed_files": [
+        ".gitignore",
+        "README.md",
+        "chat_context_db.py",
+        "chatbot.py",
+        "chatbot_context.json",
+        "core/tool_registry.py",
+        "logs/mcp-server.log",
+        "mcp_server/.env.example",
+        "mcp_server/Dockerfile",
+        "mcp_server/README.md",
+        "mcp_server/__init__.py",
+        "mcp_server/core/tool_registry.py",
+        "mcp_server/deploy/deploy-aws.sh",
+        "mcp_server/docker-compose.yml",
+        "mcp_server/langchain_mcp_server.py",
+        "mcp_server/logs/mcp-server.log",
+        "mcp_server/mcp_sqlite_logger.py",
+        "mcp_server/mcp_tools.http",
+        "mcp_server/monitoring.py",
+        "mcp_server/requirements.txt",
+        "mcp_server/server.py",
+        "mcp_server/start-server.bat",
+        "mcp_server/start-server.sh",
+        "mcp_server/test_verification.py",
+        "multi-agent.py",
+        "output/workflow_context.json",
+        "requirements.txt",
+        "test_mcp_server.py",
+        "tools.json",
+        "tools/__pycache__/question_answering_module.cpython-311.pyc",
+        "tools/development/__pycache__/codebase_tools.cpython-311.pyc",
+        "tools/development/__pycache__/git_tools.cpython-311.pyc",
+        "tools/development/__pycache__/jira_tools.cpython-311.pyc",
+        "tools/development/codebase_tools.py",
+        "tools/development/git_tools.py",
+        "tools/development/jira_tools.py",
+        "tools/question_answering_module.py"
+      ]
+    },
+    {
+      "sha": "a30e504a00037e9c68e75ba1f18726e1b2383c41",
+      "short_sha": "a30e504",
+      "message": "deleted unwanted files",
+      "author": {
+        "name": "Codebandits-tal",
+        "email": "140823987+Codebandits-tal@users.noreply.github.com"
+      },
+      "authored_date": "2025-08-02T15:28:07+05:30",
+      "committed_date": "2025-08-02T15:28:07+05:30",
+      "changed_files": [
+        "data/current_repo_history.json",
+        "data/facebookreact_history.json",
+        "data/githistory.json",
+        "data/vscode_history.json",
+        "simple_api.py"
+      ]
+    },
+    {
+      "sha": "884b9dd30b4beb286e9687628a7a38393d96c638",
+      "short_sha": "884b9dd",
+      "message": "implement end point to fetch git history for remote url",
+      "author": {
+        "name": "Codebandits-tal",
+        "email": "140823987+Codebandits-tal@users.noreply.github.com"
+      },
+      "authored_date": "2025-08-02T14:34:16+05:30",
+      "committed_date": "2025-08-02T14:56:32+05:30",
+      "changed_files": [
+        "data/codebandits_private_history.json",
+        "data/current_repo_history.json",
+        "data/facebookreact_history.json",
+        "data/hello_world_remote.json",
+        "data/vscode_history.json",
+        "git_history_api.py",
+        "requirements.txt",
+        "simple_api.py"
+      ]
+    },
+    {
+      "sha": "d71e78fde8e5b33de0e0bc41ef2d947f2451e636",
+      "short_sha": "d71e78f",
+      "message": "codebase tools added",
+      "author": {
+        "name": "VishalRj-7",
+        "email": "Vishal.raj@talentica.com"
+      },
+      "authored_date": "2025-08-02T14:35:13+05:30",
+      "committed_date": "2025-08-02T14:35:13+05:30",
+      "changed_files": [
+        "multi-agent.py",
+        "tools.json",
+        "tools/development/codebase_tools.py"
+      ]
+    },
+    {
+      "sha": "fd647224fb6bfcd3990be04db152d537c6cca6cd",
+      "short_sha": "fd64722",
+      "message": "Added endpoint to be called in git webhook",
+      "author": {
+        "name": "Codebandits-tal",
+        "email": "140823987+Codebandits-tal@users.noreply.github.com"
+      },
+      "authored_date": "2025-08-02T13:34:00+05:30",
+      "committed_date": "2025-08-02T13:34:00+05:30",
+      "changed_files": [
+        "data/githistory.json",
+        "requirements.txt",
+        "simple_api.py"
+      ]
+    },
+    {
+      "sha": "8add8eeb43a9b4b22bfda432d2d07df3b00bd8ce",
+      "short_sha": "8add8ee",
+      "message": "Langchain-mcp server basic\n\nCreates mcp server and exports all 3 tools.\nJIRA\nGIT\nCODEBASE SCANNER",
+      "author": {
+        "name": "Ketan",
+        "email": "ketan@tailoredmail.com"
+      },
+      "authored_date": "2025-08-02T12:13:21+05:30",
+      "committed_date": "2025-08-02T12:13:21+05:30",
+      "changed_files": [
+        ".gitignore",
+        "README.md",
+        "chat_context_db.py",
+        "chatbot.py",
+        "chatbot_context.json",
+        "core/tool_registry.py",
+        "logs/mcp-server.log",
+        "mcp_server/.env.example",
+        "mcp_server/Dockerfile",
+        "mcp_server/README.md",
+        "mcp_server/__init__.py",
+        "mcp_server/core/tool_registry.py",
+        "mcp_server/deploy/deploy-aws.sh",
+        "mcp_server/docker-compose.yml",
+        "mcp_server/langchain_mcp_server.py",
+        "mcp_server/logs/mcp-server.log",
+        "mcp_server/mcp_sqlite_logger.py",
+        "mcp_server/mcp_tools.http",
+        "mcp_server/monitoring.py",
+        "mcp_server/requirements.txt",
+        "mcp_server/server.py",
+        "mcp_server/start-server.bat",
+        "mcp_server/start-server.sh",
+        "mcp_server/test_verification.py",
+        "output/workflow_context.json",
+        "requirements.txt",
+        "test_mcp_server.py",
+        "tools.json",
+        "tools/__pycache__/question_answering_module.cpython-311.pyc",
+        "tools/development/__pycache__/codebase_tools.cpython-311.pyc",
+        "tools/development/__pycache__/git_tools.cpython-311.pyc",
+        "tools/development/__pycache__/jira_tools.cpython-311.pyc",
+        "tools/development/codebase_tools.py",
+        "tools/development/git_tools.py",
+        "tools/development/jira_tools.py",
+        "tools/question_answering_module.py"
+      ]
+    },
+    {
+      "sha": "2e75f215fe15c232d2f9880218b4562e1f73a7c4",
+      "short_sha": "2e75f21",
+      "message": "Basic multi-agent using langchain\n\nBasic multi-agent using langchain",
+      "author": {
+        "name": "Ketan",
+        "email": "ketan@tailoredmail.com"
+      },
+      "authored_date": "2025-08-02T10:52:01+05:30",
+      "committed_date": "2025-08-02T10:52:01+05:30",
+      "changed_files": [
+        ".gitignore",
+        "LOCAL_ACCESS_GUIDE.md",
+        "__pycache__/chatbot.cpython-311.pyc",
+        "chatbot.py",
+        "chatbot_context.json",
+        "multi-agent.py",
+        "output/workflow_context.json",
+        "settings.json",
+        "test_mcp_server.py",
+        "tools/__pycache__/custom_api.cpython-311.pyc",
+        "tools/__pycache__/google_search.cpython-311.pyc",
+        "tools/__pycache__/question_answering_module.cpython-311.pyc",
+        "tools/custom_api.py",
+        "tools/development/__pycache__/git_tools.cpython-311.pyc",
+        "tools/google_search.py",
+        "tools/question_answering_module.py"
+      ]
+    },
+    {
+      "sha": "0ade3725d66dc6f2623944f42a897ad70518a8cf",
+      "short_sha": "0ade372",
+      "message": "Code structure defined for development.\n\nSeparate files for separate tools.\nSQL Lite integration for data tools integrated, but it can be modified as per use.",
+      "author": {
+        "name": "Ketan",
+        "email": "ketan@tailoredmail.com"
+      },
+      "authored_date": "2025-08-01T23:58:11+05:30",
+      "committed_date": "2025-08-01T23:58:11+05:30",
+      "changed_files": [
+        "Use case.txt",
+        "__pycache__/enhanced_context_manager.cpython-311.pyc",
+        "chatbot_context.json",
+        "enhanced_context_manager.py",
+        "settings.json",
+        "tools.json",
+        "tools/development/__pycache__/codebase_tools.cpython-311.pyc",
+        "tools/development/__pycache__/git_tools.cpython-311.pyc",
+        "tools/development/__pycache__/jira_tools.cpython-311.pyc",
+        "tools/development/codebase_tools.py",
+        "tools/development/git_tools.py",
+        "tools/development/jira_tools.py",
+        "tools_modular.json"
+      ]
+    },
+    {
+      "sha": "cd1fe4dc46952891c6a8c75bdc810f4b1c8011f0",
+      "short_sha": "cd1fe4d",
+      "message": "Ground-Zero: Multi-agent with chatbot\n\nfirst commit multi-agent and chatbot work committed.\nNOTE: Settings.json does not have OpenAI API Key. Use your own version.",
+      "author": {
+        "name": "Ketan",
+        "email": "ketan@tailoredmail.com"
+      },
+      "authored_date": "2025-08-01T21:52:58+05:30",
+      "committed_date": "2025-08-01T21:52:58+05:30",
+      "changed_files": [
+        "Use case.txt",
+        "__pycache__/agent_pb2.cpython-311.pyc",
+        "__pycache__/agent_pb2_grpc.cpython-311.pyc",
+        "__pycache__/chatbot.cpython-311.pyc",
+        "__pycache__/llm_provider.cpython-311.pyc",
+        "chatbot.py",
+        "chatbot_context.json",
+        "llm_provider.py",
+        "multi-agent.py",
+        "output/workflow_context.json",
+        "requirements.txt",
+        "settings.json",
+        "tools.json",
+        "tools/__init__.py",
+        "tools/__pycache__/__init__.cpython-311.pyc",
+        "tools/__pycache__/custom_api.cpython-311.pyc",
+        "tools/__pycache__/generate_email_sequence.cpython-311.pyc",
+        "tools/__pycache__/google_search.cpython-311.pyc",
+        "tools/__pycache__/question_answering_module.cpython-311.pyc",
+        "tools/custom_api.py",
+        "tools/google_search.py",
+        "tools/question_answering_module.py"
+      ]
+    },
+    {
+      "sha": "85f01d92190ad9c4a3852cc7ed2a2e995a0de5d3",
+      "short_sha": "85f01d9",
+      "message": "Initial commit",
+      "author": {
+        "name": "atulpandey1695",
+        "email": "atul.pandey@talentica.com"
+      },
+      "authored_date": "2025-08-01T19:57:50+05:30",
+      "committed_date": "2025-08-01T19:57:50+05:30",
+      "changed_files": []
+    }
+  ]
+}

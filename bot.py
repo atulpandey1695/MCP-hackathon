@@ -16,11 +16,15 @@ os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
 # Load both FAISS indexes
 faiss_index_path_1 = "tools/output/jira_faiss_index"
 faiss_index_path_2 = "tools/output/codebase_faiss_index"
+faiss_index_path_3 = "tools/output/git_history_faiss_index"
 vectorstore1 = FAISS.load_local(faiss_index_path_1, OpenAIEmbeddings(), allow_dangerous_deserialization=True)
 vectorstore2 = FAISS.load_local(faiss_index_path_2, OpenAIEmbeddings(), allow_dangerous_deserialization=True)
+vectorstore3 = FAISS.load_local(faiss_index_path_3, OpenAIEmbeddings(), allow_dangerous_deserialization=True)
 
 # Merge the second index into the first
+    
 vectorstore1.merge_from(vectorstore2)
+vectorstore1.merge_from(vectorstore3)
 vectorstore = vectorstore1
 
 # Initialize conversation memory
