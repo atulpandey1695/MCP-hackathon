@@ -7,3 +7,4 @@ venv/
 *.db
 
 settings.json
+node_modules
