@@ -1,0 +1,99 @@
+name: Security Scan
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    - cron: '0 2 * * 1' # Run weekly on Monday at 2 AM UTC
+
+jobs:
+  security-scan:
+    name: Security Vulnerability Scan
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+        
+    - name: Install security tools
+      run: |
+        pip install bandit safety trivy-python-plugin
+        
+    - name: Run Bandit security scan
+      run: |
+        echo "🔒 Running Bandit security scan..."
+        bandit -r . -f json -o bandit-report.json || true
+        
+    - name: Run Safety check
+      run: |
+        echo "🛡️ Running Safety dependency check..."
+        safety check --json --output safety-report.json || true
+        
+    - name: Run Trivy vulnerability scanner
+      run: |
+        echo "🔍 Running Trivy vulnerability scan..."
+        trivy fs --format json --output trivy-report.json . || true
+        
+    - name: Upload security reports
+      uses: actions/upload-artifact@v3
+      with:
+        name: security-reports-${{ github.run_number }}
+        path: |
+          bandit-report.json
+          safety-report.json
+          trivy-report.json
+        
+    - name: Comment PR with security findings
+      if: github.event_name == 'pull_request'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const fs = require('fs');
+          
+          let comment = '## 🔒 Security Scan Results\n\n';
+          
+          // Read Bandit report
+          if (fs.existsSync('bandit-report.json')) {
+            const banditReport = JSON.parse(fs.readFileSync('bandit-report.json', 'utf8'));
+            const issues = banditReport.results || [];
+            
+            if (issues.length > 0) {
+              comment += '### ⚠️ Bandit Security Issues\n\n';
+              issues.forEach(issue => {
+                comment += `- **${issue.issue_severity}**: ${issue.issue_text} (${issue.filename}:${issue.line_number})\n`;
+              });
+              comment += '\n';
+            } else {
+              comment += '✅ No Bandit security issues found\n\n';
+            }
+          }
+          
+          // Read Safety report
+          if (fs.existsSync('safety-report.json')) {
+            const safetyReport = JSON.parse(fs.readFileSync('safety-report.json', 'utf8'));
+            const vulnerabilities = safetyReport.vulnerabilities || [];
+            
+            if (vulnerabilities.length > 0) {
+              comment += '### ⚠️ Dependency Vulnerabilities\n\n';
+              vulnerabilities.forEach(vuln => {
+                comment += `- **${vuln.severity}**: ${vuln.package} ${vuln.installed_version} - ${vuln.description}\n`;
+              });
+              comment += '\n';
+            } else {
+              comment += '✅ No dependency vulnerabilities found\n\n';
+            }
+          }
+          
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: comment
+          }); 

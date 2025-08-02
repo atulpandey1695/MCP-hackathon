@@ -1,18 +1,15 @@
-# Enhanced MCP Server Infrastructure
-# Addresses all compatibility issues with Amazon Linux 2 and t2.micro
-
 terraform {
   required_version = ">= 1.0"
 }
 
 provider "aws" {
-  region = var.aws_region
+  region = "ap-south-1"
   
   default_tags {
     tags = {
-      Team = var.team_name
-      Name = var.team_name
-      Environment = var.environment
+      Team = "Minds-Constructing-Products"
+      Name = "Minds-Constructing-Products"
+      Environment = "production"
       Project = "MCP-Server"
     }
   }
@@ -28,75 +25,97 @@ data "aws_subnets" "public" {
     name   = "vpc-id"
     values = [data.aws_vpc.default.id]
   }
+  
   filter {
     name   = "map-public-ip-on-launch"
     values = ["true"]
   }
 }
 
+data "aws_availability_zones" "available" {
+  state = "available"
+}
+
 data "aws_ami" "amazon_linux_2" {
   most_recent = true
   owners      = ["amazon"]
-  
+
   filter {
     name   = "name"
     values = ["amzn2-ami-hvm-*-x86_64-gp2"]
   }
-  
+
   filter {
     name   = "virtualization-type"
     values = ["hvm"]
   }
 }
 
-# Security Groups
+# Security Groups - CORRECTED
 resource "aws_security_group" "mcp_server" {
   name_prefix = "mcp-server-sg"
-  description = "Security group for MCP Server"
   vpc_id      = data.aws_vpc.default.id
 
-  # SSH access
+  # MCP Server API
   ingress {
-    description = "SSH"
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  # Application port
-  ingress {
-    description = "MCP Server"
     from_port   = 8000
     to_port     = 8000
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
+    description = "MCP Server API"
   }
 
-  # PostgreSQL port (for local access)
+  # SSH Access
   ingress {
-    description = "PostgreSQL"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+    description = "SSH Access"
+  }
+
+  # PostgreSQL - INTERNAL ONLY
+  ingress {
     from_port   = 5432
     to_port     = 5432
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"]
+    description = "PostgreSQL Database"
   }
 
-  # Redis port (for local access)
+  # Redis - INTERNAL ONLY
   ingress {
-    description = "Redis"
     from_port   = 6379
     to_port     = 6379
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"]
+    description = "Redis Cache"
   }
 
-  # All outbound traffic
+  # HTTP for future load balancer
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+    description = "HTTP Access"
+  }
+
+  # HTTPS for future load balancer
+  ingress {
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+    description = "HTTPS Access"
+  }
+
   egress {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
+    description = "All Outbound Traffic"
   }
 
   tags = {
@@ -104,55 +123,51 @@ resource "aws_security_group" "mcp_server" {
   }
 }
 
-# EC2 Instance
+# EC2 Instance - CORRECTED
 resource "aws_instance" "mcp_server" {
   ami                    = data.aws_ami.amazon_linux_2.id
-  instance_type          = var.instance_type
-  key_name               = "Minds-Constructing-Products-key"
+  instance_type          = "t3.medium"  # UPGRADED for better performance
+  key_name              = "Minds-Constructing-Products-key"
   vpc_security_group_ids = [aws_security_group.mcp_server.id]
   subnet_id              = data.aws_subnets.public.ids[0]
   associate_public_ip_address = true
-  
+
   root_block_device {
-    volume_size = var.ec2_volume_size
+    volume_size = 30
     volume_type = "gp3"
     encrypted   = true
   }
 
-  # Use a compressed user_data approach
-  user_data = base64encode(templatefile("${path.module}/user_data.sh", {
-    team_name = var.team_name
-  }))
-
-  # Instance metadata options for better security
-  metadata_options {
-    http_endpoint = "enabled"
-    http_tokens   = "required"
-  }
-
-  # Monitoring
-  monitoring = true
+  user_data = base64encode(file("${path.module}/user_data.sh"))
 
   tags = {
     Name = "MCP-Server-Instance"
   }
+}
 
-  # Lifecycle policy to prevent accidental deletion
-  lifecycle {
-    prevent_destroy = false
+# ECR Repository
+resource "aws_ecr_repository" "mcp_server" {
+  name                 = "minds-constructing-products/mcp-server"
+  image_tag_mutability = "MUTABLE"
+
+  image_scanning_configuration {
+    scan_on_push = true
+  }
+
+  tags = {
+    Name = "MCP-Server-ECR"
   }
 }
 
-# S3 Bucket for data storage
+# S3 Bucket for logs and data
 resource "aws_s3_bucket" "mcp_data" {
-  bucket = "${var.team_name}-mcp-data"
-  
+  bucket = "minds-constructing-products-mcp-data"
+
   tags = {
     Name = "MCP-Data-Bucket"
   }
 }
 
-# S3 Bucket versioning
 resource "aws_s3_bucket_versioning" "mcp_data" {
   bucket = aws_s3_bucket.mcp_data.id
   versioning_configuration {
@@ -160,7 +175,6 @@ resource "aws_s3_bucket_versioning" "mcp_data" {
   }
 }
 
-# S3 Bucket server-side encryption
 resource "aws_s3_bucket_server_side_encryption_configuration" "mcp_data" {
   bucket = aws_s3_bucket.mcp_data.id
 
@@ -168,19 +182,6 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "mcp_data" {
     apply_server_side_encryption_by_default {
       sse_algorithm = "AES256"
     }
-  }
-}
-
-# ECR Repository for container images
-resource "aws_ecr_repository" "mcp_server" {
-  name = "${var.team_name}/mcp-server"
-  
-  image_scanning_configuration {
-    scan_on_push = true
-  }
-
-  tags = {
-    Name = "MCP-Server-ECR"
   }
 }
 
@@ -194,8 +195,18 @@ resource "aws_cloudwatch_log_group" "mcp_logs" {
   }
 }
 
-# Random password for database (if needed in future)
-resource "random_password" "db_password" {
-  length  = 16
-  special = false
-} 
+# Outputs
+output "instance_public_ip" {
+  description = "Public IP of the MCP server instance"
+  value       = aws_instance.mcp_server.public_ip
+}
+
+output "mcp_server_url" {
+  description = "URL of the MCP server"
+  value       = "http://${aws_instance.mcp_server.public_ip}:8000"
+}
+
+output "health_check_url" {
+  description = "Health check URL"
+  value       = "http://${aws_instance.mcp_server.public_ip}:8000/health"
+}

@@ -1,0 +1,71 @@
+name: Deployment Notifications
+
+on:
+  workflow_run:
+    workflows: ["MCP Server CI/CD Pipeline"]
+    types: [completed]
+
+jobs:
+  notify:
+    name: Send Notifications
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion != 'skipped' }}
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Notify Slack
+      if: ${{ secrets.SLACK_WEBHOOK_URL }}
+      uses: 8398a7/action-slack@v3
+      with:
+        status: ${{ github.event.workflow_run.conclusion }}
+        channel: '#devops'
+        text: |
+          🚀 MCP Server Deployment Status
+          
+          **Repository**: ${{ github.repository }}
+          **Branch**: ${{ github.event.workflow_run.head_branch }}
+          **Status**: ${{ github.event.workflow_run.conclusion }}
+          **Run**: ${{ github.event.workflow_run.html_url }}
+          
+          ${{ github.event.workflow_run.conclusion == 'success' && '✅ Deployment successful!' || '❌ Deployment failed!' }}
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        
+    - name: Notify Teams
+      if: ${{ secrets.TEAMS_WEBHOOK_URL }}
+      uses: 8398a7/action-slack@v3
+      with:
+        status: ${{ github.event.workflow_run.conclusion }}
+        webhook_url: ${{ secrets.TEAMS_WEBHOOK_URL }}
+        text: |
+          🚀 MCP Server Deployment Status
+          
+          **Repository**: ${{ github.repository }}
+          **Branch**: ${{ github.event.workflow_run.head_branch }}
+          **Status**: ${{ github.event.workflow_run.conclusion }}
+          **Run**: ${{ github.event.workflow_run.html_url }}
+          
+          ${{ github.event.workflow_run.conclusion == 'success' && '✅ Deployment successful!' || '❌ Deployment failed!' }}
+          
+    - name: Send Email Notification
+      if: ${{ secrets.EMAIL_SMTP_HOST }}
+      uses: dawidd6/action-send-mail@v3
+      with:
+        server_address: ${{ secrets.EMAIL_SMTP_HOST }}
+        server_port: ${{ secrets.EMAIL_SMTP_PORT }}
+        username: ${{ secrets.EMAIL_USERNAME }}
+        password: ${{ secrets.EMAIL_PASSWORD }}
+        subject: "MCP Server Deployment - ${{ github.event.workflow_run.conclusion }}"
+        to: ${{ secrets.EMAIL_TO }}
+        from: ${{ secrets.EMAIL_FROM }}
+        body: |
+          MCP Server Deployment Status
+          
+          Repository: ${{ github.repository }}
+          Branch: ${{ github.event.workflow_run.head_branch }}
+          Status: ${{ github.event.workflow_run.conclusion }}
+          Run URL: ${{ github.event.workflow_run.html_url }}
+          
+          ${{ github.event.workflow_run.conclusion == 'success' && '✅ Deployment successful!' || '❌ Deployment failed!' }} 

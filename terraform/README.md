@@ -1,211 +1,206 @@
-# 🚀 MCP Server AWS Infrastructure
+# MCP Server AWS Infrastructure
 
-This directory contains the Terraform configuration for deploying the MCP Server on AWS infrastructure.
+This Terraform configuration deploys a cost-optimized, scalable AWS infrastructure for the MCP (Model Context Protocol) Development Assistant Server.
 
-## 📋 Overview
-
-The infrastructure deploys a complete MCP Server environment with the following components:
-
-- **EC2 Instance**: t2.micro with Amazon Linux 2
-- **PostgreSQL**: Local installation on EC2 (port 5432)
-- **Redis**: Local installation on EC2 (port 6379)
-- **Docker**: Containerized MCP Server application
-- **S3 Bucket**: Data storage
-- **ECR Repository**: Container image storage
-- **CloudWatch Logs**: Application logging
-
-## 🏗️ Architecture
+## 🏗️ Architecture Overview
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                        AWS Cloud                          │
-│  ┌─────────────────────────────────────────────────────┐   │
-│  │              ap-south-1 Region                     │   │
-│  │  ┌─────────────────────────────────────────────┐   │   │
-│  │  │           Default VPC                      │   │   │
-│  │  │  ┌─────────────────────────────────────┐   │   │   │
-│  │  │  │         Public Subnet              │   │   │   │
-│  │  │  │  ┌─────────────────────────────┐   │   │   │   │
-│  │  │  │  │      EC2 Instance           │   │   │   │   │
-│  │  │  │  │  ┌─────────────────────┐   │   │   │   │   │
-│  │  │  │  │  │   MCP Server App    │   │   │   │   │   │
-│  │  │  │  │  │   (Port 8000)       │   │   │   │   │   │
-│  │  │  │  │  └─────────────────────┘   │   │   │   │   │
-│  │  │  │  │  ┌─────────────────────┐   │   │   │   │   │
-│  │  │  │  │  │   PostgreSQL        │   │   │   │   │   │
-│  │  │  │  │  │   (Port 5432)       │   │   │   │   │   │
-│  │  │  │  │  └─────────────────────┘   │   │   │   │   │
-│  │  │  │  │  ┌─────────────────────┐   │   │   │   │   │
-│  │  │  │  │  │   Redis             │   │   │   │   │   │
-│  │  │  │  │  │   (Port 6379)       │   │   │   │   │   │
-│  │  │  │  │  └─────────────────────┘   │   │   │   │   │
-│  │  │  │  └─────────────────────────────┘   │   │   │   │
-│  │  │  └─────────────────────────────────────┘   │   │   │
-│  │  └─────────────────────────────────────────────┘   │   │
-│  │  ┌─────────────────────────────────────────────┐   │   │
-│  │  │              S3 Bucket                     │   │   │
-│  │  │        (Data Storage)                      │   │   │
-│  │  └─────────────────────────────────────────────┘   │   │
-│  │  ┌─────────────────────────────────────────────┐   │   │
-│  │  │            ECR Repository                  │   │   │
-│  │  │      (Container Images)                    │   │   │
-│  │  └─────────────────────────────────────────────┘   │   │
-│  │  ┌─────────────────────────────────────────────┐   │   │
-│  │  │          CloudWatch Logs                   │   │   │
-│  │  │        (Application Logs)                  │   │   │
-│  │  └─────────────────────────────────────────────┘   │   │
-│  └─────────────────────────────────────────────────────┘   │
-└─────────────────────────────────────────────────────────────┘
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   Internet      │    │   ALB           │    │   EC2 Instance  │
+│                 │────│   (Load         │────│   (t2.micro)    │
+│                 │    │   Balancer)     │    │                 │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+                                                       │
+                                                       ▼
+                                              ┌─────────────────┐
+                                              │   RDS           │
+                                              │   PostgreSQL    │
+                                              │   (db.t2.micro) │
+                                              └─────────────────┘
 ```
 
-## 📁 File Structure
+## 📋 Infrastructure Components
 
-```
-terraform/
-├── main.tf              # Main Terraform configuration
-├── variables.tf         # Input variables
-├── outputs.tf          # Output values
-├── versions.tf         # Terraform and provider versions
-├── user_data.sh        # EC2 instance setup script
-├── .gitignore          # Git ignore rules
-├── README.md           # This file
-├── DEPLOYMENT_GUIDE.md # Detailed deployment guide
-├── MANUAL_DEPLOYMENT.md # Manual deployment instructions
-└── workflow.md         # Workflow documentation
-```
+### Compute
+- **EC2 Instance**: `t2.micro` (1 vCPU, 1GB RAM, 20GB EBS)
+- **AMI**: Amazon Linux 2023 ARM64
+- **Auto-scaling**: Manual scaling capability
+
+### Database
+- **RDS PostgreSQL**: `db.t2.micro` (1 vCPU, 1GB RAM, 10GB storage)
+- **Backup**: 7-day retention
+- **Encryption**: Enabled
+
+### Storage
+- **S3 Bucket**: `minds-constructing-products-mcp-data`
+- **ECR Repository**: `minds-constructing-products/mcp-server`
+
+### Networking
+- **Load Balancer**: Application Load Balancer
+- **Security Groups**: Restricted access
+- **VPC**: Default VPC in ap-south-1
+
+### Monitoring
+- **CloudWatch Logs**: `/aws/mcp-server`
+- **Health Checks**: Application-level monitoring
 
 ## 🚀 Quick Start
 
 ### Prerequisites
+1. AWS CLI configured
+2. Terraform installed
+3. SSH key pair (auto-generated)
 
-1. **AWS CLI** configured with appropriate permissions
-2. **Terraform** installed (version >= 1.0)
-3. **SSH key pair** named `Minds-Constructing-Products-key.pem`
-4. **AWS Region**: ap-south-1
-
-### Deployment
+### Deployment Steps
 
 ```bash
-# 1. Navigate to terraform directory
-cd terraform
+# 1. Clone the repository
+git clone <repository-url>
+cd MCP-hackathon/terraform
 
-# 2. Initialize Terraform
-terraform init
-
-# 3. Review the plan
-terraform plan
-
-# 4. Apply the infrastructure
-terraform apply
+# 2. Run deployment script
+chmod +x deploy.sh
+./deploy.sh
 ```
 
-### Verification
+### Manual Deployment
 
 ```bash
-# Get connection information
-terraform output
+# Initialize Terraform
+terraform init
 
-# SSH to the instance
-ssh -i "Minds-Constructing-Products-key.pem" ec2-user@<PUBLIC_IP>
+# Plan deployment
+terraform plan
 
-# Check services
-sudo systemctl status postgresql-12 redis mcp-server.service
-
-# Test application
-curl http://localhost:8000/health
+# Apply configuration
+terraform apply
 ```
 
 ## 🔧 Configuration
 
-### Variables
+### Environment Variables
+- `AWS_REGION`: ap-south-1
+- `TEAM_NAME`: Minds-Constructing-Products
+- `INSTANCE_TYPE`: t2.micro
+- `RDS_INSTANCE_CLASS`: db.t2.micro
 
-| Variable | Description | Default |
-|----------|-------------|---------|
-| `aws_region` | AWS region | `ap-south-1` |
-| `team_name` | Team name for tagging | `Minds-Constructing-Products` |
-| `environment` | Environment name | `production` |
-| `instance_type` | EC2 instance type | `t2.micro` |
-| `ec2_volume_size` | Root volume size (GB) | `30` |
+### Customization
+Edit `variables.tf` to modify:
+- Instance types
+- Storage sizes
+- Region settings
+- Team name
 
-### Resources Created
+## 📊 Monitoring & Logging
 
-- **EC2 Instance**: t2.micro with 30GB GP3 volume
-- **Security Group**: Ports 22, 8000, 5432, 6379
-- **S3 Bucket**: Data storage with versioning and encryption
-- **ECR Repository**: Container image storage
-- **CloudWatch Log Group**: Application logging
-
-## 🔍 Monitoring
-
-### Application Endpoints
-
-- **Main Application**: `http://<PUBLIC_IP>:8000`
-- **Health Check**: `http://<PUBLIC_IP>:8000/health`
-- **Tools Endpoint**: `http://<PUBLIC_IP>:8000/tools`
+### Application URLs
+- **REST API**: `http://<alb-dns-name>`
+- **WebSocket**: `ws://<alb-dns-name>/mcp`
+- **Health Check**: `http://<alb-dns-name>/`
 
 ### Log Locations
+- **Application Logs**: `/opt/mcp-server/logs/`
+- **System Logs**: `sudo journalctl -u mcp-server.service`
+- **CloudWatch**: `/aws/mcp-server`
 
-- **Application Logs**: `/opt/mcp-server/logs/mcp-server.log`
-- **System Logs**: `journalctl -u mcp-server.service`
-- **Docker Logs**: `docker-compose logs -f`
+## 🔒 Security
 
-## 🐛 Troubleshooting
+### Security Groups
+- **EC2**: Port 8000 (HTTP), 22 (SSH)
+- **RDS**: Port 5432 (PostgreSQL) from EC2 only
+- **ALB**: Port 80 (HTTP)
+
+### IAM Roles
+- **EC2 Role**: S3, ECR, CloudWatch access
+- **RDS**: Encrypted storage
+
+## 🛠️ Maintenance
+
+### Scaling
+```bash
+# Scale EC2 instance
+aws ec2 modify-instance-attribute --instance-id <id> --instance-type "t3.micro"
+
+# Scale RDS instance
+aws rds modify-db-instance --db-instance-identifier <id> --db-instance-class "db.t3.micro"
+```
+
+### Backup
+- **RDS**: Automated daily backups (7-day retention)
+- **S3**: Versioning enabled
+- **EC2**: EBS snapshots recommended
+
+### Updates
+```bash
+# Update application
+ssh -i ssh/mcp-server-key ec2-user@<public-ip>
+cd /opt/mcp-server
+git pull
+docker-compose up -d --build
+```
+
+## 🚨 Troubleshooting
 
 ### Common Issues
 
-1. **Services not running**: Check `systemctl status`
-2. **Application not responding**: Check `docker-compose ps`
-3. **Database connection failed**: Check PostgreSQL service
-4. **Memory issues**: Optimize for t2.micro
+1. **Application not starting**
+   ```bash
+   ssh -i ssh/mcp-server-key ec2-user@<public-ip>
+   sudo journalctl -u mcp-server.service -f
+   ```
 
-### Useful Commands
+2. **Database connection issues**
+   ```bash
+   # Check RDS status
+   aws rds describe-db-instances --db-instance-identifier mcp-postgres
+   ```
 
-```bash
-# Check all services
-sudo systemctl status postgresql-12 redis mcp-server.service
+3. **Load balancer health checks failing**
+   ```bash
+   # Check target group health
+   aws elbv2 describe-target-health --target-group-arn <target-group-arn>
+   ```
 
-# Check ports
-sudo netstat -tulpn | grep -E ":(8000|6379|5432)"
+### Health Checks
+- **Application**: `curl http://localhost:8000/`
+- **Database**: `psql -h <rds-endpoint> -U mcp_admin -d mcp_assistant`
+- **Redis**: `redis-cli ping`
 
-# Check containers
-cd /opt/mcp-server && docker-compose ps
+## 📈 Performance Optimization
 
-# Check logs
-tail -f /opt/mcp-server/logs/mcp-server.log
+### Recommendations
+1. **Enable RDS Performance Insights** for database monitoring
+2. **Use CloudFront** for global content delivery
+3. **Implement caching** with Redis
+4. **Monitor with CloudWatch** for auto-scaling
 
-# Restart services
-sudo systemctl restart mcp-server.service
-```
+### Resource Limits
+- **EC2**: 1 vCPU, 1GB RAM
+- **RDS**: 1 vCPU, 1GB RAM, 10GB storage
+- **S3**: Unlimited storage
+- **ALB**: 1000 requests/second
 
-## 🗑️ Cleanup
+## 🧹 Cleanup
 
 ```bash
 # Destroy infrastructure
 terraform destroy
+
+# Remove SSH keys
+rm -rf ssh/
 ```
 
-## 📚 Documentation
+## 📞 Support
 
-- [Deployment Guide](DEPLOYMENT_GUIDE.md) - Detailed deployment instructions
-- [Manual Deployment](MANUAL_DEPLOYMENT.md) - Manual deployment steps
-- [Workflow](workflow.md) - Infrastructure workflow
-
-## 🔐 Security
-
-- **SSH Access**: Key-based authentication only
-- **Security Groups**: Minimal required ports
-- **EBS Encryption**: All volumes encrypted
-- **S3 Encryption**: Server-side encryption enabled
-- **IAM**: Minimal required permissions
-
-## 📈 Performance
-
-Optimized for t2.micro instances:
-- Memory management with swappiness=10
-- Docker resource limits
-- Redis memory limits
-- Efficient container base images
+For issues or questions:
+1. Check CloudWatch logs
+2. Review application logs
+3. Verify security group rules
+4. Test connectivity to RDS
 
 ---
 
-**🎉 Ready to deploy your MCP Server infrastructure!** 
+**Team**: Minds-Constructing-Products  
+**Region**: ap-south-1  
+**Environment**: Production  
+**Last Updated**: $(date) 
