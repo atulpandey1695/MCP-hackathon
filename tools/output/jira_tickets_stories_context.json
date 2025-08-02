@@ -1,0 +1,155 @@
+{
+  "title": "Product Requirements Document",
+  "tickets": [
+    {
+      "id": "SCRUM-27",
+      "summary": "Integrate AI/ML food recognition service",
+      "description": null
+    },
+    {
+      "id": "SCRUM-26",
+      "summary": "Set up image upload infrastructure",
+      "description": null
+    },
+    {
+      "id": "SCRUM-25",
+      "summary": "Create statistics page",
+      "description": null
+    },
+    {
+      "id": "SCRUM-24",
+      "summary": "Build chart components",
+      "description": null
+    },
+    {
+      "id": "SCRUM-23",
+      "summary": "Implement daily calorie aggregation",
+      "description": null
+    },
+    {
+      "id": "SCRUM-22",
+      "summary": "Add pagination and filtering",
+      "description": null
+    },
+    {
+      "id": "SCRUM-21",
+      "summary": "Develop calorie entry UI components",
+      "description": null
+    },
+    {
+      "id": "SCRUM-20",
+      "summary": "Build Calorie API endpoints",
+      "description": null
+    },
+    {
+      "id": "SCRUM-19",
+      "summary": "Implement Calorie CRUD operations",
+      "description": null
+    },
+    {
+      "id": "SCRUM-18",
+      "summary": "Design Calorie database schema",
+      "description": null
+    },
+    {
+      "id": "SCRUM-17",
+      "summary": "Develop frontend authentication components",
+      "description": null
+    },
+    {
+      "id": "SCRUM-16",
+      "summary": "Build authentication middleware",
+      "description": null
+    },
+    {
+      "id": "SCRUM-15",
+      "summary": "Create User entity and repository",
+      "description": null
+    },
+    {
+      "id": "SCRUM-14",
+      "summary": "Implement JWT token management",
+      "description": null
+    },
+    {
+      "id": "SCRUM-13",
+      "summary": "Set up Google OAuth configuration",
+      "description": null
+    },
+    {
+      "id": "SCRUM-12",
+      "summary": "Comprehensive Testing",
+      "description": null
+    },
+    {
+      "id": "SCRUM-11",
+      "summary": "DevOps and Deployment",
+      "description": null
+    },
+    {
+      "id": "SCRUM-10",
+      "summary": "Goal Setting and Tracking",
+      "description": null
+    },
+    {
+      "id": "SCRUM-9",
+      "summary": "Performance Optimization",
+      "description": null
+    },
+    {
+      "id": "SCRUM-8",
+      "summary": "UI/UX Improvements",
+      "description": null
+    },
+    {
+      "id": "SCRUM-7",
+      "summary": "Advanced Data Management",
+      "description": null
+    },
+    {
+      "id": "SCRUM-6",
+      "summary": "Image-Based Calorie Detection",
+      "description": null
+    },
+    {
+      "id": "SCRUM-5",
+      "summary": "Data Visualization Dashboard",
+      "description": null
+    },
+    {
+      "id": "SCRUM-4",
+      "summary": "Calorie Entry Management",
+      "description": null
+    },
+    {
+      "id": "SCRUM-3",
+      "summary": "User Authentication & Authorization",
+      "description": null
+    },
+    {
+      "id": "SCRUM-2",
+      "summary": "Epic: Calorie Tracker Application Development",
+      "description": null
+    },
+    {
+      "id": "SCRUM-1",
+      "summary": "Calorie Tracker",
+      "description": null
+    },
+    {
+      "id": "LEARNJIRA-3",
+      "summary": "Atlassian Intelligence: How to work smarter with AI \ud83e\udd16",
+      "description": "[https://www.loom.com/embed/7fa7364ac5814377bf339d2ce31ae2a5?sid=4e385c77-5ea4-4c1d-adda-ebc8b3b3c698|https://www.loom.com/embed/7fa7364ac5814377bf339d2ce31ae2a5?sid=4e385c77-5ea4-4c1d-adda-ebc8b3b3c698|smart-embed]\n\nIn this video, we\u2019ll show you how to use Atlassian Intelligence in Jira to identify risks, automate work, and keep projects on track. See how AI can help you remove blockers before they slow you down and tickets with clear descriptions and acceptance criteria.\n\n*Resources:*\n\n\n* [Atlassian Intelligence overview|https://support.atlassian.com/organization-administration/docs/get-started-with-atlassian-intelligence-guide/]\n* [Use AI to write or create content|https://support.atlassian.com/jira-software-cloud/docs/use-atlassian-intelligence-to-help-write-or-edit-content/]\n* [Use AI to build better search queries|https://support.atlassian.com/jira-software-cloud/docs/use-atlassian-intelligence-to-search-for-issues/]\n* [How AI can create better automations|https://support.atlassian.com/cloud-automation/docs/use-atlassian-intelligence-with-jira-automation/]"
+    },
+    {
+      "id": "LEARNJIRA-2",
+      "summary": "Plans: How to use detailed roadmaps to plan out your work \ud83d\udccd",
+      "description": "[https://www.loom.com/embed/88f966bbfc434507b26c397ab0923f3e?sid=3db973df-3c55-4045-a363-12053db42c32|https://www.loom.com/embed/88f966bbfc434507b26c397ab0923f3e?sid=3db973df-3c55-4045-a363-12053db42c32|smart-embed]\n\nIn this video, we\u2019ll show you how to use Plans to plan your work, track dependencies, and keep teams aligned. Learn how to build roadmaps into your team\u2019s rituals and manage work so you always deliver on time.\n\n*Resources:*\n\n\n* [Plans overview|https://www.atlassian.com/software/jira/guides/advanced-roadmaps/overview]\n* [Getting started with Plans|https://support.atlassian.com/jira-software-cloud/docs/get-started-with-advanced-roadmaps/]\n* [More video tutorials on how to create a Plan|https://www.atlassian.com/software/jira/guides/advanced-roadmaps/tutorials]"
+    },
+    {
+      "id": "LEARNJIRA-1",
+      "summary": "Security & permissions: How to control who can edit or or manage projects \ud83d\udea7",
+      "description": "[https://www.loom.com/embed/b387523478a3417da222bc69403db9c0?sid=9c5cd990-e88a-41ca-b1c7-4f5fbe8ceb31|https://www.loom.com/embed/b387523478a3417da222bc69403db9c0?sid=9c5cd990-e88a-41ca-b1c7-4f5fbe8ceb31|smart-embed]\n\nIn this video, we\u2019ll show you how to control who can create, edit, or change project settings in Jira. Learn how to customize permissions so the right people have the right access, so your projects are secure and organized.\n\n*Resources:*\n\n\n* [Permissions overview|https://www.atlassian.com/software/jira/guides/permissions/overview]\n* [How to change permissions|https://www.atlassian.com/software/jira/guides/permissions/tutorials]\n* [Manage project permissions|https://support.atlassian.com/jira-cloud-administration/docs/manage-project-permissions/]"
+    }
+  ]
+}

@@ -14,7 +14,7 @@ load_dotenv()
 os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
 
 # Load both FAISS indexes
-faiss_index_path_1 = "tools/output/jira_faiss_index"
+faiss_index_path_1 = "tools/output/jira_tickets_stories_faiss_index"
 faiss_index_path_2 = "tools/output/codebase_faiss_index"
 faiss_index_path_3 = "tools/output/git_history_faiss_index"
 vectorstore1 = FAISS.load_local(faiss_index_path_1, OpenAIEmbeddings(), allow_dangerous_deserialization=True)
