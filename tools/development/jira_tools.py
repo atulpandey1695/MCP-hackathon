@@ -9,15 +9,15 @@ from tools.utils.faiss_converter import json_to_faiss
 
 JIRA_API_URL = "https://tailoredmail.atlassian.net/rest/api/2/search"
 JIRA_USERNAME = "krishnan@proze.io"
-JIRA_API_TOKEN = "DyFWMPjLhvE2H6YGWueGFF95"
+JIRA_API_TOKEN = ""
 
 @tool
-def jira_ticket_summarizer(jira_query: str) -> str:
+def jira_ticket_summarizer(query: str) -> str:
     """
     Fetch JIRA tickets, summarize them into a PRD, and save the context in JSON format.
     """
     # Step 1: Fetch JIRA tickets
-    tickets = fetch_jira_tickets(jira_query)
+    tickets = fetch_jira_tickets(query)
     
     # Step 2: Summarize tickets into a PRD
     prd = summarize_tickets(tickets)
@@ -29,14 +29,14 @@ def jira_ticket_summarizer(jira_query: str) -> str:
     
     return "JIRA tickets summarized and saved to prd_context.json."
 
-def fetch_jira_tickets(jira_query: str):
+def fetch_jira_tickets(query: str):
     """Fetch JIRA tickets using the JIRA API."""
     headers = {
         "Content-Type": "application/json"
     }
     auth = (JIRA_USERNAME, JIRA_API_TOKEN)
     params = {
-        "jql": jira_query,
+        "jql": query,
         "fields": "summary,description"
     }
     response = requests.get(JIRA_API_URL, headers=headers, auth=auth, params=params)
@@ -67,6 +67,6 @@ def save_prd_to_json(prd):
 def convert_to_faiss():
     # Convert JSON to FAISS chunks
     json_file_path = "tools/output/prd_context.json"
-    faiss_index_path = "tools/output/faiss_index"
+    faiss_index_path = "tools/output/jira_faiss_index"
     faiss_index = json_to_faiss(json_file_path, faiss_index_path)
     print(f"FAISS index created {faiss_index}")

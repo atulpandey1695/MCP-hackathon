@@ -1,107 +1,46 @@
-"""
-Codebase analysis tools
-"""
-from enhanced_context_manager import DevelopmentContextManager, get_context_manager
-import os
-import ast
-import json
-from pathlib import Path
-from langchain.tools import tool
+import tempfile
+import shutil
+import subprocess
 import openai
+import os
 
-@tool
-def scan_codebase(query: str) -> str:
-    """Tool to scan and analyze codebase patterns"""
-    cm = get_context_manager()
-    
-    # Extract language or pattern type from query
-    query_lower = query.lower()
-    
-    if "python" in query_lower:
-        language = "python"
-    elif "javascript" in query_lower or "js" in query_lower:
-        language = "javascript"
-    elif "java" in query_lower:
-        language = "java"
-    else:
-        language = None
-    
-    # Scan current directory for code files
-    code_files = []
-    extensions = {'.py': 'python', '.js': 'javascript', '.java': 'java', 
-                  '.ts': 'typescript', '.cpp': 'cpp', '.c': 'c'}
-    
-    for ext, lang in extensions.items():
-        if language is None or lang == language:
-            code_files.extend(Path('.').rglob(f'*{ext}'))
-    
-    patterns_found = 0
-    for file_path in code_files[:10]:  # Limit for MVP
-        try:
-            with open(file_path, 'r', encoding='utf-8') as f:
-                content = f.read()
-                
-            # Simple pattern extraction
-            if file_path.suffix == '.py':
-                # Extract class and function names
-                try:
-                    tree = ast.parse(content)
-                    for node in ast.walk(tree):
-                        if isinstance(node, ast.ClassDef):
-                            cm.store_code_pattern(
-                                str(file_path), 'python', 'class',
-                                f"class {node.name}:", 
-                                {"name": node.name, "file": str(file_path)}
-                            )
-                            patterns_found += 1
-                        elif isinstance(node, ast.FunctionDef):
-                            cm.store_code_pattern(
-                                str(file_path), 'python', 'function',
-                                f"def {node.name}():", 
-                                {"name": node.name, "file": str(file_path)}
-                            )
-                            patterns_found += 1
-                except:
-                    pass
-        except:
-            continue
-    
-    # Get folder structure analysis
-    if language:
-        folders = cm.get_folder_structure_examples(language)
-        folder_info = f"Common folders: {list(folders.keys())[:5]}"
-    else:
-        folder_info = "Multiple languages detected"
-    
-    return f"Codebase scan completed. Found {patterns_found} patterns. {folder_info}. Use specific queries like 'python naming conventions' for detailed analysis."
-
-def analyze_folder_structure(query):
-    """Analyze and suggest folder structures"""
-    cm = get_context_manager()
-    
-    # Get current folder structure
-    current_dirs = [d for d in Path('.').iterdir() if d.is_dir() and not d.name.startswith('.')]
-    
-    return f"Current structure: {[d.name for d in current_dirs]}. Analyzing patterns from database..."
-
- 
 def train_agent_on_github_repo(repo_url, output_path=None):
     """
     Clones a GitHub repo, indexes its codebase, and updates the agent's knowledge base.
     """
-    temp_dir = tempfile.mkdtemp()
+    target_dir = os.getcwd() + '/target'  # Use current working directory
+    repo_name = repo_url.rstrip('/').split('/')[-1].replace('.git', '')
+    clone_path = os.path.join(target_dir, repo_name)
+    # Ensure target_dir is empty before cloning
+    if os.path.exists(target_dir):
+        # Remove target_dir even if it contains read-only files
+        def onerror(func, path, exc_info):
+            import stat
+            os.chmod(path, stat.S_IWRITE)
+            func(path)
+        shutil.rmtree(target_dir, onerror=onerror)
     try:
-        print(f"Cloning repo {repo_url} to {temp_dir}...")
-        subprocess.run(["git", "clone", repo_url, temp_dir], check=True)
+        print(f"Cloning repo {repo_url} to {target_dir}...")
+        subprocess.run(["git", "clone", repo_url, target_dir], check=True)
         print("Generating codebase index...")
-        result = generate_codebase_index(codebase_path=temp_dir, output_path=output_path)
+        result = generate_codebase_index(codebase_path=target_dir, output_path=output_path)
         print(result)
         return result
     except Exception as e:
         return f"[ERROR] Failed to train agent on repo: {e}"
     finally:
-        shutil.rmtree(temp_dir)
-        
+        shutil.rmtree(target_dir)
+def convert_codebase_index_to_faiss():
+    """
+    Convert codebase_index.json to FAISS index for semantic search.
+    """
+    from tools.utils.faiss_converter import codebase_json_to_faiss
+    json_file_path = os.path.join(os.path.dirname(__file__), '..', 'output', 'codebase_index.json')
+    faiss_index_path = os.path.join(os.path.dirname(__file__), '..', 'output', 'codebase_faiss_index')
+    
+    faiss_index = codebase_json_to_faiss(json_file_path, faiss_index_path)
+    print(f"FAISS index created at {faiss_index_path}")
+
 def generate_codebase_index(codebase_path=None, output_path=None):
     """
     Scans the codebase directory for Python and TypeScript/JavaScript files, extracts function/class names and docstrings/comments, and saves the index as JSON.
@@ -109,14 +48,21 @@ def generate_codebase_index(codebase_path=None, output_path=None):
     if codebase_path is None:
         codebase_path = os.path.join(os.path.dirname(__file__), '..', '..', 'codebase')
     if output_path is None:
-        output_path = os.path.join(os.path.dirname(__file__), '..', '..', 'codebase_index.json')
+        output_path = os.path.join(os.path.dirname(__file__), '..', 'output', 'codebase_index.json')
     index = []
     import re
     function_regex = re.compile(r'(?:function\s+|const\s+|let\s+|var\s+)?([a-zA-Z0-9_]+)\s*\([^)]*\)\s*{')
     class_regex = re.compile(r'class\s+([a-zA-Z0-9_]+)')
     for root, dirs, files in os.walk(codebase_path):
+        # Skip any directory containing '.git' in its path
+        if '.git' in root:
+            continue
+        dirs[:] = [d for d in dirs if '.git' not in d and d not in ['__pycache__', '.svn', '.hg']]
         for file in files:
             file_path = os.path.join(root, file)
+            # Skip any file containing '.git' in its path
+            if '.git' in file_path:
+                continue
             # Read file content (truncate to first 1000 chars for large files)
             try:
                 with open(file_path, 'r', encoding='utf-8') as f:
@@ -182,12 +128,10 @@ def generate_codebase_index(codebase_path=None, output_path=None):
                     })
     with open(output_path, 'w', encoding='utf-8') as out:
         json.dump(index, out, indent=2)
-    return f"Codebase index generated at {output_path} with {len(index)} entries."
-"""
-Codebase analysis tools
-"""
-
-   
+    print(f"Codebase index generated at {output_path} with {len(index)} entries.")
+    convert_codebase_index_to_faiss()
+    return f"Codebase index generated at {output_path} with {len(index)} entries. FAISS index created."
+    
 def search_codebase_index(query, index_path=None, max_results=5):
     if index_path is None:
         index_path = os.path.join(os.path.dirname(__file__), '..', 'codebase_index.json')
@@ -206,63 +150,59 @@ def search_codebase_index(query, index_path=None, max_results=5):
         # if len(results) >= max_results:
         #     break
     return results
- 
-def question_answering(query: str) -> str:
-    """
-    Answer questions using codebase_index.json and OpenAI.
-    """
-    # Search codebase index for relevant context
-    context_items = search_codebase_index(query)
-    # Limit codebase context to first 1000 characters
-    context_snippets = "\n\n".join([
-        f"File: {item.get('file')}, Name: {item.get('name')}, Content/Doc: {(item.get('doc','') or item.get('content',''))[:300]}"
-        for item in context_items
-    ])
-    # context_snippets = context_snippets[:10000]
- 
-    # Load recent chat history from chatbot_context.json
-    chat_history_path = os.path.join(os.path.dirname(__file__), '..', 'chatbot_context.json')
-    chat_history = []
-    if os.path.exists(chat_history_path):
-        try:
-            with open(chat_history_path, 'r', encoding='utf-8') as f:
-                history = json.load(f)
-                # Get last 3 exchanges (user+assistant)
-                chat_history = history[-3:] if len(history) > 3 else history
-        except Exception:
-            pass
-    chat_history_str = "\n".join([
-        f"{msg['role']}: {msg['content']}" for msg in chat_history
-    ])
- 
-    prompt = (
-        f"User question: {query}\n\n"
-        f"Recent chat history:\n{chat_history_str}\n\n"
-        f"Relevant codebase context:\n{context_snippets}\n\n"
-        f"Answer the question using the codebase context and chat history above."
-    )
-   
-    # Load API key from environment or settings.json
-    api_key = os.getenv('OPENAI_API_KEY')
-    if not api_key:
-        settings_path = os.path.join(os.path.dirname(__file__), '..', 'settings.json')
-        if os.path.exists(settings_path):
-            try:
-                with open(settings_path, 'r', encoding='utf-8') as f:
-                    settings = json.load(f)
-                    api_key = settings.get('OPENAI_API_KEY')
-            except Exception:
-                pass
-    openai.api_key = api_key
-    try:
-        response = openai.chat.completions.create(
-            model="gpt-4",
-            messages=[{"role": "user", "content": prompt}]
-        )
-        answer = response.choices[0].message.content
-    except Exception as e:
-        return f"[ERROR] OpenAI API call failed: {e}\nCheck your API key and network connection."
-    return prompt
- 
- 
- 
+
+# def question_answering(query: str) -> str:
+#     """
+#     Answer questions using codebase_index.json and OpenAI.
+#     """
+#     # Search codebase index for relevant context
+#     context_items = search_codebase_index(query)
+#     if not context_items:
+#         return "No relevant codebase context found for your query. Please try a different question."
+#     # Limit codebase context to first 1000 characters
+#     context_snippets = "\n\n".join([
+#         f"File: {item.get('file')}, Name: {item.get('name')}, Content/Doc: {(item.get('doc','') or item.get('content',''))[:300]}"
+#         for item in context_items
+#     ])
+#     # Load recent chat history from chatbot_context.json
+#     chat_history_path = os.path.join(os.path.dirname(__file__), '..', 'chatbot_context.json')
+#     chat_history = []
+#     if os.path.exists(chat_history_path):
+#         try:
+#             with open(chat_history_path, 'r', encoding='utf-8') as f:
+#                 history = json.load(f)
+#                 chat_history = history[-3:] if len(history) > 3 else history
+#         except Exception:
+#             pass
+#     chat_history_str = "\n".join([
+#         f"{msg['role']}: {msg['content']}" for msg in chat_history
+#     ])
+#     prompt = (
+#         f"User question: {query}\n\n"
+#         f"Recent chat history:\n{chat_history_str}\n\n"
+#         f"Relevant codebase context:\n{context_snippets}\n\n"
+#         f"Answer the question using the codebase context and chat history above."
+#     )
+#     api_key = os.getenv('OPENAI_API_KEY')
+#     if not api_key:
+#         settings_path = os.path.join(os.path.dirname(__file__), '..', 'settings.json')
+#         if os.path.exists(settings_path):
+#             try:
+#                 with open(settings_path, 'r', encoding='utf-8') as f:
+#                     settings = json.load(f)
+#                     api_key = settings.get('OPENAI_API_KEY')
+#             except Exception:
+#                 pass
+#     openai.api_key = api_key
+#     try:
+#         response = openai.chat.completions.create(
+#             model="gpt-4",
+#             messages=[{"role": "user", "content": prompt}]
+#         )
+#         if not hasattr(response, 'choices') or not response.choices or not hasattr(response.choices[0], 'message'):
+#             return "OpenAI API did not return a valid response."
+#         answer = response.choices[0].message.content
+#     except Exception as e:
+#         return f"[ERROR] OpenAI API call failed: {e}\nCheck your API key and network connection."
+#     return answer
+

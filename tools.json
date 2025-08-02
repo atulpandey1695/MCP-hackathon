@@ -1,44 +1,5 @@
 [
   {
-    "name": "question_answering",
-    "module": "tools.question_answering_module",
-    "description": "Answer questions by performing internet research and logical reasoning. Remembers context for follow-up questions.",
-    "args_schema": {
-      "type": "object",
-      "properties": {
-        "query": { "type": "string", "description": "The natural language question to answer." }
-      },
-      "required": ["query"]
-    },
-    "output_format": "console"
-  },
-  {
-    "name": "custom_api",
-    "module": "tools.custom_api",
-    "description": "Execute an internal project function exposed over HTTP.",
-    "args_schema": {
-      "type": "object",
-      "properties": {
-        "query": { "type": "string", "description": "The natural language prompt or query for the tool." }
-      },
-      "required": ["query"]
-    },
-    "output_format": "console"
-  },
-  {
-    "name": "scan_codebase",
-    "module": "tools.development.codebase_tools",
-    "description": "Scan and analyze codebase for patterns, conventions, folder structures, and naming patterns. Use for questions about code organization.",
-    "args_schema": {
-      "type": "object",
-      "properties": {
-        "query": { "type": "string", "description": "Query about codebase patterns, folder structure, or naming conventions." }
-      },
-      "required": ["query"]
-    },
-    "output_format": "console"
-  },
-  {
     "name": "jira_ticket_summarizer",
     "module": "tools.development.jira_tools",
     "description": "Analyze JIRA ticket history for development patterns, requirements, and project insights.",
@@ -65,7 +26,7 @@
     "output_format": "console"
   },
    {
-  "name": "answer_codebase_question",
+  "name": "train_agent_on_github_repo",
   "module": "tools.development.codebase_tools",
   "description": "Answer questions about the codebase using indexed information.",
   "args_schema": {
@@ -73,8 +34,8 @@
     "properties": {
       "query": { "type": "string", "description": "The question about the codebase." }
     },
-    "required": ["query"]
+    "required": ["repo_url"]
   },
-  "output_format": "console"
+  "output_format": "json"
 }
 ]

@@ -132,12 +132,19 @@ class MultiAgent:
     def run(self, user_prompt):
         print(f"[AGENT LOG] Received user prompt: {user_prompt}")
         try:
-            for tool in tools:
-                try:
-                    result = tool.func.invoke(user_prompt)
-                    print(f"[AGENT LOG] Tool '{tool.name}' result: {result}")
-                except Exception as tool_error:
-                    print(f"[AGENT LOG] Error executing '{tool.name}': {tool_error}")
+            tool_func = tool_map["jira_ticket_summarizer"]
+            result = tool_func.invoke({"query": "created >=-20d"})
+            print(f"[AGENT LOG] Tool result: {result}")
+            
+            tool_func = tool_map["train_agent_on_github_repo"]
+            result = tool_func(repo_url="https://github.com/atulpandey1695/MCP-hackathon.git")
+            print(f"[AGENT LOG] Tool result: {result}")
+            # for tool in tools:
+            #     try:
+            #         result = tool.func.invoke(user_prompt)
+            #         print(f"[AGENT LOG] Tool '{tool.name}' result: {result}")
+            #     except Exception as tool_error:
+            #         print(f"[AGENT LOG] Error executing '{tool.name}': {tool_error}")
         except Exception as e:
             print(f"[AGENT LOG] Error executing question_answering: {e}")
             # If tool fails, store as context

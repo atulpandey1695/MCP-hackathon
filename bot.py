@@ -13,9 +13,15 @@ load_dotenv()
 # Set your OpenAI API key
 os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
 
-# Load FAISS index
-faiss_index_path = "tools/output/faiss_index"
-vectorstore = FAISS.load_local(faiss_index_path, OpenAIEmbeddings(), allow_dangerous_deserialization=True)
+# Load both FAISS indexes
+faiss_index_path_1 = "tools/output/jira_faiss_index"
+faiss_index_path_2 = "tools/output/codebase_faiss_index"
+vectorstore1 = FAISS.load_local(faiss_index_path_1, OpenAIEmbeddings(), allow_dangerous_deserialization=True)
+vectorstore2 = FAISS.load_local(faiss_index_path_2, OpenAIEmbeddings(), allow_dangerous_deserialization=True)
+
+# Merge the second index into the first
+vectorstore1.merge_from(vectorstore2)
+vectorstore = vectorstore1
 
 # Initialize conversation memory
 memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)
