@@ -5,6 +5,8 @@ langchain-openai
 openai
 requests
 beautifulsoup4
+flask
+gitpython
 pydantic
 python-dotenv
 mistralai

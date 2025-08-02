@@ -1,0 +1,1074 @@
+{
+  "repository": {
+    "url": "https://github.com/Codebandits-tal/hackhathon-codebandits.git",
+    "cloned_branch": "master",
+    "requested_branch": "main",
+    "remote_url": "https://github.com/Codebandits-tal/hackhathon-codebandits.git"
+  },
+  "metadata": {
+    "total_commits_fetched": 50,
+    "max_commits_requested": 50,
+    "fetch_timestamp": "2025-08-02T14:54:43.328244",
+    "clone_method": "temporary"
+  },
+  "commits": [
+    {
+      "sha": "40421a3a982ff30c31d3d27810b560804904f866",
+      "short_sha": "40421a3",
+      "message": "Updated diagram path in readme file",
+      "author": {
+        "name": "Codebandits-tal",
+        "email": "140823987+Codebandits-tal@users.noreply.github.com"
+      },
+      "authored_date": "2023-07-30T10:37:00+05:30",
+      "committed_date": "2023-07-30T10:37:00+05:30",
+      "changed_files": [
+        "README.md"
+      ]
+    },
+    {
+      "sha": "1c2b351c0727515bb9c292d06232d9c790c29d80",
+      "short_sha": "1c2b351",
+      "message": "Update README.md for onion architecture diagram",
+      "author": {
+        "name": "Codebandits-tal",
+        "email": "140823987+Codebandits-tal@users.noreply.github.com"
+      },
+      "authored_date": "2023-07-30T10:34:21+05:30",
+      "committed_date": "2023-07-30T10:34:21+05:30",
+      "changed_files": [
+        "README.md"
+      ]
+    },
+    {
+      "sha": "3a9fe6f1ecea825781a85440459d7c48583d402b",
+      "short_sha": "3a9fe6f",
+      "message": "added onion architecture diagram",
+      "author": {
+        "name": "Giridhar Anand",
+        "email": "giridhar.anand@talentica.com"
+      },
+      "authored_date": "2023-07-30T10:33:27+05:30",
+      "committed_date": "2023-07-30T10:33:40+05:30",
+      "changed_files": [
+        "Hachathon-architecture.drawio.png"
+      ]
+    },
+    {
+      "sha": "60dac31bea290a0ae831b6fdce35485a3f473c1a",
+      "short_sha": "60dac31",
+      "message": "ai icon on app level",
+      "author": {
+        "name": "Ashok Patel",
+        "email": "ashok@tailoredmail.com"
+      },
+      "authored_date": "2023-07-30T10:23:59+05:30",
+      "committed_date": "2023-07-30T10:23:59+05:30",
+      "changed_files": [
+        "CB-UI/src/app/app.component.css",
+        "CB-UI/src/app/app.component.html",
+        "CB-UI/src/app/app.component.ts",
+        "CB-UI/src/app/landing-page/landing-page.component.html"
+      ]
+    },
+    {
+      "sha": "8685b87ad62a177b9478e78ea159f236207b1415",
+      "short_sha": "8685b87",
+      "message": "fixed editor resume builder",
+      "author": {
+        "name": "Rajesh Patra",
+        "email": "rajesh@tailoredmail.com"
+      },
+      "authored_date": "2023-07-30T09:39:44+05:30",
+      "committed_date": "2023-07-30T09:39:44+05:30",
+      "changed_files": [
+        "CB-UI/src/app/component/editor/editor.component.ts",
+        "CB-UI/src/app/service/login.service.ts"
+      ]
+    },
+    {
+      "sha": "df974d836a88b7a085dd6260c18597b9f76ed92d",
+      "short_sha": "df974d8",
+      "message": "fixed import error in app module, routing fix, search fix",
+      "author": {
+        "name": "Rajesh Patra",
+        "email": "rajesh@tailoredmail.com"
+      },
+      "authored_date": "2023-07-30T09:24:28+05:30",
+      "committed_date": "2023-07-30T09:24:28+05:30",
+      "changed_files": [
+        "CB-UI/src/app/app-routing.module.ts",
+        "CB-UI/src/app/app.module.ts",
+        "CB-UI/src/app/auth.guard.ts",
+        "CB-UI/src/app/component/editor/editor.component.ts",
+        "CB-UI/src/app/login/login.component.ts",
+        "CB-UI/src/app/service/login.service.ts",
+        "CB-UI/src/app/service/search.service.ts",
+        "CB-UI/src/app/service/userinfo.service.ts"
+      ]
+    },
+    {
+      "sha": "4c4a057cd322d05d63c422decd4d0944bd8e9a74",
+      "short_sha": "4c4a057",
+      "message": "Added Pipe for Gender",
+      "author": {
+        "name": "Vishal Raj",
+        "email": "Vishal@tailoredmail.com"
+      },
+      "authored_date": "2023-07-30T07:34:20+05:30",
+      "committed_date": "2023-07-30T07:34:20+05:30",
+      "changed_files": [
+        "CB-UI/src/app/app.module.ts",
+        "CB-UI/src/app/gender.pipe.spec.ts",
+        "CB-UI/src/app/gender.pipe.ts",
+        "CB-UI/src/app/view-search-result/view-search-result.component.html"
+      ]
+    },
+    {
+      "sha": "0335f51566f8f3440c3ea0c6f03875cf1486844b",
+      "short_sha": "0335f51",
+      "message": "App module and misc files",
+      "author": {
+        "name": "Ashok Patel",
+        "email": "ashok@tailoredmail.com"
+      },
+      "authored_date": "2023-07-30T04:25:00+05:30",
+      "committed_date": "2023-07-30T04:42:36+05:30",
+      "changed_files": [
+        "CB-UI/.prettierignore",
+        "CB-UI/.prettierrc.json",
+        "CB-UI/angular.json",
+        "CB-UI/package.json",
+        "CB-UI/proxy-base.json",
+        "CB-UI/proxy-config.js",
+        "CB-UI/src/app/app.module.ts",
+        "CB-UI/src/index.html",
+        "CB-UI/src/styles.css",
+        "CB-UI/src/web.config"
+      ]
+    },
+    {
+      "sha": "b7afab9718abce478964eeb6c95b01bcb5b1c13d",
+      "short_sha": "b7afab9",
+      "message": "Landing page work",
+      "author": {
+        "name": "Ashok Patel",
+        "email": "ashok@tailoredmail.com"
+      },
+      "authored_date": "2023-07-30T04:23:37+05:30",
+      "committed_date": "2023-07-30T04:41:36+05:30",
+      "changed_files": [
+        "CB-UI/src/app/landing-page/landing-page.component.css",
+        "CB-UI/src/app/landing-page/landing-page.component.html",
+        "CB-UI/src/app/landing-page/landing-page.component.ts"
+      ]
+    },
+    {
+      "sha": "222412f0c6e6c3daae121aa7dd734569b12058c8",
+      "short_sha": "222412f",
+      "message": "Shared module",
+      "author": {
+        "name": "Ashok Patel",
+        "email": "ashok@tailoredmail.com"
+      },
+      "authored_date": "2023-07-30T04:22:44+05:30",
+      "committed_date": "2023-07-30T04:39:23+05:30",
+      "changed_files": [
+        "CB-UI/src/app/core/common.css",
+        "CB-UI/src/app/core/shared/shared.module.ts"
+      ]
+    },
+    {
+      "sha": "87a86cf86e64e78c596252e1eea45bff5b31c5da",
+      "short_sha": "87a86cf",
+      "message": "AI Assistant module",
+      "author": {
+        "name": "Ashok Patel",
+        "email": "ashok@tailoredmail.com"
+      },
+      "authored_date": "2023-07-30T04:21:36+05:30",
+      "committed_date": "2023-07-30T04:39:23+05:30",
+      "changed_files": [
+        "CB-UI/src/app/ai-assistant/ai-assistant.module.ts",
+        "CB-UI/src/app/ai-assistant/ask-anything/ask-anything.component.css",
+        "CB-UI/src/app/ai-assistant/ask-anything/ask-anything.component.html",
+        "CB-UI/src/app/ai-assistant/ask-anything/ask-anything.component.ts",
+        "CB-UI/src/app/ai-assistant/assistant.service.ts",
+        "CB-UI/src/app/ai-assistant/core/ai-styles.css",
+        "CB-UI/src/app/ai-assistant/email-helper/email-helper.component.css",
+        "CB-UI/src/app/ai-assistant/email-helper/email-helper.component.html",
+        "CB-UI/src/app/ai-assistant/email-helper/email-helper.component.spec.ts",
+        "CB-UI/src/app/ai-assistant/email-helper/email-helper.component.ts",
+        "CB-UI/src/app/ai-assistant/grammar-helper/grammar-helper.component.css",
+        "CB-UI/src/app/ai-assistant/grammar-helper/grammar-helper.component.html",
+        "CB-UI/src/app/ai-assistant/grammar-helper/grammar-helper.component.spec.ts",
+        "CB-UI/src/app/ai-assistant/grammar-helper/grammar-helper.component.ts",
+        "CB-UI/src/app/ai-assistant/home/home.component.css",
+        "CB-UI/src/app/ai-assistant/home/home.component.html",
+        "CB-UI/src/app/ai-assistant/home/home.component.ts",
+        "CB-UI/src/app/ai-assistant/interview-helper/interview-helper.component.css",
+        "CB-UI/src/app/ai-assistant/interview-helper/interview-helper.component.html",
+        "CB-UI/src/app/ai-assistant/interview-helper/interview-helper.component.spec.ts",
+        "CB-UI/src/app/ai-assistant/interview-helper/interview-helper.component.ts",
+        "CB-UI/src/app/ai-assistant/resume-helper/resume-helper.component.css",
+        "CB-UI/src/app/ai-assistant/resume-helper/resume-helper.component.html",
+        "CB-UI/src/app/ai-assistant/resume-helper/resume-helper.component.spec.ts",
+        "CB-UI/src/app/ai-assistant/resume-helper/resume-helper.component.ts",
+        "CB-UI/src/app/ai-assistant/search-helper/search-helper.component.css",
+        "CB-UI/src/app/ai-assistant/search-helper/search-helper.component.html",
+        "CB-UI/src/app/ai-assistant/search-helper/search-helper.component.spec.ts",
+        "CB-UI/src/app/ai-assistant/search-helper/search-helper.component.ts"
+      ]
+    },
+    {
+      "sha": "06904bacfaa6c97a420f0c4b503b16486206de2f",
+      "short_sha": "06904ba",
+      "message": "Python code",
+      "author": {
+        "name": "Ashok Patel",
+        "email": "ashok@tailoredmail.com"
+      },
+      "authored_date": "2023-07-30T04:21:02+05:30",
+      "committed_date": "2023-07-30T04:39:22+05:30",
+      "changed_files": [
+        "CB-AI-Assistant/index.py",
+        "CB-AI-Assistant/web.config"
+      ]
+    },
+    {
+      "sha": "c2e3b3f7cddf29dec2e2c178ac8d5197cee425ea",
+      "short_sha": "c2e3b3f",
+      "message": "CB ai first work",
+      "author": {
+        "name": "Ashok Patel",
+        "email": "ashok@tailoredmail.com"
+      },
+      "authored_date": "2023-07-29T14:03:34+05:30",
+      "committed_date": "2023-07-30T04:39:22+05:30",
+      "changed_files": [
+        ".gitignore",
+        "CB-AI-Assistant/.gitignore",
+        "CB-AI-Assistant/.vscode/launch.json",
+        "CB-AI-Assistant/.vscode/settings.json",
+        "CB-AI-Assistant/README.md",
+        "CB-AI-Assistant/Setup.md",
+        "CB-AI-Assistant/conf/config.ini",
+        "CB-AI-Assistant/index.py",
+        "CB-AI-Assistant/requirements.txt",
+        "CB-AI-Assistant/templates/index.html",
+        "CB-AI-Assistant/web.config",
+        "CB-UI/src/app/ai-assistant/ai-assistant-routing.module.ts",
+        "CB-UI/src/app/ai-assistant/ai-assistant.module.ts",
+        "CB-UI/src/app/ai-assistant/ask-anything/ask-anything.component.css",
+        "CB-UI/src/app/ai-assistant/ask-anything/ask-anything.component.html",
+        "CB-UI/src/app/ai-assistant/ask-anything/ask-anything.component.spec.ts",
+        "CB-UI/src/app/ai-assistant/ask-anything/ask-anything.component.ts",
+        "CB-UI/src/app/ai-assistant/assistant.service.spec.ts",
+        "CB-UI/src/app/ai-assistant/assistant.service.ts",
+        "CB-UI/src/app/ai-assistant/core/ai-assistant-request.model.ts",
+        "CB-UI/src/app/ai-assistant/core/ai-assistant-response.model.ts",
+        "CB-UI/src/app/ai-assistant/core/ai-styles.css",
+        "CB-UI/src/app/ai-assistant/core/toolbar-map.ts",
+        "CB-UI/src/app/ai-assistant/home/home.component.css",
+        "CB-UI/src/app/ai-assistant/home/home.component.html",
+        "CB-UI/src/app/ai-assistant/home/home.component.spec.ts",
+        "CB-UI/src/app/ai-assistant/home/home.component.ts",
+        "CB-UI/src/app/core/http.service.spec.ts",
+        "CB-UI/src/app/core/http.service.ts",
+        "CB-UI/src/app/landing-page/landing-page.component.ts"
+      ]
+    },
+    {
+      "sha": "a1b06e6e4bf456759ce78dd762edc830fdc49811",
+      "short_sha": "a1b06e6",
+      "message": "added Search integration -Vishal",
+      "author": {
+        "name": "Vishal Raj",
+        "email": "Vishal@tailoredmail.com"
+      },
+      "authored_date": "2023-07-30T03:39:06+05:30",
+      "committed_date": "2023-07-30T03:39:06+05:30",
+      "changed_files": [
+        "CB-UI/src/app/component/search/search.component.html",
+        "CB-UI/src/app/component/search/search.component.ts",
+        "CB-UI/src/app/header/header.component.css",
+        "CB-UI/src/app/header/header.component.html",
+        "CB-UI/src/app/landing-page/landing-page.component.html",
+        "CB-UI/src/app/profile/profile.component.html",
+        "CB-UI/src/app/service/search.service.spec.ts",
+        "CB-UI/src/app/service/search.service.ts",
+        "CB-UI/src/app/service/userinfo.service.ts",
+        "CB-UI/src/app/view-search-result/view-search-result.component.html",
+        "CB-UI/src/app/view-search-result/view-search-result.component.ts"
+      ]
+    },
+    {
+      "sha": "00b7d9deca5ef67e4f0f901be555fbe4be8c92ba",
+      "short_sha": "00b7d9d",
+      "message": "implemented get resume and save resume api",
+      "author": {
+        "name": "Giridhar Anand",
+        "email": "giridhar.anand@talentica.com"
+      },
+      "authored_date": "2023-07-30T03:01:47+05:30",
+      "committed_date": "2023-07-30T03:01:47+05:30",
+      "changed_files": [
+        "CB.Api/Controllers/ResumeController.cs",
+        "CB.Core/Models/Resume.cs",
+        "CB.Core/Repositories/IResumeRepository.cs",
+        "CB.Core/Services/IResumeService.cs",
+        "CB.Core/ServicesImpl/ResumeService.cs",
+        "CB.Extension/CBExtension.cs",
+        "CB.Repository/ResumeRepository.cs",
+        "CB.Repository/SQLDB/ReleaseScripts.sql/procs.sql",
+        "CB.Repository/SQLDB/ReleaseScripts.sql/tables.sql",
+        "CB.Repository/SQLDB/SProcs/get_resume.sql",
+        "CB.Repository/SQLDB/SProcs/save_resume.sql"
+      ]
+    },
+    {
+      "sha": "4abfa4fac765f913d9eb46adb89068a5de64ca8e",
+      "short_sha": "4abfa4f",
+      "message": "order by descending for search employee api",
+      "author": {
+        "name": "Giridhar Anand",
+        "email": "giridhar.anand@talentica.com"
+      },
+      "authored_date": "2023-07-30T01:34:31+05:30",
+      "committed_date": "2023-07-30T01:34:31+05:30",
+      "changed_files": [
+        "CB.Repository/SQLDB/ReleaseScripts.sql/procs.sql",
+        "CB.Repository/SQLDB/SProcs/search_employees.sql"
+      ]
+    },
+    {
+      "sha": "fcfd09f1871ee19fd848ca7b62a6d9b873c8829d",
+      "short_sha": "fcfd09f",
+      "message": "implemented search employee api",
+      "author": {
+        "name": "Giridhar Anand",
+        "email": "giridhar.anand@talentica.com"
+      },
+      "authored_date": "2023-07-30T01:25:35+05:30",
+      "committed_date": "2023-07-30T01:26:49+05:30",
+      "changed_files": [
+        "CB.Api/Controllers/EmployeeController.cs",
+        "CB.Api/Controllers/LoginController.cs",
+        "CB.Core/Commands/EmployeeSearchCommand.cs",
+        "CB.Api/Commands/LoginCommand.cs",
+        "CB.Core/Repositories/IEmployeeRepository.cs",
+        "CB.Core/Services/IEmployeeService.cs",
+        "CB.Core/ServicesImpl/EmployeeService.cs",
+        "CB.Repository/EmployeeRepository.cs",
+        "CB.Repository/SQLDB/ReleaseScripts.sql/procs.sql",
+        "CB.Repository/SQLDB/SProcs/get_employee_by_id.sql",
+        "CB.Repository/SQLDB/SProcs/search_employees.sql"
+      ]
+    },
+    {
+      "sha": "eab38cac1c7071eef158df24c9f96dd53f53266f",
+      "short_sha": "eab38ca",
+      "message": "YearOfExperience Bug Fixed",
+      "author": {
+        "name": "Vishal Raj",
+        "email": "Vishal@tailoredmail.com"
+      },
+      "authored_date": "2023-07-30T00:46:03+05:30",
+      "committed_date": "2023-07-30T00:46:03+05:30",
+      "changed_files": [
+        "CB-UI/src/app/profile/profile.component.html",
+        "CB-UI/src/app/profile/profile.component.ts"
+      ]
+    },
+    {
+      "sha": "12d02fa43c3b9fb83add1be3c0767d9c8dd12f5d",
+      "short_sha": "12d02fa",
+      "message": "forms autofill-rajesh",
+      "author": {
+        "name": "Rajesh Patra",
+        "email": "rajesh@tailoredmail.com"
+      },
+      "authored_date": "2023-07-30T00:24:57+05:30",
+      "committed_date": "2023-07-30T00:24:57+05:30",
+      "changed_files": [
+        "CB-UI/src/app/profile/profile.component.html",
+        "CB-UI/src/app/profile/profile.component.ts"
+      ]
+    },
+    {
+      "sha": "8b30ba4a082ba50bafb37b8ee854110ead087453",
+      "short_sha": "8b30ba4",
+      "message": "cors fix, issue tracker url update",
+      "author": {
+        "name": "Rajesh Patra",
+        "email": "rajesh@tailoredmail.com"
+      },
+      "authored_date": "2023-07-29T23:17:01+05:30",
+      "committed_date": "2023-07-29T23:17:01+05:30",
+      "changed_files": [
+        "CB-UI/src/app/app-routing.module.ts",
+        "CB-UI/src/app/header/header.component.html",
+        "CB-UI/src/app/issuetracker/issuetracker.component.ts",
+        "CB-UI/src/environments/environment.ts",
+        "CB.Api/Program.cs",
+        "CB.Repository/UnitOfWork.cs"
+      ]
+    },
+    {
+      "sha": "a1218c0ae44443ff8df24ea9c1e4d71c58c60611",
+      "short_sha": "a1218c0",
+      "message": "added cors policy, api in url",
+      "author": {
+        "name": "Giridhar Anand",
+        "email": "giridhar.anand@talentica.com"
+      },
+      "authored_date": "2023-07-29T23:00:03+05:30",
+      "committed_date": "2023-07-29T23:01:04+05:30",
+      "changed_files": [
+        "CB.Api/CB.Api.csproj",
+        "CB.Api/Controllers/LoginController.cs",
+        "CB.Api/Controllers/ProjectController.cs",
+        "CB.Api/Program.cs"
+      ]
+    },
+    {
+      "sha": "1670d81c42a2bd60f5eee83888d1620ac3bb7203",
+      "short_sha": "1670d81",
+      "message": "Added login html code -Vishal",
+      "author": {
+        "name": "Vishal Raj",
+        "email": "Vishal@tailoredmail.com"
+      },
+      "authored_date": "2023-07-29T21:12:58+05:30",
+      "committed_date": "2023-07-29T21:12:58+05:30",
+      "changed_files": [
+        "CB-UI/src/app/login/login.component.html",
+        "CB-UI/src/app/service/login.service.ts",
+        "CB-UI/src/environments/environment.ts"
+      ]
+    },
+    {
+      "sha": "0a29e4e3b004caacbb53081eac2b73e415833b2f",
+      "short_sha": "0a29e4e",
+      "message": "Added component to display users depending upon the search filter",
+      "author": {
+        "name": "Vishal Raj",
+        "email": "Vishal@tailoredmail.com"
+      },
+      "authored_date": "2023-07-29T20:32:54+05:30",
+      "committed_date": "2023-07-29T20:39:24+05:30",
+      "changed_files": [
+        "CB-UI/src/app/app-routing.module.ts",
+        "CB-UI/src/app/app.module.ts",
+        "CB-UI/src/app/profile/profile.component.css",
+        "CB-UI/src/app/view-search-result/view-search-result.component.css",
+        "CB-UI/src/app/view-search-result/view-search-result.component.html",
+        "CB-UI/src/app/view-search-result/view-search-result.component.spec.ts",
+        "CB-UI/src/app/view-search-result/view-search-result.component.ts"
+      ]
+    },
+    {
+      "sha": "76453991a9ae93a3a9df50c7f2391f7eb438bbc5",
+      "short_sha": "7645399",
+      "message": "implemented login service code",
+      "author": {
+        "name": "Vishal Raj",
+        "email": "Vishal@tailoredmail.com"
+      },
+      "authored_date": "2023-07-29T18:14:26+05:30",
+      "committed_date": "2023-07-29T20:28:38+05:30",
+      "changed_files": [
+        "CB-UI/src/app/app-routing.module.ts",
+        "CB-UI/src/app/login/login.component.ts",
+        "CB-UI/src/app/service/login.service.ts",
+        "CB-UI/src/app/service/userinfo.service.ts",
+        "CB-UI/src/environments/environment.ts"
+      ]
+    },
+    {
+      "sha": "3a014138598f6821dbbd87a47af1d78e57e56895",
+      "short_sha": "3a01413",
+      "message": "UI for login and employee search",
+      "author": {
+        "name": "Vishal Raj",
+        "email": "Vishal@tailoredmail.com"
+      },
+      "authored_date": "2023-07-29T17:29:04+05:30",
+      "committed_date": "2023-07-29T20:27:38+05:30",
+      "changed_files": [
+        "CB-UI/src/app/app-routing.module.ts",
+        "CB-UI/src/app/component/search/search.component.css",
+        "CB-UI/src/app/component/search/search.component.html",
+        "CB-UI/src/app/component/search/search.component.ts",
+        "CB-UI/src/app/header/header.component.css",
+        "CB-UI/src/app/header/header.component.html",
+        "CB-UI/src/app/landing-page/landing-page.component.css",
+        "CB-UI/src/app/login/login.component.css",
+        "CB-UI/src/app/login/login.component.ts"
+      ]
+    },
+    {
+      "sha": "95dde18ec0d8f28a67eea2ebe240d75a73d6afee",
+      "short_sha": "95dde18",
+      "message": "ai assist button added in resumebuilder",
+      "author": {
+        "name": "Rajesh Patra",
+        "email": "rajesh@tailoredmail.com"
+      },
+      "authored_date": "2023-07-29T18:21:28+05:30",
+      "committed_date": "2023-07-29T20:27:02+05:30",
+      "changed_files": [
+        "CB-UI/src/app/app.component.html",
+        "CB-UI/src/app/component/editor/editor.component.html",
+        "CB-UI/src/app/component/editor/editor.component.ts"
+      ]
+    },
+    {
+      "sha": "3d2b5db90d69e0611977cb08a04c6d5f3df68af2",
+      "short_sha": "3d2b5db",
+      "message": "issuetracker update",
+      "author": {
+        "name": "Rajesh Patra",
+        "email": "rajesh@tailoredmail.com"
+      },
+      "authored_date": "2023-07-29T16:50:57+05:30",
+      "committed_date": "2023-07-29T20:26:54+05:30",
+      "changed_files": [
+        "CB-UI/src/app/app.module.ts",
+        "CB-UI/src/app/issuetracker/issuetracker.component.css",
+        "CB-UI/src/app/issuetracker/issuetracker.component.html",
+        "CB-UI/src/app/issuetracker/issuetracker.component.ts",
+        "CB-UI/src/app/service/userinfo.service.ts"
+      ]
+    },
+    {
+      "sha": "79ded17afab556cbd0d52efdb96f89de2dbc7677",
+      "short_sha": "79ded17",
+      "message": "issue tracker started",
+      "author": {
+        "name": "Rajesh Patra",
+        "email": "rajesh@tailoredmail.com"
+      },
+      "authored_date": "2023-07-29T15:24:40+05:30",
+      "committed_date": "2023-07-29T20:26:05+05:30",
+      "changed_files": [
+        "CB-UI/src/app/app.module.ts",
+        "CB-UI/src/app/issuetracker/issuetracker.component.css",
+        "CB-UI/src/app/issuetracker/issuetracker.component.html",
+        "CB-UI/src/app/issuetracker/issuetracker.component.ts"
+      ]
+    },
+    {
+      "sha": "77cd8117c387651896f83f5d5c948cb68f818488",
+      "short_sha": "77cd811",
+      "message": "mat list added",
+      "author": {
+        "name": "Rajesh Patra",
+        "email": "rajesh@tailoredmail.com"
+      },
+      "authored_date": "2023-07-29T12:01:04+05:30",
+      "committed_date": "2023-07-29T20:25:59+05:30",
+      "changed_files": [
+        "CB-UI/src/app/app.module.ts",
+        "CB-UI/src/app/issuetracker/issuetracker.component.html"
+      ]
+    },
+    {
+      "sha": "06287ca153c69fea1508aea19b30634196aaf600",
+      "short_sha": "06287ca",
+      "message": "resumebuilder service added",
+      "author": {
+        "name": "Rajesh Patra",
+        "email": "rajesh@tailoredmail.com"
+      },
+      "authored_date": "2023-07-29T11:01:33+05:30",
+      "committed_date": "2023-07-29T20:25:03+05:30",
+      "changed_files": [
+        "CB-UI/src/app/component/editor/editor.component.html",
+        "CB-UI/src/app/component/editor/editor.component.ts",
+        "CB-UI/src/app/resumebuilder/resumebuilder.component.html",
+        "CB-UI/src/app/resumebuilder/resumebuilder.component.ts",
+        "CB-UI/src/app/service/userinfo.service.ts"
+      ]
+    },
+    {
+      "sha": "5abfb0a488bb7005ba491f894830bb24b0370918",
+      "short_sha": "5abfb0a",
+      "message": "resume builder work started",
+      "author": {
+        "name": "Rajesh Patra",
+        "email": "rajesh@tailoredmail.com"
+      },
+      "authored_date": "2023-07-29T10:35:39+05:30",
+      "committed_date": "2023-07-29T20:24:55+05:30",
+      "changed_files": [
+        "CB-UI/src/app/component/editor/editor.component.html",
+        "CB-UI/src/app/component/editor/editor.component.ts",
+        "CB-UI/src/app/resumebuilder/resumebuilder.component.html"
+      ]
+    },
+    {
+      "sha": "69fb515fd7bd5a255b30def7b89552221ec66774",
+      "short_sha": "69fb515",
+      "message": "Added Form for profile",
+      "author": {
+        "name": "Vishal Raj",
+        "email": "Vishal@tailoredmail.com"
+      },
+      "authored_date": "2023-07-29T12:30:36+05:30",
+      "committed_date": "2023-07-29T20:23:03+05:30",
+      "changed_files": [
+        "CB-UI/src/app/app-routing.module.ts",
+        "CB-UI/src/app/app.module.ts",
+        "CB-UI/src/app/footer/footer.component.css",
+        "CB-UI/src/app/footer/footer.component.html",
+        "CB-UI/src/app/footer/footer.component.spec.ts",
+        "CB-UI/src/app/footer/footer.component.ts",
+        "CB-UI/src/app/header/header.component.css",
+        "CB-UI/src/app/header/header.component.html",
+        "CB-UI/src/app/header/header.component.spec.ts",
+        "CB-UI/src/app/header/header.component.ts",
+        "CB-UI/src/app/landing-page/landing-page.component.css",
+        "CB-UI/src/app/landing-page/landing-page.component.html",
+        "CB-UI/src/app/login/login.component.html",
+        "CB-UI/src/app/profile/profile.component.css",
+        "CB-UI/src/app/profile/profile.component.html",
+        "CB-UI/src/app/profile/profile.component.ts"
+      ]
+    },
+    {
+      "sha": "0b60419c0fda05c4d6db88dd758b0d437ad6d470",
+      "short_sha": "0b60419",
+      "message": "implemented login api",
+      "author": {
+        "name": "Giridhar Anand",
+        "email": "giridhar.anand@talentica.com"
+      },
+      "authored_date": "2023-07-29T19:12:40+05:30",
+      "committed_date": "2023-07-29T19:12:40+05:30",
+      "changed_files": [
+        "CB.Api/Commands/LoginCommand.cs",
+        "CB.Api/Controllers/LoginController.cs",
+        "CB.Core/Enums/Gender.cs",
+        "CB.Core/Exceptions/ModelNotFoundException.cs",
+        "CB.Core/Models/Employee.cs",
+        "CB.Core/Repositories/IEmployeeRepository.cs",
+        "CB.Core/Services/IEmployeeService.cs",
+        "CB.Core/ServicesImpl/EmployeeService.cs",
+        "CB.Extension/CBExtension.cs",
+        "CB.Repository/BaseRepository.cs",
+        "CB.Repository/EmployeeRepository.cs",
+        "CB.Repository/SQLDB/ReleaseScripts.sql/procs.sql",
+        "CB.Repository/SQLDB/ReleaseScripts.sql/tables.sql",
+        "CB.Repository/SQLDB/SProcs/get_employee_by_email.sql"
+      ]
+    },
+    {
+      "sha": "641386a5e8580d07b585590ff3a59a88454961dc",
+      "short_sha": "641386a",
+      "message": "created release scripts",
+      "author": {
+        "name": "Giridhar Anand",
+        "email": "giridhar.anand@talentica.com"
+      },
+      "authored_date": "2023-07-29T13:49:10+05:30",
+      "committed_date": "2023-07-29T13:49:10+05:30",
+      "changed_files": [
+        "CB.Repository/SQLDB/ReleaseScripts.sql/procs.sql",
+        "CB.Repository/SQLDB/ReleaseScripts.sql/202307290159.sql"
+      ]
+    },
+    {
+      "sha": "d3abd8565fab18c8978961087bff25a7ccd80dd0",
+      "short_sha": "d3abd85",
+      "message": "Create README.md",
+      "author": {
+        "name": "Codebandits-tal",
+        "email": "140823987+Codebandits-tal@users.noreply.github.com"
+      },
+      "authored_date": "2023-07-29T13:30:33+05:30",
+      "committed_date": "2023-07-29T13:30:33+05:30",
+      "changed_files": [
+        "README.md"
+      ]
+    },
+    {
+      "sha": "81cf6d5a22442cc967e2ea31f8ca33ad27973b7a",
+      "short_sha": "81cf6d5",
+      "message": "clean architecture framework set up with first api implemented",
+      "author": {
+        "name": "Giridhar Anand",
+        "email": "giridhar.anand@talentica.com"
+      },
+      "authored_date": "2023-07-29T13:15:28+05:30",
+      "committed_date": "2023-07-29T13:21:34+05:30",
+      "changed_files": [
+        ".gitignore",
+        ".vscode/launch.json",
+        ".vscode/tasks.json",
+        "CB.Api/CB.Api.csproj",
+        "CB.Api/Controllers/ProjectController.cs",
+        "CB.Api/Program.cs",
+        "CB.Api/Properties/launchSettings.json",
+        "CB.Api/appsettings.Development.json",
+        "CB.Api/appsettings.json",
+        "CB.Core/CB.Core.csproj",
+        "CB.Core/Models/BaseModel.cs",
+        "CB.Core/Models/Project.cs",
+        "CB.Core/Repositories/IProjectRepository.cs",
+        "CB.Core/Repositories/IUnitOfWork.cs",
+        "CB.Core/Services/IProjectService.cs",
+        "CB.Core/ServicesImpl/ProjectService.cs",
+        "CB.Extension/CB.Extension.csproj",
+        "CB.Extension/CBExtension.cs",
+        "CB.Repository/BaseRepository.cs",
+        "CB.Repository/CB.Repository.csproj",
+        "CB.Repository/ProjectRepository.cs",
+        "CB.Repository/SQLDB/ReleaseScripts.sql/202307290159.sql",
+        "CB.Repository/SQLDB/SProcs/get_projects.sql",
+        "CB.Repository/SQLDB/tables.sql",
+        "CB.Repository/UnitOfWork.cs",
+        "CB.sln"
+      ]
+    },
+    {
+      "sha": "86a7f8b193efda06c1644962f42aa49180345404",
+      "short_sha": "86a7f8b",
+      "message": "new pages added",
+      "author": {
+        "name": "Rajesh Patra",
+        "email": "rajesh@tailoredmail.com"
+      },
+      "authored_date": "2023-07-29T09:06:19+05:30",
+      "committed_date": "2023-07-29T09:06:19+05:30",
+      "changed_files": [
+        "CB-UI/src/app/app-routing.module.ts",
+        "CB-UI/src/app/app.module.ts",
+        "CB-UI/src/app/emp-team-lookup/emp-team-lookup.component.css",
+        "CB-UI/src/app/emp-team-lookup/emp-team-lookup.component.html",
+        "CB-UI/src/app/emp-team-lookup/emp-team-lookup.component.spec.ts",
+        "CB-UI/src/app/emp-team-lookup/emp-team-lookup.component.ts",
+        "CB-UI/src/app/issuetracker/issuetracker.component.css",
+        "CB-UI/src/app/issuetracker/issuetracker.component.html",
+        "CB-UI/src/app/issuetracker/issuetracker.component.spec.ts",
+        "CB-UI/src/app/issuetracker/issuetracker.component.ts",
+        "CB-UI/src/app/resumebuilder/resumebuilder.component.css",
+        "CB-UI/src/app/resumebuilder/resumebuilder.component.html",
+        "CB-UI/src/app/resumebuilder/resumebuilder.component.spec.ts",
+        "CB-UI/src/app/resumebuilder/resumebuilder.component.ts"
+      ]
+    },
+    {
+      "sha": "fdeda525a22c8f28413ae49e151ac6e6e6eaded0",
+      "short_sha": "fdeda52",
+      "message": "export to pdf ckeditor4 added",
+      "author": {
+        "name": "Rajesh Patra",
+        "email": "rajesh@tailoredmail.com"
+      },
+      "authored_date": "2023-07-29T08:39:34+05:30",
+      "committed_date": "2023-07-29T08:39:34+05:30",
+      "changed_files": [
+        "CB-UI/package-lock.json",
+        "CB-UI/package.json",
+        "CB-UI/src/app/app.component.ts",
+        "CB-UI/src/app/component/editor/editor.component.html",
+        "CB-UI/src/app/component/editor/editor.component.ts",
+        "CB-UI/src/assets/ckeditor4-plugin-exportpdf/CHANGELOG.md",
+        "CB-UI/src/assets/ckeditor4-plugin-exportpdf/LICENSE.md",
+        "CB-UI/src/assets/ckeditor4-plugin-exportpdf/README.md",
+        "CB-UI/src/assets/ckeditor4-plugin-exportpdf/icons/exportpdf.png",
+        "CB-UI/src/assets/ckeditor4-plugin-exportpdf/icons/hidpi/exportpdf.png",
+        "CB-UI/src/assets/ckeditor4-plugin-exportpdf/lang/en.js",
+        "CB-UI/src/assets/ckeditor4-plugin-exportpdf/package.json",
+        "CB-UI/src/assets/ckeditor4-plugin-exportpdf/plugin.js",
+        "CB-UI/src/assets/ckeditor4-plugin-exportpdf/plugindefinition.js",
+        "CB-UI/src/assets/ckeditor4-plugin-exportpdf/tests/_helpers/tools.js",
+        "CB-UI/src/assets/ckeditor4-plugin-exportpdf/tests/authentication.js",
+        "CB-UI/src/assets/ckeditor4-plugin-exportpdf/tests/exportpdf.js",
+        "CB-UI/src/assets/ckeditor4-plugin-exportpdf/tests/manual/configfilename.html",
+        "CB-UI/src/assets/ckeditor4-plugin-exportpdf/tests/manual/configfilename.md",
+        "CB-UI/src/assets/ckeditor4-plugin-exportpdf/tests/manual/emptyeditor.html",
+        "CB-UI/src/assets/ckeditor4-plugin-exportpdf/tests/manual/emptyeditor.md",
+        "CB-UI/src/assets/ckeditor4-plugin-exportpdf/tests/manual/integration.html",
+        "CB-UI/src/assets/ckeditor4-plugin-exportpdf/tests/manual/integration.md",
+        "CB-UI/src/assets/ckeditor4-plugin-exportpdf/tests/manual/integrations/easyimage.html",
+        "CB-UI/src/assets/ckeditor4-plugin-exportpdf/tests/manual/integrations/easyimage.md",
+        "CB-UI/src/assets/ckeditor4-plugin-exportpdf/tests/manual/notifications.html",
+        "CB-UI/src/assets/ckeditor4-plugin-exportpdf/tests/manual/notifications.md",
+        "CB-UI/src/assets/ckeditor4-plugin-exportpdf/tests/manual/notificationsasync.html",
+        "CB-UI/src/assets/ckeditor4-plugin-exportpdf/tests/manual/notificationsasync.md",
+        "CB-UI/src/assets/ckeditor4-plugin-exportpdf/tests/manual/paperformat.html",
+        "CB-UI/src/assets/ckeditor4-plugin-exportpdf/tests/manual/paperformat.md",
+        "CB-UI/src/assets/ckeditor4-plugin-exportpdf/tests/manual/readonly.html",
+        "CB-UI/src/assets/ckeditor4-plugin-exportpdf/tests/manual/readonly.md",
+        "CB-UI/src/assets/ckeditor4-plugin-exportpdf/tests/manual/stylesheets.html",
+        "CB-UI/src/assets/ckeditor4-plugin-exportpdf/tests/manual/stylesheets.md",
+        "CB-UI/src/assets/ckeditor4-plugin-exportpdf/tests/manual/tokenfetching.html",
+        "CB-UI/src/assets/ckeditor4-plugin-exportpdf/tests/manual/tokenfetching.md",
+        "CB-UI/src/assets/ckeditor4-plugin-exportpdf/tests/manual/tokentwoeditorscorrect.html",
+        "CB-UI/src/assets/ckeditor4-plugin-exportpdf/tests/manual/tokentwoeditorscorrect.md",
+        "CB-UI/src/assets/ckeditor4-plugin-exportpdf/tests/manual/tokentwoeditorswrong.html",
+        "CB-UI/src/assets/ckeditor4-plugin-exportpdf/tests/manual/tokentwoeditorswrong.md",
+        "CB-UI/src/assets/ckeditor4-plugin-exportpdf/tests/manual/tokenwithouturl.html",
+        "CB-UI/src/assets/ckeditor4-plugin-exportpdf/tests/manual/tokenwithouturl.md",
+        "CB-UI/src/assets/ckeditor4-plugin-exportpdf/tests/manual/wrongendpoint.html",
+        "CB-UI/src/assets/ckeditor4-plugin-exportpdf/tests/manual/wrongendpoint.md",
+        "CB-UI/src/assets/ckeditor4-plugin-exportpdf/tests/notification.js",
+        "CB-UI/src/assets/ckeditor4-plugin-exportpdf/tests/resourcespaths.js",
+        "CB-UI/src/assets/ckeditor4-plugin-exportpdf/tests/statistics.js",
+        "CB-UI/src/assets/ckeditor4-plugin-exportpdf/tests/stylesheets.js",
+        "CB-UI/src/index.html"
+      ]
+    },
+    {
+      "sha": "66c1a05d14e86cb8823c9177a2fbf8323066cda4",
+      "short_sha": "66c1a05",
+      "message": "multiselect dropdown added",
+      "author": {
+        "name": "Rajesh Patra",
+        "email": "rajesh@tailoredmail.com"
+      },
+      "authored_date": "2023-07-29T07:12:17+05:30",
+      "committed_date": "2023-07-29T07:12:17+05:30",
+      "changed_files": [
+        "CB-UI/package-lock.json",
+        "CB-UI/package.json",
+        "CB-UI/src/app/app.module.ts",
+        "CB-UI/src/app/login/login.component.html",
+        "CB-UI/src/app/profile/profile.component.html",
+        "CB-UI/src/app/profile/profile.component.ts"
+      ]
+    },
+    {
+      "sha": "3924d30a7b29bef1ae2f995b5a3e49666875b40c",
+      "short_sha": "3924d30",
+      "message": "ckeditor added",
+      "author": {
+        "name": "Rajesh Patra",
+        "email": "rajesh@tailoredmail.com"
+      },
+      "authored_date": "2023-07-29T07:02:47+05:30",
+      "committed_date": "2023-07-29T07:02:47+05:30",
+      "changed_files": [
+        "CB-UI/src/app/app.module.ts",
+        "CB-UI/src/app/component/editor/editor.component.html",
+        "CB-UI/src/app/component/editor/editor.component.ts",
+        "CB-UI/src/app/login/login.component.html"
+      ]
+    },
+    {
+      "sha": "9fa0b82a74766d00a24332a32aa52c678b9d7a0a",
+      "short_sha": "9fa0b82",
+      "message": "angular material fixed",
+      "author": {
+        "name": "Rajesh Patra",
+        "email": "rajesh@tailoredmail.com"
+      },
+      "authored_date": "2023-07-29T06:47:48+05:30",
+      "committed_date": "2023-07-29T06:47:48+05:30",
+      "changed_files": [
+        "CB-UI/angular.json",
+        "CB-UI/package-lock.json",
+        "CB-UI/package.json",
+        "CB-UI/src/app/app.module.ts",
+        "CB-UI/src/app/login/login.component.html",
+        "CB-UI/src/app/login/login.component.ts",
+        "CB-UI/src/index.html",
+        "CB-UI/src/styles.css"
+      ]
+    },
+    {
+      "sha": "16f15dce5abc03573f19d4f742566c7039eabaa3",
+      "short_sha": "16f15dc",
+      "message": "multi field search added",
+      "author": {
+        "name": "Rajesh Patra",
+        "email": "rajesh@tailoredmail.com"
+      },
+      "authored_date": "2023-07-28T23:48:12+05:30",
+      "committed_date": "2023-07-28T23:48:12+05:30",
+      "changed_files": [
+        "CB-UI/src/app/app.module.ts",
+        "CB-UI/src/app/component/search/search.component.html",
+        "CB-UI/src/app/component/search/search.component.ts",
+        "CB-UI/src/app/login/login.component.html"
+      ]
+    },
+    {
+      "sha": "d6898601878f82b656df455a16ad7e236a10429b",
+      "short_sha": "d689860",
+      "message": "login button added",
+      "author": {
+        "name": "Rajesh Patra",
+        "email": "rajesh@tailoredmail.com"
+      },
+      "authored_date": "2023-07-28T22:46:48+05:30",
+      "committed_date": "2023-07-28T22:46:48+05:30",
+      "changed_files": [
+        "CB-UI/src/app/login/login.component.html",
+        "CB-UI/src/app/login/login.component.ts",
+        "CB-UI/src/app/service/login.service.ts"
+      ]
+    },
+    {
+      "sha": "50088ded927f9d2daff08e497b3a9934c0ede07d",
+      "short_sha": "50088de",
+      "message": "auth guard updated",
+      "author": {
+        "name": "Rajesh Patra",
+        "email": "rajesh@tailoredmail.com"
+      },
+      "authored_date": "2023-07-28T22:35:04+05:30",
+      "committed_date": "2023-07-28T22:35:04+05:30",
+      "changed_files": [
+        "CB-UI/package-lock.json",
+        "CB-UI/package.json",
+        "CB-UI/src/app/auth.guard.ts",
+        "CB-UI/src/app/service/auth-interceptor.interceptor.spec.ts",
+        "CB-UI/src/app/service/auth-interceptor.interceptor.ts",
+        "CB-UI/src/app/service/login.service.ts"
+      ]
+    },
+    {
+      "sha": "aec141a2323b9861ed6e52e0f0e1640cecfab286",
+      "short_sha": "aec141a",
+      "message": "landing page work contd",
+      "author": {
+        "name": "Vishal Raj",
+        "email": "Vishal@tailoredmail.com"
+      },
+      "authored_date": "2023-07-28T21:48:36+05:30",
+      "committed_date": "2023-07-28T21:48:36+05:30",
+      "changed_files": [
+        "CB-UI/src/app/app-routing.module.ts",
+        "CB-UI/src/app/app.component.html",
+        "CB-UI/src/app/app.module.ts",
+        "CB-UI/src/app/landing-page/landing-page.component.html"
+      ]
+    },
+    {
+      "sha": "382741daf2cae91b88060ae6279e13341ff4068e",
+      "short_sha": "382741d",
+      "message": "Merge branch 'master' of https://github.com/Codebandits-tal/hackhathon-codebandits",
+      "author": {
+        "name": "Vishal Raj",
+        "email": "Vishal@tailoredmail.com"
+      },
+      "authored_date": "2023-07-28T21:26:47+05:30",
+      "committed_date": "2023-07-28T21:26:47+05:30",
+      "changed_files": []
+    },
+    {
+      "sha": "0748e50b8aaa260fa40256021a681787f2e4a9bc",
+      "short_sha": "0748e50",
+      "message": "routing added",
+      "author": {
+        "name": "Rajesh Patra",
+        "email": "rajesh@tailoredmail.com"
+      },
+      "authored_date": "2023-07-28T21:15:03+05:30",
+      "committed_date": "2023-07-28T21:25:51+05:30",
+      "changed_files": [
+        "CB-UI/src/app/app-routing.module.ts",
+        "CB-UI/src/app/app.component.html",
+        "CB-UI/src/index.html"
+      ]
+    },
+    {
+      "sha": "f19e4877d3cb8e3fa5f62b5c67222fadfa4a75f9",
+      "short_sha": "f19e487",
+      "message": "Added Template code in landing page component",
+      "author": {
+        "name": "Vishal Raj",
+        "email": "Vishal@tailoredmail.com"
+      },
+      "authored_date": "2023-07-28T21:23:28+05:30",
+      "committed_date": "2023-07-28T21:23:28+05:30",
+      "changed_files": [
+        "CB-UI/src/app/app.module.ts",
+        "CB-UI/src/app/landing-page/landing-page.component.css",
+        "CB-UI/src/app/landing-page/landing-page.component.html",
+        "CB-UI/src/app/landing-page/landing-page.component.spec.ts",
+        "CB-UI/src/app/landing-page/landing-page.component.ts"
+      ]
+    },
+    {
+      "sha": "ca7ba01e5ff045384beb4998ab7c663909965e81",
+      "short_sha": "ca7ba01",
+      "message": "routing added",
+      "author": {
+        "name": "Rajesh Patra",
+        "email": "rajesh@tailoredmail.com"
+      },
+      "authored_date": "2023-07-28T21:15:03+05:30",
+      "committed_date": "2023-07-28T21:15:03+05:30",
+      "changed_files": [
+        "CB-UI/src/app/app-routing.module.ts",
+        "CB-UI/src/app/app.component.html",
+        "CB-UI/src/index.html"
+      ]
+    },
+    {
+      "sha": "111e912b39cc1e62ca7cb635930c662c64183ea2",
+      "short_sha": "111e912",
+      "message": "Adding Angular UI",
+      "author": {
+        "name": "Rajesh Patra",
+        "email": "rajesh@tailoredmail.com"
+      },
+      "authored_date": "2023-07-28T20:34:41+05:30",
+      "committed_date": "2023-07-28T20:34:41+05:30",
+      "changed_files": [
+        "CB-UI/.browserslistrc",
+        "CB-UI/.editorconfig",
+        "CB-UI/.gitignore",
+        "CB-UI/README.md",
+        "CB-UI/angular.json",
+        "CB-UI/karma.conf.js",
+        "CB-UI/package-lock.json",
+        "CB-UI/package.json",
+        "CB-UI/src/app/app-routing.module.ts",
+        "CB-UI/src/app/app.component.css",
+        "CB-UI/src/app/app.component.html",
+        "CB-UI/src/app/app.component.spec.ts",
+        "CB-UI/src/app/app.component.ts",
+        "CB-UI/src/app/app.module.ts",
+        "CB-UI/src/app/auth.guard.spec.ts",
+        "CB-UI/src/app/auth.guard.ts",
+        "CB-UI/src/app/component/editor/editor.component.css",
+        "CB-UI/src/app/component/editor/editor.component.html",
+        "CB-UI/src/app/component/editor/editor.component.spec.ts",
+        "CB-UI/src/app/component/editor/editor.component.ts",
+        "CB-UI/src/app/component/search/search.component.css",
+        "CB-UI/src/app/component/search/search.component.html",
+        "CB-UI/src/app/component/search/search.component.spec.ts",
+        "CB-UI/src/app/component/search/search.component.ts",
+        "CB-UI/src/app/login/login.component.css",
+        "CB-UI/src/app/login/login.component.html",
+        "CB-UI/src/app/login/login.component.spec.ts",
+        "CB-UI/src/app/login/login.component.ts",
+        "CB-UI/src/app/profile/profile.component.css",
+        "CB-UI/src/app/profile/profile.component.html",
+        "CB-UI/src/app/profile/profile.component.spec.ts",
+        "CB-UI/src/app/profile/profile.component.ts",
+        "CB-UI/src/app/service/login.service.spec.ts",
+        "CB-UI/src/app/service/login.service.ts",
+        "CB-UI/src/app/service/userinfo.service.spec.ts",
+        "CB-UI/src/app/service/userinfo.service.ts",
+        "CB-UI/src/assets/.gitkeep",
+        "CB-UI/src/environments/environment.prod.ts",
+        "CB-UI/src/environments/environment.ts",
+        "CB-UI/src/favicon.ico",
+        "CB-UI/src/index.html",
+        "CB-UI/src/main.ts",
+        "CB-UI/src/polyfills.ts",
+        "CB-UI/src/styles.css",
+        "CB-UI/src/test.ts",
+        "CB-UI/tsconfig.app.json",
+        "CB-UI/tsconfig.json",
+        "CB-UI/tsconfig.spec.json"
+      ]
+    }
+  ]
+}
