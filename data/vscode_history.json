@@ -1,0 +1,160 @@
+{
+  "repository": {
+    "url": "https://github.com/microsoft/vscode.git",
+    "cloned_branch": "main",
+    "requested_branch": "main",
+    "remote_url": "https://github.com/microsoft/vscode.git"
+  },
+  "metadata": {
+    "total_commits_fetched": 10,
+    "max_commits_requested": 10,
+    "fetch_timestamp": "2025-08-02T14:03:14.730610",
+    "clone_method": "temporary"
+  },
+  "commits": [
+    {
+      "sha": "3aef8be5e46aa7e97e8b0ed115f6147cd0b24634",
+      "short_sha": "3aef8be",
+      "message": "align w release branch (#259267)\n\ntweak",
+      "author": {
+        "name": "Megan Rogge",
+        "email": "merogge@microsoft.com"
+      },
+      "authored_date": "2025-08-01T15:47:55-04:00",
+      "committed_date": "2025-08-01T19:47:55+00:00",
+      "changed_files": [
+        "src/vs/workbench/contrib/terminalContrib/chatAgentTools/browser/task/taskHelpers.ts"
+      ]
+    },
+    {
+      "sha": "6ac234017dd7879aefd4bbe77f6c7bf6e1acc5db",
+      "short_sha": "6ac2340",
+      "message": "Bump distro (#259258)",
+      "author": {
+        "name": "Logan Ramos",
+        "email": "lramos15@gmail.com"
+      },
+      "authored_date": "2025-08-01T14:54:25-04:00",
+      "committed_date": "2025-08-01T11:54:25-07:00",
+      "changed_files": [
+        "package.json"
+      ]
+    },
+    {
+      "sha": "ef385680fb64386ca9f4a5b604a397af88ffd277",
+      "short_sha": "ef38568",
+      "message": "💄 Todo list tool messages (#259245)",
+      "author": {
+        "name": "Harald Kirschner",
+        "email": "hkirschner@microsoft.com"
+      },
+      "authored_date": "2025-08-01T11:16:36-07:00",
+      "committed_date": "2025-08-01T11:16:36-07:00",
+      "changed_files": [
+        "src/vs/workbench/contrib/chat/common/tools/manageTodoListTool.ts"
+      ]
+    },
+    {
+      "sha": "286f5ab7b2d43c577f5553798126ea4165eb9deb",
+      "short_sha": "286f5ab",
+      "message": "Todo items with description tooltip (#258931)",
+      "author": {
+        "name": "Harald Kirschner",
+        "email": "hkirschner@microsoft.com"
+      },
+      "authored_date": "2025-08-01T11:15:47-07:00",
+      "committed_date": "2025-08-01T11:15:47-07:00",
+      "changed_files": [
+        "src/vs/workbench/contrib/chat/browser/chatContentParts/chatTodoListWidget.ts",
+        "src/vs/workbench/contrib/chat/browser/media/chat.css"
+      ]
+    },
+    {
+      "sha": "c7b91f814a23917b86afa95f65dccf292fb3bf91",
+      "short_sha": "c7b91f8",
+      "message": "add backticks vs single quotes around task labels for result messages (#259237)\n\nfix #259234",
+      "author": {
+        "name": "Megan Rogge",
+        "email": "merogge@microsoft.com"
+      },
+      "authored_date": "2025-08-01T12:34:21-04:00",
+      "committed_date": "2025-08-01T16:34:21+00:00",
+      "changed_files": [
+        "src/vs/workbench/contrib/terminalContrib/chatAgentTools/browser/task/createAndRunTaskTool.ts",
+        "src/vs/workbench/contrib/terminalContrib/chatAgentTools/browser/task/getTaskOutputTool.ts",
+        "src/vs/workbench/contrib/terminalContrib/chatAgentTools/browser/task/runTaskTool.ts"
+      ]
+    },
+    {
+      "sha": "b603ca63971ae372d5c7f74f464264441467ceea",
+      "short_sha": "b603ca6",
+      "message": "Use platform agnostic URI comparison for task resolution (#259230)\n\nfixes #259213",
+      "author": {
+        "name": "Megan Rogge",
+        "email": "merogge@microsoft.com"
+      },
+      "authored_date": "2025-08-01T12:33:11-04:00",
+      "committed_date": "2025-08-01T09:33:11-07:00",
+      "changed_files": [
+        "src/vs/workbench/contrib/terminalContrib/chatAgentTools/browser/task/taskHelpers.ts"
+      ]
+    },
+    {
+      "sha": "ff0d98bbfcead4a09d52b0da8735b39a56bcb449",
+      "short_sha": "ff0d98b",
+      "message": "Allow the canonical package name and version to be sent back from the install flow (#259081)",
+      "author": {
+        "name": "Joel Verhagen",
+        "email": "jver@microsoft.com"
+      },
+      "authored_date": "2025-08-01T12:21:45-04:00",
+      "committed_date": "2025-08-01T16:21:45+00:00",
+      "changed_files": [
+        "src/vs/workbench/contrib/mcp/browser/mcpCommandsAddConfiguration.ts"
+      ]
+    },
+    {
+      "sha": "95edd199c9ded499829d737c8ff47701b4fa823a",
+      "short_sha": "95edd19",
+      "message": "Merge pull request #259216 from microsoft/tyriar/259212\n\nRequire the approve property",
+      "author": {
+        "name": "Daniel Imms",
+        "email": "2193314+Tyriar@users.noreply.github.com"
+      },
+      "authored_date": "2025-08-01T09:21:24-07:00",
+      "committed_date": "2025-08-01T09:21:24-07:00",
+      "changed_files": [
+        "src/vs/workbench/contrib/terminalContrib/chatAgentTools/common/terminalChatAgentToolsConfiguration.ts"
+      ]
+    },
+    {
+      "sha": "eeeaebd9f60179802179693fc65884965ca88f1e",
+      "short_sha": "eeeaebd",
+      "message": "only make issue reporter link for slow renderer times (#259103)",
+      "author": {
+        "name": "Aaron Munger",
+        "email": "2019016+amunger@users.noreply.github.com"
+      },
+      "authored_date": "2025-08-01T09:21:05-07:00",
+      "committed_date": "2025-08-01T12:21:05-04:00",
+      "changed_files": [
+        "src/vs/workbench/contrib/notebook/browser/contrib/cellStatusBar/executionStatusBarItemController.ts"
+      ]
+    },
+    {
+      "sha": "895f281d1d31f6aa635c89056dfc26053e40a9db",
+      "short_sha": "895f281",
+      "message": "Merge pull request #259224 from microsoft/tyriar/258996\n\nFix /.*/ auto approve case",
+      "author": {
+        "name": "Daniel Imms",
+        "email": "2193314+Tyriar@users.noreply.github.com"
+      },
+      "authored_date": "2025-08-01T09:04:01-07:00",
+      "committed_date": "2025-08-01T09:04:01-07:00",
+      "changed_files": [
+        "src/vs/workbench/contrib/terminalContrib/chatAgentTools/browser/commandLineAutoApprover.ts",
+        "src/vs/workbench/contrib/terminalContrib/chatAgentTools/test/browser/commandLineAutoApprover.test.ts"
+      ]
+    }
+  ]
+}
