@@ -141,10 +141,8 @@ class MultiAgent:
 
     def run(self, user_prompt):
         print(f"[AGENT LOG] Received user prompt: {user_prompt}")
-        
-        # Try to execute question_answering tool (chatbot)
         try:
-            tool_func = tool_map["question_answering"]
+            tool_func = tool_map["answer_codebase_question"]
             result = tool_func(query=user_prompt)
             print(f"[AGENT LOG] Tool result: {result}")
         except Exception as e:

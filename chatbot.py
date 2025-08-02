@@ -2,10 +2,10 @@ from llm_provider import LLMProvider
 import os
 import pathlib
 import json
+
 from langchain_openai import ChatOpenAI
 from langchain.prompts import ChatPromptTemplate
-import os
-import json
+from chat_context_db import ChatContextDB
 
 class Chatbot:
     def __init__(self, model="gpt-4"):
@@ -28,23 +28,16 @@ class Chatbot:
             ("user", "{user_message}")
         ])
         self.chain = self.prompt | self.llm
-        self.context = []
-        self.context_file = "chatbot_context.json"
-        self._load_context()
+        self.context_db = ChatContextDB()
+        self.context = self.context_db.load_context()
+
 
     def _load_context(self):
-        if os.path.exists(self.context_file):
-            try:
-                with open(self.context_file, "r", encoding="utf-8") as f:
-                    self.context = json.load(f)
-            except json.JSONDecodeError:
-                self.context = []
-        else:
-            self.context = []
+        self.context = self.context_db.load_context()
+
 
     def _save_context(self):
-        with open(self.context_file, "w", encoding="utf-8") as f:
-            json.dump(self.context, f, indent=2)
+        self.context_db.save_context(self.context)
 
     def add_to_context(self, user_message, bot_response):
         self.context.append({"role": "user", "content": user_message})
