@@ -119,8 +119,10 @@ resource "aws_instance" "mcp_server" {
     encrypted   = true
   }
 
-  # Enhanced user_data with proper encoding
-  user_data = base64encode(file("${path.module}/user_data.sh"))
+  # Use a compressed user_data approach
+  user_data = base64encode(templatefile("${path.module}/user_data.sh", {
+    team_name = var.team_name
+  }))
 
   # Instance metadata options for better security
   metadata_options {
@@ -171,7 +173,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "mcp_data" {
 
 # ECR Repository for container images
 resource "aws_ecr_repository" "mcp_server" {
-  repository_name = "${var.team_name}/mcp-server"
+  name = "${var.team_name}/mcp-server"
   
   image_scanning_configuration {
     scan_on_push = true
