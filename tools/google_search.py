@@ -1,5 +1,9 @@
-import json, requests, bs4
+import json
+import requests
+import bs4
+from langchain.tools import tool
 
+@tool
 def google_search(query: str) -> str:
     """
     Scrapes DuckDuckGo (no API key) for the first 5 organic results.

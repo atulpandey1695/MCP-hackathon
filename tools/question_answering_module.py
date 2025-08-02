@@ -1,8 +1,9 @@
-import json
+from langchain.tools import tool
 
-def question_answering(query: str) -> str:
+@tool
+def question_answering_module(question: str) -> str:
     """
     Perform logical reasoning and answer questions based on the query.
     """
     # Placeholder implementation
-    return json.dumps({"answer": f"This is a response to the query: {query}"}, indent=2)
+    return "Answer to the question"

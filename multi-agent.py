@@ -11,6 +11,10 @@ import os
 sys.path.append(os.path.join(os.path.dirname(__file__), 'tools'))
 
 from llm_provider import LLMProvider
+from langchain.agents import Tool, AgentExecutor, create_openai_functions_agent
+from langchain.prompts import ChatPromptTemplate
+from langchain.memory import ConversationBufferMemory
+from langchain_openai import OpenAI
 
 sys.path.append(str(pathlib.Path(__file__).parent))
 TOOLS_PATH = pathlib.Path(__file__).parent / "tools.json"
@@ -44,6 +48,56 @@ for tool in tools_config:
     
     mod = importlib.import_module(import_path)
     tool_map[func_name] = getattr(mod, func_name)
+
+# Initialize tools
+from tools.custom_api import custom_api
+from tools.google_search import google_search
+from tools.question_answering_module import question_answering_module
+
+tools = [
+    Tool(
+        name="Custom API",
+        func=custom_api,
+        description="Custom API for specific tasks"
+    ),
+    Tool(
+        name="Google Search",
+        func=google_search,
+        description="Search Google for information"
+    ),
+    Tool(
+        name="Question Answering",
+        func=question_answering_module,
+        description="Answer questions based on context"
+    )
+]
+
+# Initialize memory
+memory = ConversationBufferMemory()
+
+# Initialize LLM
+openai_api_key = os.getenv("OPENAI_API_KEY")
+if not openai_api_key:
+    # Try to read from settings.json
+    settings_path = pathlib.Path(__file__).parent / "settings.json"
+    if settings_path.exists():
+        with open(settings_path, "r", encoding="utf-8") as f:
+            try:
+                settings = json.load(f)
+                openai_api_key = settings.get("OPENAI_API_KEY")
+            except Exception:
+                openai_api_key = None
+    if not openai_api_key:
+        openai_api_key = input("Enter your OpenAI API key: ").strip()
+llm = OpenAI(model="gpt-4", openai_api_key=openai_api_key)
+
+# Create a prompt for the agent
+prompt = ChatPromptTemplate.from_messages([
+    ("system", "You are a helpful multi-agent assistant. Use tools as needed to solve the user's request. {agent_scratchpad}"),
+    ("user", "{input}")
+])
+agent = create_openai_functions_agent(llm, tools, prompt)
+agent_executor = AgentExecutor(agent=agent, tools=tools, memory=memory)
 
 # Helper: Save workflow context
 def save_context(context):
@@ -99,6 +153,10 @@ class MultiAgent:
             context = load_context()
             context["data_context"][user_prompt] = user_prompt
             save_context(context)
+
+# Example usage
+def run_agent(user_input):
+    return agent_executor.run(user_input)
 
 if __name__ == "__main__":
     # Setup LLMProvider with a valid provider
