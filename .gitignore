@@ -8,3 +8,5 @@ venv/
 
 settings.json
 node_modules
+
+target/

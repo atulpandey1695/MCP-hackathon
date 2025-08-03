@@ -6,12 +6,168 @@
     "remote_url": "https://github.com/atulpandey1695/MCP-hackathon.git"
   },
   "metadata": {
-    "total_commits_fetched": 17,
+    "total_commits_fetched": 25,
     "max_commits_requested": 50,
-    "fetch_timestamp": "2025-08-02T22:30:57.974281",
+    "fetch_timestamp": "2025-08-03T13:27:16.121429",
     "clone_method": "temporary"
   },
   "commits": [
+    {
+      "sha": "53230e24dc8452b1771160943206b8849bb8b59f",
+      "short_sha": "53230e2",
+      "message": "vinay jira token",
+      "author": {
+        "name": "patelashok93",
+        "email": "ashok.patel@talentica.com"
+      },
+      "authored_date": "2025-08-03T12:38:35+05:30",
+      "committed_date": "2025-08-03T12:52:30+05:30",
+      "changed_files": [
+        ".env",
+        "tools/development/jira_tools.py"
+      ]
+    },
+    {
+      "sha": "d1c395af17563272642b262eba2a6222b12dfad7",
+      "short_sha": "d1c395a",
+      "message": "Cleanup: ignore terraform-generated files and remove large tracked files",
+      "author": {
+        "name": "atul.pandey",
+        "email": "atul.pandey@digitalturbine.com"
+      },
+      "authored_date": "2025-08-03T01:49:39+05:30",
+      "committed_date": "2025-08-03T01:53:08+05:30",
+      "changed_files": [
+        "terraform/.gitignore"
+      ]
+    },
+    {
+      "sha": "22a604169dea019aeb4932fbc0b74c94f6950481",
+      "short_sha": "22a6041",
+      "message": "Cleanup: ignore Terraform-generated files and remove large tracked files",
+      "author": {
+        "name": "atul.pandey",
+        "email": "atul.pandey@digitalturbine.com"
+      },
+      "authored_date": "2025-08-03T01:44:06+05:30",
+      "committed_date": "2025-08-03T01:53:08+05:30",
+      "changed_files": [
+        "terraform/terraform.tfstate",
+        "terraform/terraform.tfstate.backup"
+      ]
+    },
+    {
+      "sha": "2cbecdafbdedddb81ef4b69403a34db69d809ff4",
+      "short_sha": "2cbecda",
+      "message": "updated the terraform code files",
+      "author": {
+        "name": "atul.pandey",
+        "email": "atul.pandey@digitalturbine.com"
+      },
+      "authored_date": "2025-08-03T01:36:33+05:30",
+      "committed_date": "2025-08-03T01:53:08+05:30",
+      "changed_files": [
+        ".github/workflows/README.md",
+        ".github/workflows/ci-cd.yml",
+        ".github/workflows/notifications.yml",
+        ".github/workflows/security-scan.yml",
+        ".github/workflows/terraform-plan.yml",
+        "ARCHITECTURE_DIAGRAM.md",
+        "PRESENTATION_ARCHITECTURE.md",
+        "PRESENTATION_SLIDES.md",
+        "README_PRESENTATION.md",
+        "terraform/.gitignore",
+        "terraform/.terraform.lock.hcl",
+        "terraform/DEPLOYMENT_GUIDE.md",
+        "terraform/MANUAL_DEPLOYMENT.md",
+        "terraform/README.md",
+        "terraform/WORKFLOW_DIAGRAM.md",
+        "terraform/main.tf",
+        "terraform/outputs.tf",
+        "terraform/setup_script.sh",
+        "terraform/terraform.tfstate",
+        "terraform/terraform.tfstate.backup",
+        "terraform/user_data.sh",
+        "terraform/variables.tf",
+        "terraform/workflow.md"
+      ]
+    },
+    {
+      "sha": "690ee18f82844ea3a69a404cf97755817f683f13",
+      "short_sha": "690ee18",
+      "message": "jira tool update",
+      "author": {
+        "name": "patelashok93",
+        "email": "ashok.patel@talentica.com"
+      },
+      "authored_date": "2025-08-03T00:49:05+05:30",
+      "committed_date": "2025-08-03T00:50:15+05:30",
+      "changed_files": [
+        "bot.py",
+        "tools/development/jira_tools.py",
+        "tools/output/jira_faiss_index/index.faiss",
+        "tools/output/jira_faiss_index/index.pkl",
+        "tools/output/jira_tickets_stories_context.json",
+        "tools/output/jira_tickets_stories_faiss_index/index.faiss",
+        "tools/output/jira_tickets_stories_faiss_index/index.pkl",
+        "tools/output/prd_context.json"
+      ]
+    },
+    {
+      "sha": "4547fe4ded6445474a34946ee0b297cc899b212e",
+      "short_sha": "4547fe4",
+      "message": "Git ignore with Node_Modules",
+      "author": {
+        "name": "Ketan",
+        "email": "ketan@tailoredmail.com"
+      },
+      "authored_date": "2025-08-02T23:09:42+05:30",
+      "committed_date": "2025-08-02T23:09:54+05:30",
+      "changed_files": [
+        ".gitignore"
+      ]
+    },
+    {
+      "sha": "a3f6eefb4fe5a351d83a1f389bf1204c0d8b6646",
+      "short_sha": "a3f6eef",
+      "message": "UI with Streamlit",
+      "author": {
+        "name": "VinayD-01",
+        "email": "vinay.dahat@talentica.com"
+      },
+      "authored_date": "2025-08-02T22:58:01+05:30",
+      "committed_date": "2025-08-02T22:58:01+05:30",
+      "changed_files": [
+        "requirements.txt",
+        "streamlit_app.py"
+      ]
+    },
+    {
+      "sha": "da919ed69fa7045249f4718ced6c84a6d22ea833",
+      "short_sha": "da919ed",
+      "message": "Integegrated git history tool in multi-agent",
+      "author": {
+        "name": "Codebandits-tal",
+        "email": "140823987+Codebandits-tal@users.noreply.github.com"
+      },
+      "authored_date": "2025-08-02T22:40:43+05:30",
+      "committed_date": "2025-08-02T22:40:43+05:30",
+      "changed_files": [
+        "bot.py",
+        "git_history_api.py",
+        "multi-agent.py",
+        "output/workflow_context.json",
+        "tools.json",
+        "tools/development/git_tools.py",
+        "tools/output/git_history_faiss_index/index.faiss",
+        "tools/output/git_history_faiss_index/index.pkl",
+        "tools/output/git_history_index.json",
+        "tools/output/jira_faiss_index/index.faiss",
+        "tools/output/jira_faiss_index/index.pkl",
+        "tools/output/remote_git_history.json",
+        "tools/utils/faiss_converter.py"
+      ]
+    },
     {
       "sha": "db9a7063a94d151ff91f74493fb66117889b5d26",
       "short_sha": "db9a706",

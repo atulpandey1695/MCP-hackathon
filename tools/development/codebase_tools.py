@@ -3,7 +3,8 @@ import shutil
 import subprocess
 import openai
 import os
-
+import json
+import ast
 def train_agent_on_github_repo(repo_url, output_path=None):
     """
     Clones a GitHub repo, indexes its codebase, and updates the agent's knowledge base.
@@ -28,8 +29,7 @@ def train_agent_on_github_repo(repo_url, output_path=None):
         return result
     except Exception as e:
         return f"[ERROR] Failed to train agent on repo: {e}"
-    finally:
-        shutil.rmtree(target_dir)
+   
 def convert_codebase_index_to_faiss():
     """
     Convert codebase_index.json to FAISS index for semantic search.
