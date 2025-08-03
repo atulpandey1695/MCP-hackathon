@@ -6,9 +6,12 @@
     "args_schema": {
       "type": "object",
       "properties": {
+        "domainUrl": { "type": "string", "description": "The JIRA domain URL." },
+        "userName": { "type": "string", "description": "The JIRA username." },
+        "token": { "type": "string", "description": "The JIRA API token." },
         "query": { "type": "string", "description": "Query about JIRA patterns, ticket analysis, or project requirements." }
       },
-      "required": ["query"]
+      "required": ["domainUrl", "userName", "token", "query"]
     },
     "output_format": "json"
   },

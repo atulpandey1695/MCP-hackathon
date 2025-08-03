@@ -6,12 +6,35 @@
     "remote_url": "https://github.com/atulpandey1695/MCP-hackathon.git"
   },
   "metadata": {
-    "total_commits_fetched": 25,
+    "total_commits_fetched": 26,
     "max_commits_requested": 50,
-    "fetch_timestamp": "2025-08-03T13:27:16.121429",
+    "fetch_timestamp": "2025-08-03T15:29:02.492330",
     "clone_method": "temporary"
   },
   "commits": [
+    {
+      "sha": "668c0c69c6499cd38d9b14a1f12bd2dae5269bfc",
+      "short_sha": "668c0c6",
+      "message": "codebase tools access denied error fix",
+      "author": {
+        "name": "VishalRj-7",
+        "email": "Vishal.raj@talentica.com"
+      },
+      "authored_date": "2025-08-03T13:30:28+05:30",
+      "committed_date": "2025-08-03T13:30:28+05:30",
+      "changed_files": [
+        ".gitignore",
+        "tools/development/codebase_tools.py",
+        "tools/output/codebase_faiss_index/index.faiss",
+        "tools/output/codebase_faiss_index/index.pkl",
+        "tools/output/codebase_index.json",
+        "tools/output/git_history_faiss_index/index.faiss",
+        "tools/output/git_history_faiss_index/index.pkl",
+        "tools/output/git_history_index.json",
+        "tools/output/jira_tickets_stories_faiss_index/index.faiss",
+        "tools/output/jira_tickets_stories_faiss_index/index.pkl"
+      ]
+    },
     {
       "sha": "53230e24dc8452b1771160943206b8849bb8b59f",
       "short_sha": "53230e2",

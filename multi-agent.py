@@ -7,7 +7,12 @@ import json
 import pathlib
 import importlib
 import sys
+from dotenv import load_dotenv
 import os
+
+
+# Load environment variables from .env file
+load_dotenv()
 
 from langchain_openai import OpenAI
 sys.path.append(os.path.join(os.path.dirname(__file__), 'tools'))
@@ -133,10 +138,16 @@ class MultiAgent:
         print(f"[AGENT LOG] Received user prompt: {user_prompt}")
         print(f"[AGENT LOG] tool_map keys: {list(tool_map.keys())}")
         try:
+            JIRA_PARAM = os.getenv("JIRA_PARAM")
             # Check for jira_ticket_summarizer
             if "jira_ticket_summarizer" in tool_map:
                 tool_func = tool_map["jira_ticket_summarizer"]
-                result = tool_func.invoke({"query": "created >=-20d"})
+                result = tool_func.invoke({
+                    "domainUrl": "https://talentica-mcp-hackathon.atlassian.net",
+                    "userName": "vinay.dahat@talentica.com",
+                    "token": JIRA_PARAM,
+                    "query": "created >=-20d"
+                })
                 print(f"[AGENT LOG] Tool result: {result}")
             else:
                 print("[AGENT LOG] Tool 'jira_ticket_summarizer' not found in tool_map.")

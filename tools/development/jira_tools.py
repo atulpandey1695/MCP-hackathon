@@ -6,24 +6,22 @@ import requests
 from enhanced_context_manager import get_context_manager
 from langchain.tools import tool
 from tools.utils.faiss_converter import json_to_faiss
-from dotenv import load_dotenv
-import os
-
-# Load environment variables from .env file
-load_dotenv()
-
-JIRA_PARAM = os.getenv("JIRA_PARAM")
-
-JIRA_API_URL = "https://talentica-mcp-hackathon.atlassian.net/rest/api/latest/search"
-JIRA_USERNAME = "vinay.dahat@talentica.com"
 
 @tool
-def jira_ticket_summarizer(query: str) -> str:
+def jira_ticket_summarizer(domainUrl: str, userName: str, token: str, query: str) -> str:
     """
     Fetch JIRA tickets, summarize them into a PRD, and save the context in JSON format.
     """
+    # Validate input parameters
+    if not all([domainUrl, userName, token, query]):
+        return "Missing required parameters. Please provide domainUrl, userName, token, and query."
+
+    # Construct JIRA API URL and credentials dynamically
+    jira_api_url = f"{domainUrl}/rest/api/latest/search"
+    auth = (userName, token)
+
     # Step 1: Fetch JIRA tickets
-    tickets = fetch_jira_tickets(query)
+    tickets = fetch_jira_tickets(jira_api_url, auth, query)
 
     print(f"Fetched {len(tickets)} JIRA tickets.")
     
@@ -35,19 +33,18 @@ def jira_ticket_summarizer(query: str) -> str:
 
     convert_to_faiss()
     
-    return "JIRA tickets summarized and saved to prd_context.json."
+    return "JIRA tickets summarized and saved to jira_tickets_stories_context.json."
 
-def fetch_jira_tickets(query: str):
+def fetch_jira_tickets(jira_api_url: str, auth: tuple, query: str):
     """Fetch JIRA tickets using the JIRA API."""
     headers = {
         "Content-Type": "application/json"
     }
-    auth = (JIRA_USERNAME, JIRA_PARAM)
     params = {
         "jql": query,
         "fields": "*all"
     }
-    response = requests.get(JIRA_API_URL, headers=headers, auth=auth, params=params)
+    response = requests.get(jira_api_url, headers=headers, auth=auth, params=params)
     if response.status_code != 200:
         raise Exception(f"Failed to fetch JIRA tickets: {response.status_code} - {response.text}")
 
@@ -61,7 +58,7 @@ def fetch_jira_tickets(query: str):
     while start_at + max_results < total:
         start_at += max_results
         params["startAt"] = start_at
-        response = requests.get(JIRA_API_URL, headers=headers, auth=auth, params=params)
+        response = requests.get(jira_api_url, headers=headers, auth=auth, params=params)
         if response.status_code != 200:
             raise Exception(f"Failed to fetch JIRA tickets: {response.status_code} - {response.text}")
         data = response.json()

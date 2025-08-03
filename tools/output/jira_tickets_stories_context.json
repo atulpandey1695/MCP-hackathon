@@ -34,97 +34,97 @@
     {
       "id": "SCRUM-21",
       "summary": "Develop calorie entry UI components",
-      "description": null
+      "description": "Design and implement reusable React components for adding, editing, and deleting calorie entries. Components should include input fields for meal name, calorie count, and date/time, along with validation and user feedback. Ensure consistent styling using CSS modules and theme variables. These components will be used across the stats page and test data features."
     },
     {
       "id": "SCRUM-20",
       "summary": "Build Calorie API endpoints",
-      "description": null
+      "description": "Implement full backend API support for calorie-related features. Endpoints should include:\n\n* {{POST /calories}}: Add a new entry.\n* {{GET /calories}}: Retrieve all entries.\n* {{GET /calories/by-day}}: Get daily grouped stats.\n* {{PUT /calories/:id}}: Update an entry.\n* {{DELETE /calories/:id}}: Remove an entry.\n* {{POST /calories/test-data}}: Populate mock data for testing.\n\nThese endpoints should follow REST conventions and be covered with tests."
     },
     {
       "id": "SCRUM-19",
       "summary": "Implement Calorie CRUD operations",
-      "description": null
+      "description": "Develop backend logic and RESTful endpoints to create, retrieve, update, and delete calorie entries. Ensure all operations are scoped to the authenticated user and prevent unauthorized access to others\u2019 data. Validate input data for each operation and respond with appropriate status codes and messages."
     },
     {
       "id": "SCRUM-18",
       "summary": "Design Calorie database schema",
-      "description": null
+      "description": "Create a robust schema using TypeORM for storing calorie entries. Each entry should include fields like {{id}}, {{userId}}, {{mealName}}, {{calories}}, and {{timestamp}}. Link entries to users and enforce referential integrity. Prepare migration scripts to initialize the database schema during deployment."
     },
     {
       "id": "SCRUM-17",
       "summary": "Develop frontend authentication components",
-      "description": null
+      "description": "Build reusable components to handle user login, logout, and session management in the frontend. Use React Context or global state management to persist authenticated user info. Display logged-in user's name and avatar in the UI. Secure routes using guards or conditional rendering based on auth status."
     },
     {
       "id": "SCRUM-16",
       "summary": "Build authentication middleware",
-      "description": null
+      "description": "Develop middleware in NestJS that intercepts HTTP requests to validate JWT tokens. Allow only authenticated users to access protected routes. Return appropriate error codes for invalid or expired tokens. Log token errors for debugging and monitoring purposes."
     },
     {
       "id": "SCRUM-15",
       "summary": "Create User entity and repository",
-      "description": null
+      "description": "Define a {{User}} entity using TypeORM with fields such as email, name, and profile picture. Create a repository to handle user creation, updates, and lookups. Upon successful OAuth login, either create a new user or update existing records with the latest data from Google. Ensure indexing on the email field for fast lookup."
     },
     {
       "id": "SCRUM-14",
       "summary": "Implement JWT token management",
-      "description": null
+      "description": "Use {{@nestjs/jwt}} to manage JWT tokens in the backend. Create services to sign, validate, and decode tokens securely. Embed user identification in the token payload and use expiration claims ({{exp}}) to enforce session expiry. Implement middleware to guard protected routes based on token validity."
     },
     {
       "id": "SCRUM-13",
       "summary": "Set up Google OAuth configuration",
-      "description": null
+      "description": "Set up and configure Google OAuth on both frontend and backend. In the frontend, use {{@react-oauth/google}} to initiate login flows. On the backend, use {{google-auth-library}} to verify tokens, extract user details, and issue JWTs. Ensure secure token exchange and proper error handling for authentication failures. Configure necessary credentials in {{.env}} or Docker environment files."
     },
     {
       "id": "SCRUM-12",
       "summary": "Comprehensive Testing",
-      "description": null
+      "description": "Containerize all application services (frontend, backend, and mock service) using Docker. Configure {{docker-compose}} to enable seamless multi-container orchestration. Set up the frontend to be served using Nginx, and backend and mock services to run on Node.js environments. Ensure all services are configurable through environment variables (e.g., JWT secrets, OAuth client IDs). Validate the setup with local builds and simulate production deployment."
     },
     {
       "id": "SCRUM-11",
       "summary": "DevOps and Deployment",
-      "description": null
+      "description": "Containerize all application services (frontend, backend, and mock service) using Docker. Configure {{docker-compose}} to enable seamless multi-container orchestration. Set up the frontend to be served using Nginx, and backend and mock services to run on Node.js environments. Ensure all services are configurable through environment variables (e.g., JWT secrets, OAuth client IDs). Validate the setup with local builds and simulate production deployment."
     },
     {
       "id": "SCRUM-10",
       "summary": "Goal Setting and Tracking",
-      "description": null
+      "description": "Introduce the ability for users to set daily calorie intake goals. Build backend support for saving and retrieving these goals. On the frontend, display progress indicators comparing consumed calories vs. the user-defined target. Provide feedback if users exceed or stay under their goals. This feature sets the foundation for future personalized health recommendations."
     },
     {
       "id": "SCRUM-9",
       "summary": "Performance Optimization",
-      "description": null
+      "description": "Identify and address performance bottlenecks in both frontend and backend. Implement lazy loading for components and optimize database queries to support high user concurrency. Ensure that the app handles up to 100 calorie entries per user without noticeable lag. Perform stress testing on endpoints and improve response times where necessary. Reduce bundle size using code splitting in the frontend."
     },
     {
       "id": "SCRUM-8",
       "summary": "UI/UX Improvements",
-      "description": null
+      "description": "Enhance the frontend UI to ensure responsiveness, accessibility, and a seamless user experience. Add support for toggling between light and dark themes. Improve layout responsiveness across desktop and mobile. Include accessible design practices (ARIA roles, color contrast, focus states). Streamline navigation across the landing page, stats page, and settings. Ensure loading states, empty states, and error messages are clearly communicated."
     },
     {
       "id": "SCRUM-7",
       "summary": "Advanced Data Management",
-      "description": null
+      "description": "Implement optimized backend logic to handle calorie entry retrieval grouped by day. Add support for calculating totals, averages, and trends. Create services that can return structured, analytics-ready datasets to support both visualizations and future enhancements like goal tracking or personalized insights. Implement server-side filters for date range and user-specific queries."
     },
     {
       "id": "SCRUM-6",
       "summary": "Image-Based Calorie Detection",
-      "description": null
+      "description": "Develop a mock image analysis API using Express.js that simulates food recognition. The service should accept image uploads and return a structured response with a random food item name and estimated calorie value. This mock endpoint will allow the frontend to simulate real-world food analysis before implementing actual AI-based image processing. Ensure the service handles invalid file formats and large image sizes gracefully."
     },
     {
       "id": "SCRUM-5",
       "summary": "Data Visualization Dashboard",
-      "description": null
+      "description": "Create a visually engaging stats dashboard using {{react-chartjs-2}} and {{chart.js}}. The dashboard should display a bar chart that shows the user's calorie intake over different selectable timeframes (1 week, 2 weeks, 4 weeks). The page should also include a data table of logged meals with edit and delete options. The charts must update dynamically based on user data fetched from the backend grouped by date."
     },
     {
       "id": "SCRUM-4",
       "summary": "Calorie Entry Management",
-      "description": null
+      "description": "Design and implement backend support and frontend components for calorie entry management. Users should be able to add meals with associated calorie values, view a list of past entries, update existing records, and delete unwanted ones. Ensure entries are linked to authenticated users and provide feedback on successful or failed operations. Data integrity and validation (e.g., non-negative calorie values) should be enforced both client-side and server-side."
     },
     {
       "id": "SCRUM-3",
       "summary": "User Authentication & Authorization",
-      "description": null
+      "description": "Implement a secure and scalable authentication and authorization system. Integrate Google OAuth 2.0 for user sign-in and ensure user information (email, name, profile picture) is captured during login. Use JWT (JSON Web Tokens) to manage authenticated sessions. Protect all calorie tracking features and APIs behind JWT middleware, allowing only authorized users to access and manage their data. Ensure proper token validation and expiration handling."
     },
     {
       "id": "SCRUM-2",
