@@ -143,8 +143,8 @@ class MultiAgent:
             if "jira_ticket_summarizer" in tool_map:
                 tool_func = tool_map["jira_ticket_summarizer"]
                 result = tool_func.invoke({
-                    "domainUrl": "https://talentica-mcp-hackathon.atlassian.net",
-                    "userName": "vinay.dahat@talentica.com",
+                    "domain": "https://talentica-mcp-hackathon.atlassian.net",
+                    "user": "vinay.dahat@talentica.com",
                     "token": JIRA_PARAM,
                     "query": "created >=-20d"
                 })

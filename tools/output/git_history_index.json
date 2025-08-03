@@ -6,12 +6,38 @@
     "remote_url": "https://github.com/atulpandey1695/MCP-hackathon.git"
   },
   "metadata": {
-    "total_commits_fetched": 26,
+    "total_commits_fetched": 27,
     "max_commits_requested": 50,
-    "fetch_timestamp": "2025-08-03T15:29:02.492330",
+    "fetch_timestamp": "2025-08-03T17:16:55.875310",
     "clone_method": "temporary"
   },
   "commits": [
+    {
+      "sha": "c2af05954483efbed5b7712257bffdb7947b39b9",
+      "short_sha": "c2af059",
+      "message": "update jira tool with params",
+      "author": {
+        "name": "patelashok93",
+        "email": "ashok.patel@talentica.com"
+      },
+      "authored_date": "2025-08-03T15:31:23+05:30",
+      "committed_date": "2025-08-03T15:31:23+05:30",
+      "changed_files": [
+        "bot.py",
+        "multi-agent.py",
+        "tools.json",
+        "tools/development/jira_tools.py",
+        "tools/output/codebase_faiss_index/index.faiss",
+        "tools/output/codebase_faiss_index/index.pkl",
+        "tools/output/codebase_index.json",
+        "tools/output/git_history_faiss_index/index.faiss",
+        "tools/output/git_history_faiss_index/index.pkl",
+        "tools/output/git_history_index.json",
+        "tools/output/jira_tickets_stories_context.json",
+        "tools/output/jira_tickets_stories_faiss_index/index.faiss",
+        "tools/output/jira_tickets_stories_faiss_index/index.pkl"
+      ]
+    },
     {
       "sha": "668c0c69c6499cd38d9b14a1f12bd2dae5269bfc",
       "short_sha": "668c0c6",

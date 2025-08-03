@@ -8,17 +8,17 @@ from langchain.tools import tool
 from tools.utils.faiss_converter import json_to_faiss
 
 @tool
-def jira_ticket_summarizer(domainUrl: str, userName: str, token: str, query: str) -> str:
+def jira_ticket_summarizer(domain: str, user: str, token: str, query: str) -> str:
     """
     Fetch JIRA tickets, summarize them into a PRD, and save the context in JSON format.
     """
     # Validate input parameters
-    if not all([domainUrl, userName, token, query]):
-        return "Missing required parameters. Please provide domainUrl, userName, token, and query."
+    if not all([domain, user, token, query]):
+        return "Missing required parameters. Please provide domain, user, token, and query."
 
     # Construct JIRA API URL and credentials dynamically
-    jira_api_url = f"{domainUrl}/rest/api/latest/search"
-    auth = (userName, token)
+    jira_api_url = f"{domain}/rest/api/latest/search"
+    auth = (user, token)
 
     # Step 1: Fetch JIRA tickets
     tickets = fetch_jira_tickets(jira_api_url, auth, query)

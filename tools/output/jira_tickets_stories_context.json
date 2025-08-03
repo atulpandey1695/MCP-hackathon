@@ -4,32 +4,32 @@
     {
       "id": "SCRUM-27",
       "summary": "Integrate AI/ML food recognition service",
-      "description": null
+      "description": "(For mock integration or future enhancement) Integrate the mock AI/ML service with the frontend to simulate food recognition. After image upload, send the file to the backend endpoint ({{/api/food/analyze}}) and display the returned mock food name and estimated calories. Structure the integration to allow easy replacement with a real AI model in the future."
     },
     {
       "id": "SCRUM-26",
       "summary": "Set up image upload infrastructure",
-      "description": null
+      "description": "Set up frontend and backend infrastructure to support image uploads for food analysis. Use {{multer}} in the Express mock service to handle multipart form data. Ensure file size limits, MIME type validation, and error handling are implemented. The UI should include a drag-and-drop or file selection input with clear feedback."
     },
     {
       "id": "SCRUM-25",
       "summary": "Create statistics page",
-      "description": null
+      "description": "Develop a dedicated statistics page that combines chart visualizations, a table of calorie entries, and summary statistics. Provide intuitive navigation and controls for filtering, editing, and deleting entries. This page serves as the main user interface for reviewing and managing calorie data."
     },
     {
       "id": "SCRUM-24",
       "summary": "Build chart components",
-      "description": null
+      "description": "Build reusable bar chart components using {{react-chartjs-2}} to display daily calorie intake trends. The chart should support different timeframes (1 week, 2 weeks, 4 weeks) and dynamically update based on user selection. Ensure responsiveness and accessibility in the chart presentation."
     },
     {
       "id": "SCRUM-23",
       "summary": "Implement daily calorie aggregation",
-      "description": null
+      "description": "Implement backend logic to group calorie entries by day and calculate total calorie intake per day. This data will feed the visualization and analytics components. Ensure that the grouping handles time zones appropriately and returns structured data for charting and insights."
     },
     {
       "id": "SCRUM-22",
       "summary": "Add pagination and filtering",
-      "description": null
+      "description": "Add support for paginating the calorie entry list and filtering data by date range or meal type. Ensure the filtering logic works both on the frontend (for client-side performance) and optionally on the backend (for scalability). This will improve usability when users have large datasets, aligning with the requirement to handle up to 100 entries smoothly."
     },
     {
       "id": "SCRUM-21",

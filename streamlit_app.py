@@ -51,8 +51,8 @@ except ImportError as e:
 
 # Configure Streamlit with professional settings
 st.set_page_config(
-    page_title="MCP AI Assistant Suite",
-    page_icon="🤖",
+    page_title="AI Powered Org Level Assistant",
+    page_icon="🏢",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
@@ -774,11 +774,22 @@ class ProfessionalToolManager:
         try:
             tool_func = tool_info["function"]
             
-            # Execute the tool based on its parameter signature
-            if len(arguments) == 1 and "query" in arguments:
-                result = tool_func(arguments["query"])
+            # Check if this is a LangChain tool (has 'invoke' method)
+            if hasattr(tool_func, 'invoke'):
+                # For LangChain tools, use invoke method
+                result = tool_func.invoke(arguments)
+            elif hasattr(tool_func, 'run'):
+                # Alternative LangChain method
+                if len(arguments) == 1 and "query" in arguments:
+                    result = tool_func.run(arguments["query"])
+                else:
+                    result = tool_func.run(**arguments)
             else:
-                result = tool_func(**arguments)
+                # Execute the tool based on its parameter signature
+                if len(arguments) == 1 and "query" in arguments:
+                    result = tool_func(arguments["query"])
+                else:
+                    result = tool_func(**arguments)
             
             end_time = datetime.now()
             execution_time = (end_time - start_time).total_seconds()
@@ -915,15 +926,15 @@ def render_professional_header():
     <div class="main-header">
         <div class="header-content">
             <div class="brand-section">
-                <div class="brand-icon">🤖</div>
+                <div class="brand-icon">🏢</div>
                 <div class="brand-text">
-                    <h1>MCP Professional AI Suite</h1>
-                    <div class="tagline">ChatGPT-style Tool Assistant with Development Modes</div>
+                    <h1>AI Powered Org Level Assistant</h1>
+                    <div class="tagline">Empowering Developers, Product Owners & Teams with Intelligent Insights</div>
                 </div>
             </div>
             <div class="system-status">
                 <div class="status-indicator"></div>
-                AI Assistant Ready
+                Organization AI Ready
             </div>
         </div>
     </div>
@@ -932,40 +943,254 @@ def render_professional_header():
 def render_chatgpt_interface():
     """Render ChatGPT-like interface with intelligent conversation"""
     
-    # Set default mode to AI Assistant (hidden from user)
-    mode = "AI Assistant"
+    # Show AI integration status
+    if BOT_AVAILABLE:
+        st.markdown("""
+        <div class="custom-alert alert-success">
+            <strong>Organization AI Engine Active:</strong> Comprehensive assistance for development teams and product management
+        </div>
+        """, unsafe_allow_html=True)
+    else:
+        st.markdown(f"""
+        <div class="custom-alert alert-warning">
+            <strong>Organization AI Engine Unavailable:</strong> {BOT_IMPORT_ERROR}
+        </div>
+        """, unsafe_allow_html=True)
+
+    # Debug: Show available tools in sidebar (for development)
+    with st.sidebar:
+        st.markdown("### 🔧 Tool Debug Info")
+        tool_manager = st.session_state.tool_manager
+        available_tools = tool_manager.get_available_tools()
+        all_tools = tool_manager.get_all_tools()
+        
+        st.markdown(f"**Available Tools:** {len(available_tools)}")
+        for tool in available_tools:
+            st.success(f"✅ {tool}")
+        
+        st.markdown(f"**Total Tools:** {len(all_tools)}")
+        for tool_name, info in all_tools.items():
+            if info["status"] != "available":
+                st.error(f"❌ {tool_name}: {info['status']}")
+
+    # Collapsible Multi-Agent Tool Selection Interface
+    with st.expander("Organization Intelligence & Analytics Hub", expanded=False):
+        st.markdown("**Enterprise-Level Analysis Tools for Development Teams & Product Management**")
+        
+        col1, col2 = st.columns([1, 1])
+        
+        with col1:
+            # Get available tools
+            tool_manager = st.session_state.tool_manager
+            available_tools = tool_manager.get_available_tools()
+            
+            # Define three main organizational tools
+            org_tools = {
+                "JIRA Project Analysis": "jira_ticket_summarizer",
+                "Git Repository Analysis": "fetch_remote_git_history", 
+                "Codebase Intelligence": "train_agent_on_github_repo"
+            }
+            
+            # Filter to only show available tools
+            available_org_tools = {name: tool for name, tool in org_tools.items() 
+                                 if tool in available_tools}
+            
+            if not available_org_tools:
+                st.warning("No organizational analysis tools are currently available. Please check tool configuration.")
+                available_org_tools = {"Demo Mode": "demo_tool"}
+            
+            selected_analysis = st.selectbox(
+                "Choose Organization Analysis:",
+                ["None"] + list(available_org_tools.keys()),
+                help="Select the type of organizational analysis you need",
+                key="selected_analysis_dropdown"
+            )
+        
+        with col2:
+            # Tool execution interface
+            if selected_analysis and selected_analysis != "None":
+                if selected_analysis in available_org_tools:
+                    actual_tool = available_org_tools[selected_analysis]
+                    
+                    # JIRA Project Analysis - 4 specific fields
+                    if selected_analysis == "JIRA Project Analysis":
+                        st.markdown("**📊 JIRA Configuration & Analysis**")
+                        
+                        jira_domain = st.text_input(
+                            "JIRA Domain URL:",
+                            placeholder="https://yourcompany.atlassian.net",
+                            help="Your JIRA instance URL (e.g., https://company.atlassian.net)",
+                            key="jira_domain"
+                        )
+                        
+                        jira_username = st.text_input(
+                            "JIRA Username/Email:",
+                            placeholder="your.email@company.com",
+                            help="Your JIRA account username or email address",
+                            key="jira_username"
+                        )
+                        
+                        jira_token = st.text_input(
+                            "JIRA API Token:",
+                            type="password",
+                            placeholder="Your JIRA API token",
+                            help="Generate API token from JIRA Account Settings > Security > API Tokens",
+                            key="jira_token"
+                        )
+                        
+                        jira_query = st.text_area(
+                            "Analysis Query:",
+                            placeholder="Describe what you want to analyze: project metrics, sprint performance, issue patterns, team productivity, etc.",
+                            help="Specify what insights you need from your JIRA data",
+                            height=100,
+                            key="jira_query_area"
+                        )
+                        
+                        if st.button(f"Analyze JIRA Project Data", type="primary", key="execute_jira_btn"):
+                            if all([jira_domain.strip(), jira_username.strip(), jira_token.strip(), jira_query.strip()]):
+                                with st.spinner(f"Connecting to JIRA and analyzing data..."):
+                                    try:
+                                        # Pass JIRA parameters using keyword arguments directly to the function
+                                        result = tool_manager.execute_tool(actual_tool, {
+                                            "domain": jira_domain,
+                                            "user": jira_username, 
+                                            "token": jira_token,
+                                            "query": jira_query
+                                        })
+                                        
+                                        if result["success"]:
+                                            st.success(f"JIRA analysis completed successfully!")
+                                            with st.expander("JIRA Project Intelligence Report", expanded=True):
+                                                st.markdown(f"**Analysis Type:** {selected_analysis}")
+                                                st.markdown(f"**JIRA Instance:** {jira_domain}")
+                                                st.markdown(f"**Analysis Duration:** {result['execution_time']:.2f} seconds")
+                                                st.code(result["result"], language="text")
+                                                
+                                                if st.button("Discuss JIRA Insights with Organization AI", key="send_jira_to_chat"):
+                                                    tool_summary = f"JIRA Analysis from {jira_domain}\nQuery: {jira_query}\nInsights: {result['result'][:500]}..."
+                                                    st.session_state.tool_results_for_chat = tool_summary
+                                                    st.success("JIRA insights prepared for organization-level discussion!")
+                                        else:
+                                            st.error(f"JIRA analysis failed: {result.get('error', 'Unknown error')}")
+                                            st.info("💡 **Tip:** Verify your JIRA credentials and domain URL are correct.")
+                                    except Exception as e:
+                                        st.error(f"JIRA connection error: {str(e)}")
+                                        st.info("💡 **Tip:** Check your JIRA domain URL, username, and API token.")
+                            else:
+                                st.warning("Please fill in all JIRA configuration fields.")
+                    
+                    # Git Repository Analysis - Original format
+                    elif selected_analysis == "Git Repository Analysis":
+                        tool_query = st.text_area(
+                            "Organization Data & Context:",
+                            value="",
+                            placeholder=f"Describe your project status, team metrics, development progress, or provide relevant data for {selected_analysis.lower()}...",
+                            help="Enter project information, team data, development metrics, or organizational context for comprehensive analysis",
+                            height=120,
+                            key="git_tool_input_area"
+                        )
+                        
+                        if st.button(f"Generate Organization Insights", type="primary", key="execute_git_btn"):
+                            if tool_query.strip():
+                                with st.spinner(f"Analyzing organizational data..."):
+                                    try:
+                                        result = tool_manager.execute_tool(actual_tool, {"repo_url": tool_query})
+                                        
+                                        if result["success"]:
+                                            st.success(f"Organization insights generated successfully!")
+                                            with st.expander("Organization Intelligence Report", expanded=True):
+                                                st.markdown(f"**Analysis Type:** {selected_analysis}")
+                                                st.markdown(f"**Analysis Duration:** {result['execution_time']:.2f} seconds")
+                                                st.code(result["result"], language="text")
+                                                
+                                                if st.button("Discuss Insights with Organization AI", key="send_git_to_chat"):
+                                                    tool_summary = f"Organization Analysis: {selected_analysis}\nData Context: {tool_query}\nInsights: {result['result'][:500]}..."
+                                                    st.session_state.tool_results_for_chat = tool_summary
+                                                    st.success("Insights prepared for organization-level discussion!")
+                                        else:
+                                            st.error(f"Organization analysis failed: {result.get('error', 'Unknown error')}")
+                                            st.info("💡 **Tip:** Try providing more specific information or check if the tool supports your query format.")
+                                    except Exception as e:
+                                        st.error(f"Analysis execution error: {str(e)}")
+                                        st.info("💡 **Tip:** Please verify your input format and try again.")
+                            else:
+                                st.warning("Please provide organizational data or context for comprehensive analysis.")
+                    
+                    # Codebase Intelligence - Original format
+                    elif selected_analysis == "Codebase Intelligence":
+                        tool_query = st.text_area(
+                            "Organization Data & Context:",
+                            value="",
+                            placeholder=f"Describe your project status, team metrics, development progress, or provide relevant data for {selected_analysis.lower()}...",
+                            help="Enter project information, team data, development metrics, or organizational context for comprehensive analysis",
+                            height=120,
+                            key="codebase_tool_input_area"
+                        )
+                        
+                        if st.button(f"Generate Organization Insights", type="primary", key="execute_codebase_btn"):
+                            if tool_query.strip():
+                                with st.spinner(f"Analyzing organizational data..."):
+                                    try:
+                                        result = tool_manager.execute_tool(actual_tool, {"query": tool_query})
+                                        
+                                        if result["success"]:
+                                            st.success(f"Organization insights generated successfully!")
+                                            with st.expander("Organization Intelligence Report", expanded=True):
+                                                st.markdown(f"**Analysis Type:** {selected_analysis}")
+                                                st.markdown(f"**Analysis Duration:** {result['execution_time']:.2f} seconds")
+                                                st.code(result["result"], language="text")
+                                                
+                                                if st.button("Discuss Insights with Organization AI", key="send_codebase_to_chat"):
+                                                    tool_summary = f"Organization Analysis: {selected_analysis}\nData Context: {tool_query}\nInsights: {result['result'][:500]}..."
+                                                    st.session_state.tool_results_for_chat = tool_summary
+                                                    st.success("Insights prepared for organization-level discussion!")
+                                        else:
+                                            st.error(f"Organization analysis failed: {result.get('error', 'Unknown error')}")
+                                            st.info("💡 **Tip:** Try providing more specific information or check if the tool supports your query format.")
+                                    except Exception as e:
+                                        st.error(f"Analysis execution error: {str(e)}")
+                                        st.info("💡 **Tip:** Please verify your input format and try again.")
+                            else:
+                                st.warning("Please provide organizational data or context for comprehensive analysis.")
+                else:
+                    st.info("Please select an analysis type to proceed.")
     
-    # Load conversation history for AI Assistant mode
-    conversation_key = "conversation_ai_assistant"
-    if conversation_key not in st.session_state:
-        st.session_state[conversation_key] = []
+    st.markdown("---")
     
-    conversation_history = st.session_state[conversation_key]
+    # Main Chat Interface - Always uses advanced AI
+    st.markdown("### AI Powered Organization Assistant")
+    
+    # Load main conversation history (not mode-specific)
+    if "main_conversation" not in st.session_state:
+        st.session_state.main_conversation = []
+    
+    conversation_history = st.session_state.main_conversation
     
     # Chat container with ChatGPT-like styling
     chat_container = st.container()
     
     with chat_container:
         if not conversation_history:
-            # Enhanced welcome message for intelligent assistant
+            # Welcome message for main chat
             st.markdown(f"""
             <div class="welcome-message">
                 <div class="welcome-content">
-                    👋 Hello! I'm your intelligent AI assistant with comprehensive access to your knowledge base. I can help you with:
+                    Welcome to your AI Powered Organization Level Assistant! I provide comprehensive support for development teams and product management.
                     <br><br>
-                    🎯 <strong>JIRA Tasks & Project Management:</strong> Analyze project history, track issue patterns, review development workflows, and get insights from your JIRA data
+                    <strong>For Developers:</strong> Code analysis, architecture insights, Git workflows, and technical documentation
                     <br><br>
-                    📚 <strong>Codebase Analysis:</strong> Understand code architecture, review implementation details, and explore your project structure with intelligent code insights
+                    <strong>For Product Owners:</strong> Project estimates, sprint progress tracking, delivery timelines, and team productivity insights
                     <br><br>
-                    🔄 <strong>Git History & Version Control:</strong> Examine commit patterns, analyze repository conventions, track development progress, and review code standards
+                    <strong>For Teams:</strong> JIRA analytics, workflow optimization, collaboration patterns, and organizational metrics
                     <br><br>
-                    💡 Ask me anything about your data, projects, or get help with complex queries. I can understand context and provide detailed insights with sophisticated reasoning across all your development tools and data sources.
+                    Ask questions about your development projects, team performance, or organizational processes for intelligent, data-driven insights.
+                    <br><br>
+                    <strong>Need specific organizational analysis? Use the Organization Intelligence Hub above.</strong>
                 </div>
             </div>
             """, unsafe_allow_html=True)
     
     # Display conversation history
-    mode_info = {"AI Assistant": {"icon": "🤖"}}
     for i, message in enumerate(conversation_history):
         if message["role"] == "user":
             st.markdown(f"""
@@ -978,32 +1203,39 @@ def render_chatgpt_interface():
         else:
             st.markdown(f"""
             <div class="chat-message assistant-message">
-                <div class="assistant-avatar">{mode_info["AI Assistant"]['icon']}</div>
+                <div class="assistant-avatar">AI</div>
                 <div class="message-content">
                     {message["content"]}
                 </div>
             </div>
             """, unsafe_allow_html=True)
     
-    # Chat input for intelligent conversation
-    if prompt := st.chat_input("Ask me anything about your data, projects, or get intelligent insights..."):
+    # Check if tool results should be auto-added to chat
+    if "tool_results_for_chat" in st.session_state:
+        auto_message = f"Please analyze these organizational insights:\n\n{st.session_state.tool_results_for_chat}"
+        del st.session_state.tool_results_for_chat
+        st.rerun()
+    
+    # Chat input - always powered by advanced AI
+    if prompt := st.chat_input("Ask about development progress, team metrics, project estimates, or any organizational insights..."):
         # Add user message
         user_message = {"role": "user", "content": prompt}
         conversation_history.append(user_message)
         
-        # Get AI response using bot.py
-        with st.spinner("🤖 Processing your request with intelligent analysis..."):
+        # Get AI response using advanced intelligence
+        with st.spinner("Processing organizational request with AI intelligence..."):
             if BOT_AVAILABLE:
                 response = chat_with_bot(prompt)
             else:
-                response = f"**AI Assistant Response** *(Bot Unavailable)*\n\nRegarding: '{prompt}'\n\n{BOT_IMPORT_ERROR}\n\nPlease ensure:\n• bot.py is available\n• OpenAI API key is configured\n• FAISS index is built and accessible"
+                response = f"**Organization AI Assistant** *(AI Engine Unavailable)*\n\nRegarding: '{prompt}'\n\n{BOT_IMPORT_ERROR}\n\nPlease ensure:\n• Organization AI engine is properly configured\n• API access is available\n• Knowledge base is accessible\n\nThis assistant is designed to provide intelligent organizational insights for development teams and product management."
         
         # Add assistant response
         assistant_message = {"role": "assistant", "content": response}
         conversation_history.append(assistant_message)
         
         # Save conversation
-        st.session_state[conversation_key] = conversation_history
+        st.session_state.main_conversation = conversation_history
+        save_conversation_history(conversation_history, "Organization Chat")
         
         # Rerun to show new messages
         st.rerun()
@@ -1018,11 +1250,33 @@ def load_conversation_history():
         pass
     return []
 
-def save_conversation_history(history):
-    """Save conversation history to file"""
+def save_conversation_history(history, mode="AI Assistant"):
+    """Save conversation history to file with mode context"""
     try:
+        # Update metadata
+        if "session_metadata" in st.session_state:
+            st.session_state.session_metadata["last_activity"] = datetime.now().isoformat()
+            st.session_state.session_metadata["message_count"] = len(history)
+        
+        # Save to main context file (for bot.py compatibility)
         with open("chatbot_context.json", "w", encoding="utf-8") as f:
             json.dump(history, f, indent=2, ensure_ascii=False)
+        
+        # Save mode-specific session backup
+        session_file = f"sessions/session_{st.session_state.session_id}_{mode.lower().replace(' ', '_')}.json"
+        os.makedirs("sessions", exist_ok=True)
+        session_data = {
+            "session_id": st.session_state.session_id,
+            "session_name": st.session_state.session_name,
+            "mode": mode,
+            "metadata": st.session_state.get("session_metadata", {}),
+            "conversation": history,
+            "bot_integration": BOT_AVAILABLE,
+            "last_saved": datetime.now().isoformat()
+        }
+        with open(session_file, "w", encoding="utf-8") as f:
+            json.dump(session_data, f, indent=2, ensure_ascii=False)
+            
     except Exception as e:
         st.error(f"Error saving conversation: {e}")
 
@@ -1030,19 +1284,6 @@ def get_mode_specific_response(mode: str, user_message: str, available_tools: Li
     """Get mode-specific AI response"""
     try:
         mode_contexts = {
-            "AI Assistant": f"""
-            You are a professional AI assistant for the MCP Tools Suite. 
-            Available tools: {', '.join(available_tools)}
-            
-            Help with:
-            - General queries and information
-            - Tool selection and guidance
-            - Parameter configuration
-            - Best practices
-            
-            USER REQUEST: {user_message}
-            """,
-            
             "JIRA Tools": f"""
             You are a JIRA specialist assistant. Focus on project management and issue tracking.
             Available tools: {', '.join(available_tools)}
@@ -1069,36 +1310,34 @@ def get_mode_specific_response(mode: str, user_message: str, available_tools: Li
             USER REQUEST: {user_message}
             """,
             
-            "Codebase Tools": f"""
-            You are a code analysis and development specialist.
+            "Multi-Agent": f"""
+            You are a multi-agent coordinator for the professional tool suite.
             Available tools: {', '.join(available_tools)}
             
             Help with:
-            - Code scanning and analysis
-            - Codebase indexing
-            - Development insights
-            - Code quality assessment
+            - Complex multi-step workflows
+            - Cross-platform integrations
+            - Comprehensive analysis
+            - Advanced automation
             
             USER REQUEST: {user_message}
             """
         }
         
-        enhanced_prompt = mode_contexts.get(mode, mode_contexts["AI Assistant"])
+        enhanced_prompt = mode_contexts.get(mode, mode_contexts["Multi-Agent"])
         
         if CHATBOT_AVAILABLE:
             response = question_answering(enhanced_prompt)
         else:
             # Fallback responses for demo mode
             fallback_responses = {
-                "AI Assistant": f"**AI Assistant Response** *(Demo Mode)*\n\nRegarding: '{user_message}'\n\n• Use question_answering tool for general queries\n• Check available tools in the system\n• Review tool documentation for parameters",
-                
                 "JIRA Tools": f"**JIRA Tools Assistant** *(Demo Mode)*\n\nFor JIRA-related query: '{user_message}'\n\n• Use analyze_jira_history tool for project analysis\n• Review issue tracking patterns\n• Analyze development workflows",
                 
                 "Git Tools": f"**Git Tools Assistant** *(Demo Mode)*\n\nFor Git-related query: '{user_message}'\n\n• Use check_git_conventions tool for repository analysis\n• Review commit patterns\n• Analyze code standards compliance",
                 
-                "Codebase Tools": f"**Codebase Tools Assistant** *(Demo Mode)*\n\nFor codebase query: '{user_message}'\n\n• Use scan_codebase tool for code analysis\n• Generate codebase index for insights\n• Review code quality metrics"
+                "Multi-Agent": f"**Multi-Agent Coordinator** *(Demo Mode)*\n\nFor multi-tool query: '{user_message}'\n\n• Coordinate multiple specialized tools\n• Execute complex workflows\n• Provide comprehensive analysis"
             }
-            response = fallback_responses.get(mode, fallback_responses["AI Assistant"])
+            response = fallback_responses.get(mode, fallback_responses["Multi-Agent"])
         
         return response
         
@@ -1111,18 +1350,11 @@ def auto_execute_tool_if_applicable(mode: str, user_message: str) -> str:
     
     # Define tool mappings for each mode
     mode_tool_mapping = {
-        "AI Assistant": {
-            "question_answering": ["what", "how", "why", "when", "where", "capital", "explain"]
-        },
         "JIRA Tools": {
             "analyze_jira_history": ["jira", "project", "issue", "history", "analyze"]
         },
         "Git Tools": {
             "check_git_conventions": ["git", "repository", "commit", "convention", "standard"]
-        },
-        "Codebase Tools": {
-            "scan_codebase": ["scan", "code", "codebase", "analyze code"],
-            "generate_codebase_index": ["index", "generate", "codebase index"]
         }
     }
     
@@ -1157,15 +1389,15 @@ def main():
     if not BOT_AVAILABLE:
         st.markdown(f"""
         <div class="custom-alert alert-warning">
-            <strong>Bot Functionality Limited:</strong> {BOT_IMPORT_ERROR}<br>
-            Please ensure bot.py is configured with OpenAI API key and FAISS index is available.
+            <strong>Organization AI Engine Functionality Limited:</strong> {BOT_IMPORT_ERROR}<br>
+            Please ensure the organization AI engine is configured with proper API access and knowledge base for comprehensive organizational insights.
         </div>
         """, unsafe_allow_html=True)
     elif not CHATBOT_AVAILABLE:
         st.markdown("""
         <div class="custom-alert alert-info">
-            <strong>Note:</strong> Using bot.py for AI functionality. 
-            For additional features, install: <code>pip install langchain-openai langchain</code>
+            <strong>Note:</strong> Using advanced organization AI engine for intelligent responses. 
+            For additional organizational features, enhanced capabilities are available with full system setup.
         </div>
         """, unsafe_allow_html=True)
     
