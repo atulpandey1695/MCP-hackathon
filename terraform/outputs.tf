@@ -21,9 +21,10 @@ output "s3_bucket_name" {
 output "application_urls" {
   description = "Application access URLs"
   value = {
-    rest_api     = "http://${aws_instance.mcp_server.public_ip}:8000"
-    websocket    = "ws://${aws_instance.mcp_server.public_ip}:8000/mcp"
-    health_check = "http://${aws_instance.mcp_server.public_ip}:8000/"
+    mcp_server_api = "http://${aws_instance.mcp_server.public_ip}:8000"
+    streamlit_app  = "http://${aws_instance.mcp_server.public_ip}:8501"
+    websocket      = "ws://${aws_instance.mcp_server.public_ip}:8000/mcp"
+    health_check   = "http://${aws_instance.mcp_server.public_ip}:8000/"
   }
 }
 
@@ -39,7 +40,7 @@ output "infrastructure_details" {
     ec2_volume_size = aws_instance.mcp_server.root_block_device[0].volume_size
     region = aws_instance.mcp_server.availability_zone
     key_name = "Minds-Constructing-Products-key"
-    postgres_location = "EC2 Instance (localhost:5432)"
-    database_name = "mcp_assistant"
+    containers = ["mcp-server", "streamlit"]
+    ports = ["8000", "8501"]
   }
-} 
+}

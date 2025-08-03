@@ -37,7 +37,7 @@ class ToolRegistry:
         try:
             # Add parent directory to Python path for imports
             import sys
-            parent_dir = str(Path(__file__).parent.parent.parent)
+            parent_dir = str(Path(__file__).parent.parent)
             if parent_dir not in sys.path:
                 sys.path.insert(0, parent_dir)
             
@@ -80,9 +80,10 @@ def get_tool_registry() -> ToolRegistry:
     """Get global tool registry instance"""
     global tool_registry
     if tool_registry is None:
-        config_path = Path(__file__).parent.parent.parent / "tools.json"
+        # Look for tools.json in the MCP-hackathon directory (parent of mcp_server)
+        config_path = Path(__file__).parent.parent / "tools.json"
         if config_path.exists():
             tool_registry = ToolRegistry(str(config_path))
         else:
-            raise FileNotFoundError("tools.json configuration file not found in the root directory")
+            raise FileNotFoundError("tools.json configuration file not found in the MCP-hackathon directory")
     return tool_registry

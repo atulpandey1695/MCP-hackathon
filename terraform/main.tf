@@ -51,7 +51,7 @@ data "aws_ami" "amazon_linux_2" {
   }
 }
 
-# Security Groups - CORRECTED
+# Security Groups - UPDATED for two containers
 resource "aws_security_group" "mcp_server" {
   name_prefix = "mcp-server-sg"
   vpc_id      = data.aws_vpc.default.id
@@ -65,6 +65,15 @@ resource "aws_security_group" "mcp_server" {
     description = "MCP Server API"
   }
 
+  # Streamlit App
+  ingress {
+    from_port   = 8501
+    to_port     = 8501
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+    description = "Streamlit App"
+  }
+
   # SSH Access
   ingress {
     from_port   = 22
@@ -72,24 +81,6 @@ resource "aws_security_group" "mcp_server" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
     description = "SSH Access"
-  }
-
-  # PostgreSQL - INTERNAL ONLY
-  ingress {
-    from_port   = 5432
-    to_port     = 5432
-    protocol    = "tcp"
-    cidr_blocks = ["10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"]
-    description = "PostgreSQL Database"
-  }
-
-  # Redis - INTERNAL ONLY
-  ingress {
-    from_port   = 6379
-    to_port     = 6379
-    protocol    = "tcp"
-    cidr_blocks = ["10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"]
-    description = "Redis Cache"
   }
 
   # HTTP for future load balancer
@@ -123,10 +114,10 @@ resource "aws_security_group" "mcp_server" {
   }
 }
 
-# EC2 Instance - CORRECTED
+# EC2 Instance - UPDATED
 resource "aws_instance" "mcp_server" {
   ami                    = data.aws_ami.amazon_linux_2.id
-  instance_type          = "t3.medium"  # UPGRADED for better performance
+  instance_type          = "t3.medium"
   key_name              = "Minds-Constructing-Products-key"
   vpc_security_group_ids = [aws_security_group.mcp_server.id]
   subnet_id              = data.aws_subnets.public.ids[0]
@@ -193,20 +184,4 @@ resource "aws_cloudwatch_log_group" "mcp_logs" {
   tags = {
     Name = "MCP-Server-Logs"
   }
-}
-
-# Outputs
-output "instance_public_ip" {
-  description = "Public IP of the MCP server instance"
-  value       = aws_instance.mcp_server.public_ip
-}
-
-output "mcp_server_url" {
-  description = "URL of the MCP server"
-  value       = "http://${aws_instance.mcp_server.public_ip}:8000"
-}
-
-output "health_check_url" {
-  description = "Health check URL"
-  value       = "http://${aws_instance.mcp_server.public_ip}:8000/health"
 }

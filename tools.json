@@ -22,7 +22,8 @@
     "args_schema": {
       "type": "object",
       "properties": {
-        "query": { "type": "string", "description": "Query about git conventions, commit patterns, or code change history." }
+        "query": { "type": "string", "description": "Query about git conventions, commit patterns, or code change history." },
+        "repo_url": { "type": "string", "description": "URL of the git repository to fetch history from." }
       },
       "required": ["repo_url"]
     },
@@ -35,7 +36,8 @@
   "args_schema": {
     "type": "object",
     "properties": {
-      "query": { "type": "string", "description": "The question about the codebase." }
+      "query": { "type": "string", "description": "The question about the codebase." },
+      "repo_url": { "type": "string", "description": "URL of the git repository to analyze." }
     },
     "required": ["repo_url"]
   },

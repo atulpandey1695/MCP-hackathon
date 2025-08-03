@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# MCP Server Deployment Script
-# CORRECTED based on manual workaround
+# MCP Server Deployment Script - UPDATED for two containers
+# MCP Server + Streamlit App
 
 set -e  # Exit on any error
 
@@ -25,50 +25,6 @@ echo "📦 Installing Docker Compose..."
 curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
 
-# Install PostgreSQL - CORRECTED
-echo "🗄️ Installing PostgreSQL..."
-yum install -y postgresql postgresql-server postgresql-contrib
-
-# Initialize PostgreSQL - CORRECTED
-echo "🗄️ Initializing PostgreSQL..."
-/usr/bin/postgresql-setup initdb
-systemctl enable postgresql
-systemctl start postgresql
-
-# Wait for PostgreSQL to be ready
-echo "⏳ Waiting for PostgreSQL to start..."
-sleep 10
-
-# Create PostgreSQL user and database - CORRECTED
-echo "👤 Creating database user and database..."
-sudo -u postgres psql -c "CREATE USER mcp_admin WITH PASSWORD 'mcp_password_123';" 2>/dev/null || echo "User might already exist"
-sudo -u postgres psql -c "CREATE DATABASE mcp_assistant OWNER mcp_admin;" 2>/dev/null || echo "Database might already exist"
-sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE mcp_assistant TO mcp_admin;"
-
-# Configure PostgreSQL - CORRECTED
-echo "🔧 Configuring PostgreSQL..."
-sed -i "s/#listen_addresses = 'localhost'/listen_addresses = '*'/" /var/lib/pgsql/data/postgresql.conf
-sed -i "s/#port = 5432/port = 5432/" /var/lib/pgsql/data/postgresql.conf
-
-# Configure PostgreSQL authentication - CORRECTED
-echo "host    mcp_assistant    mcp_admin    127.0.0.1/32            md5" | sudo tee -a /var/lib/pgsql/data/pg_hba.conf
-echo "host    mcp_assistant    mcp_admin    ::1/128                 md5" | sudo tee -a /var/lib/pgsql/data/pg_hba.conf
-
-# Add Docker network access - CORRECTED
-echo "host    mcp_assistant    mcp_admin    172.17.0.0/16           md5" | sudo tee -a /var/lib/pgsql/data/pg_hba.conf
-echo "host    mcp_assistant    mcp_admin    172.18.0.0/16           md5" | sudo tee -a /var/lib/pgsql/data/pg_hba.conf
-echo "host    mcp_assistant    mcp_admin    172.19.0.0/16           md5" | sudo tee -a /var/lib/pgsql/data/pg_hba.conf
-echo "host    mcp_assistant    mcp_admin    172.20.0.0/16           md5" | sudo tee -a /var/lib/pgsql/data/pg_hba.conf
-echo "host    mcp_assistant    mcp_admin    172.21.0.0/16           md5" | sudo tee -a /var/lib/pgsql/data/pg_hba.conf
-
-# Restart PostgreSQL
-systemctl restart postgresql
-
-# Stop system Redis to avoid conflicts
-echo "🔴 Stopping system Redis..."
-systemctl stop redis || true
-systemctl disable redis || true
-
 # Create application directory
 echo "📁 Creating application directory..."
 mkdir -p /opt/mcp-server
@@ -81,111 +37,114 @@ git clone https://github.com/atulpandey1695/MCP-hackathon.git .
 # Navigate to the correct directory
 cd MCP-hackathon
 
-# Create Dockerfile - CORRECTED
+# Create Dockerfile
 echo "🐳 Creating Dockerfile..."
-cat > Dockerfile << 'EOF'
-FROM python:3.9-slim
+cat > mcp_server/Dockerfile << 'EOF'
+FROM python:3.11-slim
 
 # Set working directory
 WORKDIR /app
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
+    git \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy requirements first for better caching
-COPY requirements.txt .
+COPY mcp_server/requirements.txt .
 
 # Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy application code
+# Copy all application code
 COPY . .
 
-# Create logs directory
-RUN mkdir -p logs
+# Create non-root user
+RUN useradd -m -u 1000 mcpuser && chown -R mcpuser:mcpuser /app
+USER mcpuser
 
-# Expose port
-EXPOSE 8000
+# Expose ports
+EXPOSE 8000 8501
 
 # Health check
-HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-    CMD curl -f http://localhost:8000/health || exit 1
+HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:8000/ || exit 1
 
-# Start the application
-CMD ["python", "server.py"]
+# Run the application
+CMD ["python", "mcp_server/server.py"]
 EOF
 
-# Create requirements.txt - CORRECTED
+# Create requirements.txt with all dependencies
 echo "📦 Creating requirements.txt..."
-cat > requirements.txt << 'EOF'
-fastapi
-uvicorn
-langchain>=0.1.47
-langchain-openai
-openai
-requests
-beautifulsoup4
-pydantic
-python-dotenv
-mistralai
-faiss-cpu
-langchain-community
-psycopg2-binary==2.9.7
+cat > mcp_server/requirements.txt << 'EOF'
+fastapi>=0.104.1
+uvicorn>=0.24.0
+websockets>=12.0
+pydantic>=2.5.0
+asyncio-mqtt>=0.16.1
+python-jose[cryptography]>=3.3.0
+passlib[bcrypt]>=1.7.4
+redis>=5.0.0
+psycopg2-binary>=2.9.9
+sqlalchemy>=2.0.23
+alembic>=1.13.0
+python-multipart>=0.0.6
+stripe>=7.0.0
+boto3>=1.34.0
+docker>=6.1.3
+python-dotenv>=1.0.0
+httpx>=0.25.0
+aiofiles>=23.2.1
+click>=8.1.7
+typer>=0.9.0
 flask==2.3.3
-redis==4.6.0
+streamlit>=1.35.0
+langchain>=0.1.47
+langchain-openai>=0.1.0
+langchain-community>=0.0.20
+openai>=1.0.0
+requests>=2.31.0
+beautifulsoup4>=4.12.0
+gitpython>=3.1.0
+mistralai>=0.1.0
+faiss-cpu>=1.7.4
 EOF
 
-# Create docker-compose.yml - CORRECTED
+# Create docker-compose.yml for two containers
 echo "🐳 Creating Docker Compose configuration..."
 cat > docker-compose.yml << 'EOF'
-version: '3.8'
-
 services:
+  # MCP Server
   mcp-server:
-    build: .
+    build:
+      context: .
+      dockerfile: mcp_server/Dockerfile
     ports:
       - "8000:8000"
     environment:
-      - DATABASE_URL=postgresql://mcp_admin:mcp_password_123@host.docker.internal:5432/mcp_assistant
-      - REDIS_URL=redis://redis:6379
-    depends_on:
-      - redis
-    networks:
-      - mcp-network
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-    restart: unless-stopped
-
-  redis:
-    image: redis:7-alpine
-    ports:
-      - "6379:6379"
+      - SECRET_KEY=your-production-secret-key-here
     volumes:
-      - redis_data:/data
-    networks:
-      - mcp-network
-    healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
+      - ./mcp_server/logs:/app/logs
+      - ./mcp_server/data:/app/data
     restart: unless-stopped
 
-volumes:
-  redis_data:
-
-networks:
-  mcp-network:
-    driver: bridge
+  # Streamlit App
+  streamlit:
+    build:
+      context: .
+      dockerfile: mcp_server/Dockerfile
+    ports:
+      - "8501:8501"
+    command: ["python", "-m", "streamlit", "run", "mcp_server/streamlit_app.py", "--server.address", "0.0.0.0", "--server.port", "8501"]
+    depends_on:
+      - mcp-server
+    restart: unless-stopped
 EOF
 
-# Create logs directory
-mkdir -p logs
+# Create logs and data directories
+mkdir -p mcp_server/logs
+mkdir -p mcp_server/data
 
 # Build and start the application
 echo "🔨 Building and starting application..."
@@ -200,8 +159,8 @@ echo "⚙️ Creating systemd service..."
 cat > /etc/systemd/system/mcp-server.service << 'EOF'
 [Unit]
 Description=MCP Server
-After=docker.service postgresql.service
-Requires=docker.service postgresql.service
+After=docker.service
+Requires=docker.service
 
 [Service]
 Type=oneshot
@@ -224,12 +183,6 @@ echo "�� Final verification..."
 sleep 10
 
 # Check if services are running
-if systemctl is-active --quiet postgresql; then
-    echo "✅ PostgreSQL is running"
-else
-    echo "❌ PostgreSQL is not running"
-fi
-
 if docker-compose ps | grep -q "Up"; then
     echo "✅ Docker containers are running"
 else
@@ -237,5 +190,6 @@ else
 fi
 
 echo "🎉 MCP Server deployment completed!"
-echo "�� Health check: curl http://localhost:8000/health"
+echo "🌐 MCP Server: http://localhost:8000"
+echo "📊 Streamlit App: http://localhost:8501"
 echo "🔧 Logs: docker-compose logs -f"

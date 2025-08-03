@@ -16,7 +16,7 @@ import uvicorn
 # import redis
 
 from core.tool_registry import get_tool_registry
-from mcp_server.mcp_sqlite_logger import MCPSQLiteLogger
+from mcp_sqlite_logger import MCPSQLiteLogger
 # from monitoring import MCPLogger, MCPAnalytics, track_execution
 
 # Configure enhanced logging
