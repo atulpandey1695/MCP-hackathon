@@ -6,10 +6,16 @@ import requests
 from enhanced_context_manager import get_context_manager
 from langchain.tools import tool
 from tools.utils.faiss_converter import json_to_faiss
+from dotenv import load_dotenv
+import os
+
+# Load environment variables from .env file
+load_dotenv()
+
+JIRA_PARAM = os.getenv("JIRA_PARAM")
 
 JIRA_API_URL = "https://talentica-mcp-hackathon.atlassian.net/rest/api/latest/search"
 JIRA_USERNAME = "vinay.dahat@talentica.com"
-JIRA_API_TOKEN = ""
 
 @tool
 def jira_ticket_summarizer(query: str) -> str:
@@ -36,7 +42,7 @@ def fetch_jira_tickets(query: str):
     headers = {
         "Content-Type": "application/json"
     }
-    auth = (JIRA_USERNAME, JIRA_API_TOKEN)
+    auth = (JIRA_USERNAME, JIRA_PARAM)
     params = {
         "jql": query,
         "fields": "*all"
